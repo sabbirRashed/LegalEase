@@ -16,6 +16,8 @@ import {
 } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function SignUpForm() {
     const [step, setStep] = useState("signup");
@@ -23,6 +25,8 @@ export default function SignUpForm() {
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const router = useRouter();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -88,19 +92,18 @@ export default function SignUpForm() {
             return;
         }
 
-        /*
-         * Save role here.
-         *
-         * Example:
-         *
-         * await updateUserRole(selectedRole);
-         *
-         * selectedRole:
-         * "user"
-         * "lawyer"
-         */
+        const {data, error} = await authClient.updateUser({
+            role: selectedRole
+        })
 
-        console.log("Selected role:", selectedRole);
+        console.log("Selected role:", data, error);
+        if(data?.status){
+            toast.success('Thank you for completting Sign Up step')
+            router.push('/')
+        }
+        else{
+            toast.error('Something went wrong!')
+        }
     };
 
     const handleGoogleSignup = async () => {
