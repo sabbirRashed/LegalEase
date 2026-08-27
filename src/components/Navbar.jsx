@@ -17,24 +17,10 @@ import {
 } from "react-icons/fi";
 import { authClient } from "@/lib/auth-client";
 
-// Mock user for now — replace with real auth/session data
-// const user = {
-//   isLoggedIn: true,
-//   role: "client", // "client" | "lawyer" | "admin"
-//   name: "Sabbir Rahman",
-// };
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Browse Lawyers", href: "/lawyers" },
-];
-
-// Each item gets its own accent so the dropdown feels lively, not flat
-const dashboardLinks = [
-  { label: "Dashboard", href: "/dashboard/user", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
-  { label: "Hiring History", href: "/dashboard/user/hiring-history", icon: FiClock, color: "text-violet-600 bg-violet-50" },
-  { label: "Update Profile", href: "/dashboard/profile", icon: FiEdit3, color: "text-amber-600 bg-amber-50" },
-  { label: "Comments", href: "/dashboard/comments", icon: FiMessageSquare, color: "text-emerald-600 bg-emerald-50" },
 ];
 
 

@@ -107,9 +107,22 @@ export default function SignUpForm() {
     };
 
     const handleGoogleSignup = async () => {
-        const { data: googleData, error } = await authClient.signIn.social({
-            provider: "google",
-        });
+        try {
+            const { data: loginData, error } = await authClient.signIn.social({
+                provider: "google",
+                callbackURL: "/select-role",
+            })
+            if (error) {
+                toast.error(
+                    error.message ||
+                    error.statusText ||
+                    "Something went wrong. Please try again!"
+                );
+                return;
+            }
+        } catch (error) {
+            toast.error("Something went wrong. Please try again!");
+        }
     };
 
     return (

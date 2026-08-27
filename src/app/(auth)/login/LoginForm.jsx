@@ -14,6 +14,7 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
@@ -51,37 +52,48 @@ export default function LoginForm() {
         }
 
         setIsSubmitting(true);
-         
-          const { data, error } = await authClient.signIn.email({
-              email,
-              password,
-          });
-         
-          console.log('er:', error, data);
-          if (error) {
-              setError(error.message);
-              setIsSubmitting(false);
-              return;
-          }
-         
-          router.push("/");
-         
+
+        const { data, error } = await authClient.signIn.email({
+            email,
+            password,
+        });
+
+        console.log('er:', error, data);
+        if (error) {
+            setError(error.message);
+            setIsSubmitting(false);
+            return;
+        }
+
+        router.push("/");
+
 
         setIsSubmitting(false);
     };
 
+
     const handleGoogleLogin = async () => {
-        /*
-         * Better Auth Google OAuth goes here.
-         *
-         * Example:
-         *
-         * await authClient.signIn.social({
-         *     provider: "google",
-         *     callbackURL: "/dashboard",
-         * });
-         */
+        try {
+            const { data: loginData, error } = await authClient.signIn.social({
+                provider: "google",
+                callbackURL: "/select-role",
+            });
+
+            if (error) {
+                toast.error(
+                    error.message ||
+                    error.statusText ||
+                    "Something went wrong. Please try again!"
+                );
+                return;
+            }
+
+        } catch (error) {
+            toast.error("Something went wrong. Please try again!");
+        }
     };
+
+
 
     return (
         <div className="relative flex w-full items-center justify-center overflow-hidden px-4 py-12">
