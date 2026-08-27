@@ -1,11 +1,15 @@
-import React from 'react';
+import LoginForm from "./LoginForm";
 
-const LoginPage = () => {
-    return (
-        <div>
-           login
-        </div>
-    );
+
+export const metadata = {
+    title: "Login | LegalEase",
+    description: "Sign in to your LegalEase account to hire or manage legal services.",
 };
 
-export default LoginPage;
+export default function LoginPage() {
+    return (
+        <main className="min-h-screen w-full bg-slate-50">
+            <LoginForm />
+        </main>
+    );
+}

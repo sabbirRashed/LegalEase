@@ -319,7 +319,7 @@ export default function SignUpForm() {
                                         className="flex h-12 w-full items-center justify-center rounded-xl border border-slate-200 bg-white font-semibold text-slate-700 shadow-none transition-colors hover:bg-slate-50"
                                     >
 
-                                        <FcGoogle />
+                                        <FcGoogle className="w-6 h-6" />
                                         Continue with Google
                                     </Button>
                                 </form>
