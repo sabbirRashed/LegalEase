@@ -74,7 +74,7 @@ export default function SignUpForm() {
             email,
             password,
         })
-        console.log( 'er: ', error);
+        console.log('er: ', error);
 
         if (error) {
             setError(error?.statusText || 'Sign Up failed');
@@ -92,31 +92,24 @@ export default function SignUpForm() {
             return;
         }
 
-        const {data, error} = await authClient.updateUser({
+        const { data, error } = await authClient.updateUser({
             role: selectedRole
         })
 
         console.log("Selected role:", data, error);
-        if(data?.status){
+        if (data?.status) {
             toast.success('Thank you for completting Sign Up step')
             router.push('/')
         }
-        else{
+        else {
             toast.error('Something went wrong!')
         }
     };
 
     const handleGoogleSignup = async () => {
-        /*
-         * Better Auth Google OAuth goes here.
-         *
-         * Example:
-         *
-         * await authClient.signIn.social({
-         *     provider: "google",
-         *     callbackURL: "/select-role",
-         * });
-         */
+        const { data: googleData, error } = await authClient.signIn.social({
+            provider: "google",
+        });
     };
 
     return (
