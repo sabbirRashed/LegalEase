@@ -15,6 +15,7 @@ import {
     FiAlertCircle,
 } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { authClient } from "@/lib/auth-client";
 
 export default function SignUpForm() {
     const [step, setStep] = useState("signup");
@@ -30,7 +31,7 @@ export default function SignUpForm() {
         confirmPassword: "",
     });
 
-    const [error, setError] = useState("");
+    const [errorMessage, setError] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,6 +48,7 @@ export default function SignUpForm() {
         e.preventDefault();
 
         const { name, email, password, confirmPassword } = formData;
+        console.log('formData: ', formData);
 
         if (!name || !email || !password || !confirmPassword) {
             setError("Please fill in all required fields.");
@@ -63,27 +65,23 @@ export default function SignUpForm() {
             return;
         }
 
-        /*
-         * Better Auth signup goes here.
-         *
-         * Example:
-         *
-         * const { data, error } = await authClient.signUp.email({
-         *     name,
-         *     email,
-         *     password,
-         * });
-         *
-         * if (error) {
-         *     setError(error.message);
-         *     return;
-         * }
-         */
+        const { data, error } = await authClient.signUp.email({
+            name,
+            email,
+            password,
+        })
+        console.log( 'er: ', error);
 
-        // After successful signup:
+        if (error) {
+            setError(error?.statusText || 'Sign Up failed');
+            return;
+        }
+
         setStep("role");
-    };
 
+
+    };
+    // 
     const handleRoleContinue = async () => {
         if (!selectedRole) {
             setError("Please select how you want to use LegalEase.");
@@ -285,10 +283,10 @@ export default function SignUpForm() {
                                     </TextField>
 
                                     {/* Error */}
-                                    {error && (
+                                    {errorMessage && (
                                         <div className="flex items-start gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
                                             <FiAlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-                                            <span>{error}</span>
+                                            <span>{errorMessage}</span>
                                         </div>
                                     )}
 
@@ -457,10 +455,10 @@ export default function SignUpForm() {
                                     </button>
                                 </div>
 
-                                {error && (
+                                {errorMessage && (
                                     <div className="mt-4 flex items-start gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
                                         <FiAlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-                                        <span>{error}</span>
+                                        <span>{errorMessage}</span>
                                     </div>
                                 )}
 
