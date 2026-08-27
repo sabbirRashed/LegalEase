@@ -111,7 +111,7 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {user?.email && (
+          {user?.role && (
             <Dropdown>
               <Dropdown.Trigger>
                 <span
@@ -233,7 +233,7 @@ export default function Navbar() {
           </div>
 
           {/* Dashboard links */}
-          {user?.email && (
+          {user?.role && (
             <div className="border-t border-slate-200 pt-4">
               <p className="px-3 text-xs font-semibold text-slate-500 uppercase mb-2">
                 Dashboard
