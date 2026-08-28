@@ -11,9 +11,7 @@ import {
 } from "react-icons/fi";
 import { image } from "framer-motion/client";
 
-// Add NEXT_PUBLIC_IMGBB_API_KEY to your .env.local — required since the
-// upload happens directly from the browser.
-const IMGBB_UPLOAD_URL = `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`;
+
 
 export default function ProfileForm({ existingProfile, user, onSave, setIsEditing, isEditing }) {
     // ---- Text fields ----
@@ -54,7 +52,6 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
     // Upload the selected image to ImgBB 
     const handleImageChange = async (e) => {
         const file = e.target.files?.[0];
-        console.log('image-file:', file);
         if (!file) return;
 
         setImagePreview(URL.createObjectURL(file)); 
@@ -64,7 +61,8 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
             const formData = new FormData();
             formData.append("image", file);
 
-            const res = await fetch(IMGBB_UPLOAD_URL, {
+            const uploadImageApiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY
+            const res = await fetch(`https://api.imgbb.com/1/upload?key=${uploadImageApiKey}`, {
                 method: "POST",
                 body: formData
             });
@@ -73,6 +71,7 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
             if (!data.success) throw new Error("Upload failed");
 
             setImageUrl(data.data.url);
+        
         } catch {
             setErrors((prev) => ({ ...prev, image: "Image upload failed. Please try again." }));
             setImageUrl(null);
