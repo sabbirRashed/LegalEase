@@ -1,11 +1,11 @@
 import React from 'react';
 
-const LawyerdashboardPage = () => {
+const LawyerDashboardPage = () => {
     return (
-        <div>
-            <h2>Lawyer Dashboard Page.</h2>
+        <div className=''>
+            Lawyer dashboard page
         </div>
     );
 };
 
-export default LawyerdashboardPage;
+export default LawyerDashboardPage;

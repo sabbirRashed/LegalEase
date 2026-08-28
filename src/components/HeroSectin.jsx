@@ -6,10 +6,10 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-// Replace with your own images in /public — Picsum used here as reliable placeholders
+
 const slides = [
     {
-        image: "/images/image1.jpg",
+        image: "/images/image3.jpg",
         alt: "Law books and legal library",
     },
     {
@@ -17,12 +17,12 @@ const slides = [
         alt: "Modern office building",
     },
     {
-        image: "/images/image3.jpg",
+        image: "/images/image1.jpg",
         alt: "Client and lawyer handshake",
     },
 ];
 
-const AUTOPLAY_DELAY = 5000;
+const AUTOPLAY_DELAY = 6000;
 
 const HeroSection = () => {
     const [current, setCurrent] = useState(0);
@@ -42,17 +42,17 @@ const HeroSection = () => {
     }, [nextSlide]);
 
     return (
-        <section className="relative h-[85vh] min-h-[600px] w-full overflow-hidden">
+        <section className="relative h-[85vh] min-h-150 w-full overflow-hidden">
             {/* Background image carousel */}
             <AnimatePresence mode="sync">
                 <motion.div
                     key={current}
                     initial={{ opacity: 0, scale: 1 }}
-                    animate={{ opacity: 1, scale: 1.08 }}
+                    animate={{ opacity: 1, scale: 1.06 }}
                     exit={{ opacity: 0 }}
                     transition={{
                         opacity: { duration: 1, ease: "easeInOut" },
-                        scale: { duration: AUTOPLAY_DELAY / 1000, ease: "linear" },
+                        scale: { duration: AUTOPLAY_DELAY / 2000, ease: "linear" },
                     }}
                     className="absolute inset-0"
                 >

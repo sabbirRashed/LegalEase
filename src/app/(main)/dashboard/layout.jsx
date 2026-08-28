@@ -12,7 +12,7 @@ const DashboardLayout = async({children}) => {
     return (
         <div className='flex min-h-screen '>
             <DashboardSidebar/>
-            <div>{children}</div>
+            <div className='flex-1'>{children}</div>
         </div>
     );
 };
