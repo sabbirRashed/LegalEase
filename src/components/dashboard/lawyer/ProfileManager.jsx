@@ -3,19 +3,19 @@
 import { useState } from "react";
 import ProfileForm from "./ProfileForm";
 import ProfileDisplay from "./ProfileDisplay";
-import { createLawyerProfile } from "@/lib/actions/lawyer";
+import { createLawyerProfile, updateLawyerProfile } from "@/lib/actions/lawyer";
 import { useRouter } from "next/navigation";
 
 
 
 export default function ProfileManager({ initialProfile, user }) {
-    // console.log('ini: ', initialProfile, 'user: ', user);
+
     const [profile, setProfile] = useState(initialProfile);
     const [services, setServices] = useState(null);
     const [isEdit, setIsEdit] = useState(false);
 
- 
-    console.log('after create:', profile);
+
+
 
     const isShowForm = !profile?.userId || isEdit
 
@@ -24,13 +24,28 @@ export default function ProfileManager({ initialProfile, user }) {
     const handleAddService = () => {
         // to do
     };
-    
+
+    const handleCancelEdit = () => {
+        console.log('before cancel edit');
+        setIsEdit(false)
+    }
+
     const handleSubmitProfile = async (profileData) => {
+
+        // console.log('after create:', profile);
         const res = await createLawyerProfile(profileData)
 
         setProfile(profileData)
         setIsEdit(false)
         router.refresh()
+        return res
+    }
+
+    const handleUpdateProfile = async (profileId, updatedData,) => {
+        console.log('from manage:', profileId, updatedData);
+        const res = await updateLawyerProfile(profileId, updatedData);
+
+        setIsEdit(false);
         return res
     }
 
@@ -43,7 +58,8 @@ export default function ProfileManager({ initialProfile, user }) {
                         existingProfile={profile}
                         user={user}
                         handleSubmitProfile={handleSubmitProfile}
-                        onCancel={profile ? () => setIsEdit(false) : null} />
+                        handleUpdateProfile={handleUpdateProfile}
+                        onCancel={profile ? handleCancelEdit : null} />
                 ) : (
                     <>
                         <ProfileDisplay

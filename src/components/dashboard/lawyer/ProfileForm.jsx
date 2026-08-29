@@ -9,15 +9,14 @@ import {
     FiX,
     FiUser,
 } from "react-icons/fi";
-import { createLawyerProfile } from "@/lib/actions/lawyer";
+
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 
 
-export default function ProfileForm({ existingProfile, user, handleSubmitProfile, onCancel }) {
+export default function ProfileForm({ existingProfile, user, handleSubmitProfile, handleUpdateProfile, onCancel }) {
     // ---- Text fields ----
-    console.log('form usr:', user, "exis ", existingProfile);
     const [formData, setFormData] = useState({
         name: existingProfile?.name || "",
         specialization: existingProfile?.specialization || "",
@@ -123,21 +122,45 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
 
             if (res.insertedId) {
 
-                const savedProfile = {...formData, _id: res.insertedId}
+                const savedProfile = { ...formData, _id: res.insertedId }
 
-                setFormData(savedProfile),
-                toast.success('successfully posted your profile')
-                setFormData({ name: "", specialization: "", bio: "" })
+                setFormData(savedProfile);
+                toast.success('successfully posted your profile');
+                setFormData({ name: "", specialization: "", bio: "" });
                 router.refresh()
             }
 
         } catch (error) {
-            console.log('errrrrrrrrrr: ', error);
             setErrors({ submit: "Failed to save profile. Please try again." });
         } finally {
             setIsSubmitting(false);
         }
     };
+
+    
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+
+        const updateData = {
+            image: imageUrl,
+            ...formData,
+        }
+
+        setIsSubmitting(true);
+        try {
+            const profileId = existingProfile?._id;
+            const res = await handleUpdateProfile(profileId, updateData)
+
+            if (res.modifiedCount > 0) {
+                toast.success('Successfully update your profile')                       
+            }
+        } catch {
+            setErrors({ submit: "Failed to update profile. Please try again." })
+        }finally{
+           setIsSubmitting(false);
+        }
+
+    }
 
     return (
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -148,7 +171,7 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 p-6 sm:p-8">
+            <form onSubmit={existingProfile ? handleUpdate : handleSubmit} className="space-y-6 p-6 sm:p-8">
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-[180px_1fr]">
                     {/* Profile image */}
                     <div className="flex flex-col items-center gap-3 lg:items-start">
@@ -283,14 +306,25 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
                             Cancel
                         </Button>
                     )}
-
-                    <Button
-                        type="submit"
-                        isDisabled={isSubmitting || isUploadingImage}
-                        className="h-11 rounded-xl bg-blue-600 px-6 text-sm font-semibold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 disabled:opacity-60"
-                    >
-                        {isSubmitting ? "Saving..." : "Save Profile"}
-                    </Button>
+                    {
+                        existingProfile ? <>
+                            <Button
+                                type="submit"
+                                isDisabled={isSubmitting || isUploadingImage}
+                                className="h-11 rounded-xl bg-blue-600 px-6 text-sm font-semibold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 disabled:opacity-60"
+                            >
+                                {isSubmitting ? "Updating..." : "Update Profile"}
+                            </Button>
+                        </> : <>
+                            <Button
+                                type="submit"
+                                isDisabled={isSubmitting || isUploadingImage}
+                                className="h-11 rounded-xl bg-blue-600 px-6 text-sm font-semibold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 disabled:opacity-60"
+                            >
+                                {isSubmitting ? "Saving..." : "Save Profile"}
+                            </Button>
+                        </>
+                    }
                 </div>
             </form>
         </div>
