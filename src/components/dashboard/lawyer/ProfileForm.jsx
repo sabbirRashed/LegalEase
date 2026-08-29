@@ -9,14 +9,15 @@ import {
     FiX,
     FiUser,
 } from "react-icons/fi";
-import { image } from "framer-motion/client";
-import { authClient } from "@/lib/auth-client";
 import { createLawyerProfile } from "@/lib/actions/lawyer";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 
-export default function ProfileForm({ existingProfile, isEdit, setIsEdit }) {
+export default function ProfileForm({ existingProfile, user, handleSubmitProfile, onCancel }) {
     // ---- Text fields ----
+    console.log('form usr:', user, "exis ", existingProfile);
     const [formData, setFormData] = useState({
         name: existingProfile?.name || "",
         specialization: existingProfile?.specialization || "",
@@ -33,9 +34,7 @@ export default function ProfileForm({ existingProfile, isEdit, setIsEdit }) {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const { data: session, isPending } = authClient.useSession();
-    const user = session?.user;
-    console.log('user:', user);
+    const router = useRouter()
 
     // Update a text field as the user types
     const handleChange = (e) => {
@@ -105,20 +104,35 @@ export default function ProfileForm({ existingProfile, isEdit, setIsEdit }) {
             return;
         }
 
+
         setIsSubmitting(true);
         setErrors({});
 
         try {
-            const res = await createLawyerProfile({
+            const newProfile = {
                 userId: user?.id,
                 email: user?.email,
                 image: imageUrl,
                 ...formData,
-            })
-            setErrors({})
-            console.log('res: ', res);
+            }
+            setFormData(newProfile);
 
-        } catch {
+
+            const res = await handleSubmitProfile(newProfile)
+            setErrors({})
+
+            if (res.insertedId) {
+
+                const savedProfile = {...formData, _id: res.insertedId}
+
+                setFormData(savedProfile),
+                toast.success('successfully posted your profile')
+                setFormData({ name: "", specialization: "", bio: "" })
+                router.refresh()
+            }
+
+        } catch (error) {
+            console.log('errrrrrrrrrr: ', error);
             setErrors({ submit: "Failed to save profile. Please try again." });
         } finally {
             setIsSubmitting(false);
@@ -260,11 +274,10 @@ export default function ProfileForm({ existingProfile, isEdit, setIsEdit }) {
 
                 {/* Actions */}
                 <div className="flex justify-end gap-3 border-t border-slate-100 pt-6">
-                    {setIsEdit && (
+                    {onCancel && (
                         <Button
                             type="button"
-                            onPress={setIsEdit}
-                            isDisabled={isEdit}
+                            onPress={onCancel}
                             className="h-11 rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
                         >
                             Cancel

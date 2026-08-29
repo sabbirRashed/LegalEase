@@ -3,34 +3,47 @@
 import { useState } from "react";
 import ProfileForm from "./ProfileForm";
 import ProfileDisplay from "./ProfileDisplay";
-import LegalServicesSection from "./LegalServicesSection";
-import { authClient } from "@/lib/auth-client";
 import { createLawyerProfile } from "@/lib/actions/lawyer";
+import { useRouter } from "next/navigation";
 
-export default function ProfileManager({ initialProfile, initialServices }) {
+
+
+export default function ProfileManager({ initialProfile, user }) {
+    // console.log('ini: ', initialProfile, 'user: ', user);
     const [profile, setProfile] = useState(initialProfile);
-    const [services, setServices] = useState(initialServices);
+    const [services, setServices] = useState(null);
     const [isEdit, setIsEdit] = useState(false);
 
-  const isShowForm = !true || isEdit
+ 
+    console.log('after create:', profile);
 
-   
+    const isShowForm = !profile?.userId || isEdit
+
+    const router = useRouter()
+
     const handleAddService = () => {
-        /*
-         * Replace with real navigation/modal, e.g.:
-         * router.push("/dashboard/manage-legal-profile/services/new");
-         */
-        // console.log("Add service clicked");
+        // to do
     };
+    
+    const handleSubmitProfile = async (profileData) => {
+        const res = await createLawyerProfile(profileData)
+
+        setProfile(profileData)
+        setIsEdit(false)
+        router.refresh()
+        return res
+    }
 
     return (
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
             {/* Professional Profile section */}
             <div className="p-6 sm:p-8">
                 {isShowForm ? (
-                    <ProfileForm 
-                    existingProfile={profile}
-                    setIsEdit={()=> setIsEdit(true)} />
+                    <ProfileForm
+                        existingProfile={profile}
+                        user={user}
+                        handleSubmitProfile={handleSubmitProfile}
+                        onCancel={profile ? () => setIsEdit(false) : null} />
                 ) : (
                     <>
                         <ProfileDisplay
@@ -39,12 +52,12 @@ export default function ProfileManager({ initialProfile, initialServices }) {
                         />
 
                         {/* Legal Services section */}
-                        <div className="border-t border-slate-200 p-6 sm:p-8">
+                        {/* <div className="border-t border-slate-200 p-6 sm:p-8">
                             <LegalServicesSection
                                 services={services}
                                 onAddService={handleAddService}
                             />
-                        </div>
+                        </div> */}
                     </>
                 )}
             </div>

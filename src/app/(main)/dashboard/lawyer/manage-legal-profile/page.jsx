@@ -1,30 +1,19 @@
 import ProfileManager from "@/components/dashboard/lawyer/ProfileManager";
+import { getLawyerProfileByUserId, getLogedInLawyerProfile } from "@/lib/api/lawyer";
+import { getUserSession } from "@/lib/core/session";
 
 export const metadata = {
     title: "Manage Legal Profile | LegalEase",
     description: "Create and manage your professional lawyer profile and legal services.",
 };
 
-/*
- * Replace with a real DB/session call, e.g.:
- *
- * import { getServerSession } from "@/lib/auth";
- * import { getLawyerProfile, getLawyerServices } from "@/lib/db/lawyers";
- *
- * const session = await getServerSession();
- * const profile = await getLawyerProfile(session.user.id);
- * const services = await getLawyerServices(session.user.id);
- */
-async function getInitialData() {
-    // Mocked — returns null profile so the create-profile form shows first.
-    return {
-        profile: false,
-        services: [],
-    };
-}
+
 
 export default async function ManageLegalProfilePage() {
-    const { profile, services } = await getInitialData();
+    
+    const profile = await getLogedInLawyerProfile();
+    const user = await getUserSession()
+
 
     return (
         <div className="min-h-screen w-full px-4 py-10 sm:px-6 lg:px-8 ">
@@ -41,7 +30,8 @@ export default async function ManageLegalProfilePage() {
 
                 <ProfileManager
                     initialProfile={profile}
-                    initialServices={services}
+                    user={user}
+                    // initialServices={services}
                 />
             </div>
         </div>
