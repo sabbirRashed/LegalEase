@@ -1,9 +1,13 @@
+import ProfileForms from '@/components/dashboard/lawyer/ProfileForms';
+import { div } from 'framer-motion/client';
 import React from 'react';
 
 const HiringHistory = () => {
     return (
-        <div>
-            <h1>Hiring History</h1>
+        <div className='min-h-screen w-full px-4 py-10 sm:px-6 lg:px-8 '>
+            <div className='max-w-7xl mx-auto'>
+                <ProfileForms />
+            </div>
         </div>
     );
 };

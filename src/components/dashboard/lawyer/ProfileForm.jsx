@@ -10,16 +10,19 @@ import {
     FiUser,
 } from "react-icons/fi";
 import { image } from "framer-motion/client";
+import { authClient } from "@/lib/auth-client";
+import { createLawyerProfile } from "@/lib/actions/lawyer";
 
 
 
-export default function ProfileForm({ existingProfile, user, onSave, setIsEditing, isEditing }) {
+export default function ProfileForm({ existingProfile, isEdit, setIsEdit }) {
     // ---- Text fields ----
     const [formData, setFormData] = useState({
-        name: existingProfile?.name || user?.name,
+        name: existingProfile?.name || "",
         specialization: existingProfile?.specialization || "",
         bio: existingProfile?.bio || "",
     });
+
 
     // ---- Image ----
     const [imagePreview, setImagePreview] = useState(existingProfile?.image || null);
@@ -30,21 +33,24 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const { data: session, isPending } = authClient.useSession();
+    const user = session?.user;
+    console.log('user:', user);
+
     // Update a text field as the user types
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    // Check the 3 required fields. Returns an object like { name: "..." }
-    // for whichever fields are empty — empty object means "all good".
+    //validation form
     const validate = () => {
         const newErrors = {};
 
         if (!formData.name.trim()) newErrors.name = "Name is required.";
         if (!formData.specialization.trim()) newErrors.specialization = "Specialization is required.";
         if (!formData.bio.trim()) newErrors.bio = "Bio is required.";
-        if(!imageUrl) newErrors.image = "Image is required"
+        if (!imageUrl) newErrors.image = "Image is required"
 
         return newErrors;
     };
@@ -54,7 +60,7 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
         const file = e.target.files?.[0];
         if (!file) return;
 
-        setImagePreview(URL.createObjectURL(file)); 
+        setImagePreview(URL.createObjectURL(file));
         setIsUploadingImage(true);
 
         try {
@@ -71,7 +77,7 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
             if (!data.success) throw new Error("Upload failed");
 
             setImageUrl(data.data.url);
-        
+
         } catch {
             setErrors((prev) => ({ ...prev, image: "Image upload failed. Please try again." }));
             setImageUrl(null);
@@ -103,8 +109,15 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
         setErrors({});
 
         try {
-            console.log('final-data:', formData, imageUrl);
-            await onSave({ ...formData, image: imageUrl });
+            const res = await createLawyerProfile({
+                userId: user?.id,
+                email: user?.email,
+                image: imageUrl,
+                ...formData,
+            })
+            setErrors({})
+            console.log('res: ', res);
+
         } catch {
             setErrors({ submit: "Failed to save profile. Please try again." });
         } finally {
@@ -178,7 +191,7 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
                     {/* Name + Specialization */}
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                         <TextField className="space-y-2" isRequired isInvalid={!!errors.name}>
-                            <Label htmlFor="name" className="text-sm font-semibold text-slate-700">
+                            <Label className="text-sm font-semibold text-slate-700">
                                 Full Name
                             </Label>
                             <Input
@@ -247,11 +260,11 @@ export default function ProfileForm({ existingProfile, user, onSave, setIsEditin
 
                 {/* Actions */}
                 <div className="flex justify-end gap-3 border-t border-slate-100 pt-6">
-                    {isEditing && (
+                    {setIsEdit && (
                         <Button
                             type="button"
-                            onPress={setIsEditing(false)}
-                            isDisabled={isSubmitting}
+                            onPress={setIsEdit}
+                            isDisabled={isEdit}
                             className="h-11 rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 hover:bg-slate-50"
                         >
                             Cancel
