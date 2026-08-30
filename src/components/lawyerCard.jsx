@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 import Image from "next/image";
 
-// Swap for your currency symbol, e.g. "৳"
-const CURRENCY = "$";
+
 
 const LawyerCard = ({ service }) => {
     const { _id, name, imageUrl, specialization, hourlyRate, status } = service;
