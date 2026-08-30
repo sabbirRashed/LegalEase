@@ -1,13 +1,19 @@
 import LawyerCard from "@/components/lawyerCard";
 import LawyerListingContainer from "@/components/LawyerListingContainer";
 import { getLawyerServices } from "@/lib/api/lawyer";
+import { q } from "framer-motion/m";
 
 
 
-const BrowseLawyersPage = async () => {
+const BrowseLawyersPage = async ({ searchParams }) => {
 
-    const services = await getLawyerServices();
-    console.log('services', services.length);
+    const search_params = await searchParams;
+    const query = new URLSearchParams(search_params).toString()
+    console.log(query);
+
+    const services = await getLawyerServices(query);
+
+
 
     return (
         <div className="w-11/12 max-w-7xl mx-auto py-15 md:py-20">
@@ -22,7 +28,9 @@ const BrowseLawyersPage = async () => {
             </div>
 
             <LawyerListingContainer
-            services={services}/>
+                services={services}
+                search_params={search_params}
+            />
         </div>
     );
 };

@@ -1,14 +1,43 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LawyerCard from './lawyerCard';
 import LawyerFilters from './lawlyerFilters';
+import { useRouter } from 'next/navigation';
 
-const LawyerListingContainer = ({ services }) => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [minFeeRange, setMinFeeRange] = useState('');
-    const [maxFeeRange, setMaxFeeRange] = useState('');
-    const [availability, setAvailability] = useState('');
+const LawyerListingContainer = ({ services, search_params }) => {
+    const [searchQuery, setSearchQuery] = useState(search_params?.search || '');
+    const [minFeeRange, setMinFeeRange] = useState(search_params?.minFee || '');
+    const [maxFeeRange, setMaxFeeRange] = useState(search_params?.maxFee || '');
+    const [availability, setAvailability] = useState(search_params?.status || 'all');
+
+    const router = useRouter()
+
+    // console.log("search:", searchQuery);
+    // console.log("minFee:", minFeeRange);
+    // console.log("maxFee:", maxFeeRange);
+    // console.log("availab::", availability);
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams();
+
+        if (searchQuery.trim()) {
+            searchParams.set('search', searchQuery)
+        }
+        if (minFeeRange) {
+            searchParams.set('minFee', minFeeRange)
+        }
+        if (maxFeeRange) {
+            searchParams.set('maxFee', maxFeeRange)
+        }
+        if (availability !== "all") {
+            searchParams.set('status', availability)
+        }
+
+        const path = `?${searchParams.toString()}`
+        router.push(path)
+
+    }, [searchQuery, minFeeRange, maxFeeRange, availability, router])
 
 
     return (
