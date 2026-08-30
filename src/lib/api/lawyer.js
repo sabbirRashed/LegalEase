@@ -6,6 +6,10 @@ export const getLawyerServices = async (query) => {
     return serverFetch(`/api/services?${query}`)
 }
 
+export const getLawyerServiceById = async(id)=>{
+    return serverFetch(`/api/service/${id}`)
+}
+
 export const getLawyerProfileByUserId = async (userId) => {
 
     return serverFetch(`/api/lawyer/myprofile?userId=${userId}`)

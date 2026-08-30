@@ -1,3 +1,5 @@
+"use client"
+
 import { Check, Clock, CreditCard } from '@gravity-ui/icons';
 import { Button } from '@heroui/react';
 import Image from 'next/image';
