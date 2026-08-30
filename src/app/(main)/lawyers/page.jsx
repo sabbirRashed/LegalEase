@@ -1,5 +1,6 @@
 import LawyerCard from "@/components/lawyerCard";
 import { getLawyerServices } from "@/lib/api/lawyer";
+import { h2 } from "framer-motion/client";
 
 
 
@@ -21,13 +22,20 @@ const BrowseLawyersPage = async () => {
             </div>
 
             {/* Card container */}
-            <div className="mt-10 grid min-h-50 grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4">
-                {
-                    services.map(service => <LawyerCard
-                        key={service._id}
-                        service={service} />)
-                }
-            </div>
+            {
+                services.length > 0 ? (
+                    <div className="mt-10 grid min-h-50 grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
+                        {
+                            services.map(service => <LawyerCard
+                                key={service._id}
+                                service={service} />)
+                        }
+                    </div>
+                ) : (
+                    // No card with meaningfull message
+                    <h2></h2>
+                )
+            }
         </div>
     );
 };
