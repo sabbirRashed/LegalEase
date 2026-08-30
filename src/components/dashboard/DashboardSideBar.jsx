@@ -73,7 +73,7 @@ export async function DashboardSidebar() {
 
             {/* Small device view */}
             <Drawer >
-                <Button className="lg:hidden" variant="secondary">
+                <Button className="lg:hidden  absolute" variant="white">
                     <LayoutSideContentLeft />
                 </Button>
                 <Drawer.Backdrop>

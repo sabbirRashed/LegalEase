@@ -122,7 +122,7 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
 
             if (res.insertedId) {
 
-                const savedProfile = { ...formData, _id: res.insertedId }
+                const savedProfile = { ...newProfile, _id: res.insertedId }
 
                 setFormData(savedProfile);
                 toast.success('successfully posted your profile');
@@ -152,7 +152,8 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
             const res = await handleUpdateProfile(profileId, updateData)
 
             if (res.modifiedCount > 0) {
-                toast.success('Successfully update your profile')                       
+                toast.success('Successfully update your profile') 
+                                     
             }
         } catch {
             setErrors({ submit: "Failed to update profile. Please try again." })
@@ -171,7 +172,7 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
                 </p>
             </div>
 
-            <form onSubmit={existingProfile ? handleUpdate : handleSubmit} className="space-y-6 p-6 sm:p-8">
+            <form onSubmit={existingProfile?._id ? handleUpdate : handleSubmit} className="space-y-6 p-6 sm:p-8">
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-[180px_1fr]">
                     {/* Profile image */}
                     <div className="flex flex-col items-center gap-3 lg:items-start">
@@ -307,7 +308,7 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
                         </Button>
                     )}
                     {
-                        existingProfile ? <>
+                        existingProfile?._id ? <>
                             <Button
                                 type="submit"
                                 isDisabled={isSubmitting || isUploadingImage}

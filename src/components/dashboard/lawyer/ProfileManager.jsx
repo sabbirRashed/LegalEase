@@ -5,13 +5,53 @@ import ProfileForm from "./ProfileForm";
 import ProfileDisplay from "./ProfileDisplay";
 import { createLawyerProfile, updateLawyerProfile } from "@/lib/actions/lawyer";
 import { useRouter } from "next/navigation";
+import LegalServicesSection from "./LegalServicesSection";
+
+
+const fakeServices = [
+    // {
+    //     id: "srv-101",
+    //     name: "Full-Stack Web Development",
+    //     category: "Development",
+    //     price: "1,200",
+    //     status: "active",
+    // },
+    // {
+    //     id: "srv-102",
+    //     name: "UI/UX Dashboard Redesign",
+    //     category: "Design",
+    //     price: "850",
+    //     status: "active",
+    // },
+    // {
+    //     id: "srv-103",
+    //     name: "SEO Optimization & Audit",
+    //     category: "Marketing",
+    //     price: "450",
+    //     status: "inactive",
+    // },
+    // {
+    //     id: "srv-104",
+    //     name: "REST API Integration",
+    //     category: "Backend",
+    //     price: "600",
+    //     status: "active",
+    // },
+    // {
+    //     id: "srv-105",
+    //     name: "Custom Graphic Design",
+    //     category: "Branding",
+    //     price: "300",
+    //     status: "inactive",
+    // },
+];
 
 
 
 export default function ProfileManager({ initialProfile, user }) {
 
     const [profile, setProfile] = useState(initialProfile);
-    const [services, setServices] = useState(null);
+    const [services, setServices] = useState(fakeServices);
     const [isEdit, setIsEdit] = useState(false);
 
 
@@ -46,6 +86,7 @@ export default function ProfileManager({ initialProfile, user }) {
         const res = await updateLawyerProfile(profileId, updatedData);
 
         setIsEdit(false);
+        router.refresh()
         return res
     }
 
@@ -59,7 +100,7 @@ export default function ProfileManager({ initialProfile, user }) {
                         user={user}
                         handleSubmitProfile={handleSubmitProfile}
                         handleUpdateProfile={handleUpdateProfile}
-                        onCancel={profile ? handleCancelEdit : null} />
+                        onCancel={profile?._id ? handleCancelEdit : null} />
                 ) : (
                     <>
                         <ProfileDisplay
@@ -68,12 +109,12 @@ export default function ProfileManager({ initialProfile, user }) {
                         />
 
                         {/* Legal Services section */}
-                        {/* <div className="border-t border-slate-200 p-6 sm:p-8">
+                        <div className="border-t border-slate-200 p-6 sm:p-8">
                             <LegalServicesSection
                                 services={services}
                                 onAddService={handleAddService}
                             />
-                        </div> */}
+                        </div>
                     </>
                 )}
             </div>

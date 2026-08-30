@@ -13,7 +13,7 @@ export default function ProfileDisplay({ profile, onEdit }) {
                 <button
                     type="button"
                     onClick={onEdit}
-                    className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                    className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-[10px] sm:text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
                 >
                     <FiEdit3 className="h-4 w-4" />
                     Edit Profile

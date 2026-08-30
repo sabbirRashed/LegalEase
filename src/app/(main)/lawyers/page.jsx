@@ -1,9 +1,23 @@
-import React from 'react';
+
+
 
 const BrowseLawyersPage = () => {
     return (
-        <div>
-            <h2>Browse Lawers Page</h2>
+        <div className="w-11/12 max-w-7xl mx-auto py-15 md:py-20">
+            {/* Header */}
+            <div className="text-center">
+                <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
+                    Browse Lawyers
+                </h2>
+                <p className="mt-2 text-slate-500">
+                    Find and hire verified legal experts across every specialization.
+                </p>
+            </div>
+
+            {/* Card container */}
+            <div className="mt-10 grid min-h-50 grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4">
+                {/* here i implement map */}
+            </div>
         </div>
     );
 };
