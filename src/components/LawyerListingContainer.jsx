@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import LawyerCard from './lawyerCard';
 import LawyerFilters from './lawlyerFilters';
 import { useRouter } from 'next/navigation';
+import { FiRotateCcw, FiUserX } from 'react-icons/fi';
 
 const LawyerListingContainer = ({ services, search_params }) => {
     const [searchQuery, setSearchQuery] = useState(search_params?.search || '');
@@ -65,8 +66,20 @@ const LawyerListingContainer = ({ services, search_params }) => {
                         }
                     </div>
                 ) : (
-                    // No card with meaningfull message
-                    <h2></h2>
+                    <div className="flex flex-col items-center rounded-3xl border border-dashed border-slate-200 bg-white px-6 py-16 text-center shadow-sm">
+                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                            <FiUserX className="h-7 w-7" />
+                        </div>
+
+                        <h3 className="mt-5 text-lg font-bold text-slate-900">
+                            No lawyers found
+                        </h3>
+
+                        <p className="mt-2 max-w-sm text-sm leading-relaxed text-slate-500">
+                            We couldn't find any lawyers matching your search or filters.
+                            Try adjusting your criteria or clearing the filters to see more results.
+                        </p>
+                    </div>
                 )
             }
         </div>
