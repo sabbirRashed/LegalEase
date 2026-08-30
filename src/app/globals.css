@@ -1,7 +1,13 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
-body{
+:root {
+    /* Possible values: shimmer, pulse, none */
+    --skeleton-animation: shimmer;
+}
+
+
+body {
     font-family: var(--font-inter);
-   
+
 }
