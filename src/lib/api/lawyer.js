@@ -2,6 +2,9 @@ import { revalidatePath } from "next/cache"
 import { serverFetch } from "../core/server"
 import { getUserSession } from "../core/session"
 
+export const getLawyerServices = async()=>{
+    return serverFetch('/api/services')
+}
 
 export const getLawyerProfileByUserId = async (userId) => {
 
