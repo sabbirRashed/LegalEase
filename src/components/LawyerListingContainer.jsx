@@ -42,7 +42,7 @@ const LawyerListingContainer = ({ services, search_params }) => {
 
 
     return (
-        <div>
+        <div className='mt-10'>
 
             <LawyerFilters
                 searchQuery={searchQuery}
