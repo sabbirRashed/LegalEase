@@ -13,14 +13,17 @@ import {
 } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
 
     const router = useRouter();
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get('redirect') || "/"
 
     const [formData, setFormData] = useState({
         email: "",
@@ -58,14 +61,14 @@ export default function LoginForm() {
             password,
         });
 
-        console.log('er:', error, data);
+        
         if (error) {
             setError(error.message);
             setIsSubmitting(false);
             return;
         }
 
-        router.push("/");
+        router.push(redirectTo);
 
 
         setIsSubmitting(false);
@@ -76,7 +79,7 @@ export default function LoginForm() {
         try {
             const { data: loginData, error } = await authClient.signIn.social({
                 provider: "google",
-                callbackURL: "/select-role",
+                callbackURL: `/select-role?redirect=${redirectTo}`,
             });
 
             if (error) {
@@ -256,12 +259,12 @@ export default function LoginForm() {
 
                     <p className="mt-7 text-center text-sm text-slate-500">
                         Don't have an account?{" "}
-                        <a
-                            href="/signUp"
+                        <Link
+                            href={`/signUp?redirect=${redirectTo}`}
                             className="font-semibold text-blue-600 hover:text-blue-700"
                         >
                             Sign up
-                        </a>
+                        </Link>
                     </p>
                 </motion.div>
 

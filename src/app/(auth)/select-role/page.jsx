@@ -3,11 +3,14 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 import SelectRoleComponent from './SelectRoleComponent';
 
-const SelectRolePage = async() => {
+const SelectRolePage = async({searchParams}) => {
+    const {redirect: redirectTo} = await searchParams;
+    console.log('redi----:', redirect);
+
 
     const user = await getUserSession();
     if (user?.role) {
-        redirect('/')
+        redirect(redirectTo)
     }
 
     return <SelectRoleComponent />

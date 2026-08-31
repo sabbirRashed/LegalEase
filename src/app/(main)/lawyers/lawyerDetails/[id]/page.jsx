@@ -11,6 +11,8 @@ import { Button } from "@heroui/react";
 import Link from "next/link";
 import HireCard from "@/components/HireCard";
 import { getLawyerServiceById } from "@/lib/api/lawyer";
+import { getUserSession } from "@/lib/core/session";
+import { div } from "framer-motion/client";
 
 // const lawyer = {
 //     name: "Nusrat Jahan",
@@ -41,11 +43,12 @@ const comments = [
     },
 ];
 
-const LawyerDetails = async({params}) => {
-    const {id} = await params;
-    
+const LawyerDetails = async ({ params }) => {
+    const { id } = await params;
+
     const lawyer = await getLawyerServiceById(id)
-    console.log(lawyer, "<-----------");
+    const user = await getUserSession()
+    console.log('user in profile:', user);
 
     return (
         <div className="min-h-screen bg-sky-50/60">
@@ -68,10 +71,12 @@ const LawyerDetails = async({params}) => {
             <div className="mx-auto w-11/12 max-w-7xl py-10 md:py-14">
 
                 {/* BACK */}
-                <button className="mb-7 flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-sky-600">
-                    <ArrowLeft className="h-4 w-4" />
-                    Back to Lawyers
-                </button>
+                <Link href={'/lawyers'}>
+                    <button className="cursor-pointer mb-7 flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-sky-600">
+                        <ArrowLeft className="h-4 w-4" />
+                        Back to Lawyers
+                    </button>
+                </Link>
 
                 {/* ----------------HERO PROFILE--------------*/}
                 <section className="grid gap-7 lg:grid-cols-[1fr_340px]">
@@ -188,7 +193,7 @@ const LawyerDetails = async({params}) => {
                     </div>
 
                     {/* ---------HIRE CARD---------- */}
-                    <HireCard lawyer={lawyer} />
+                    <HireCard lawyer={lawyer} user={user} id={id} />
                 </section>
 
                 {/* ---------------------ABOUT SECTION------------ */}

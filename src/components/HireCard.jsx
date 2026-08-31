@@ -3,9 +3,10 @@
 import { Check, Clock, CreditCard } from '@gravity-ui/icons';
 import { Button } from '@heroui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
-const HireCard = ({ lawyer }) => {
+const HireCard = ({ lawyer, user, id }) => {
 
     const [showHireModal, setShowHireModal] = useState(false);
 
@@ -100,17 +101,37 @@ const HireCard = ({ lawyer }) => {
                 </div>
 
                 {/* CTA */}
-                <Button
-                    onPress={() => setShowHireModal(true)}
-                    className="mt-6 h-12 w-full rounded-xl bg-sky-600 text-sm font-bold text-white shadow-sm hover:bg-sky-700"
-                >
-                    Hire Lawyer
-                </Button>
+                {
+                    user ? (<>
 
-                <p className="mt-4 text-center text-xs leading-5 text-slate-400">
-                    A hiring request will be sent to the lawyer
-                    for confirmation.
-                </p>
+                        <Button
+                            onPress={() => setShowHireModal(true)}
+                            className="mt-6 h-12 w-full rounded-xl bg-sky-600 text-sm font-bold text-white shadow-sm hover:bg-sky-700"
+                        >
+                            Hire Lawyer
+                        </Button>
+
+                        <p className="mt-4 text-center text-xs leading-5 text-slate-400">
+                            A hiring request will be sent to the lawyer
+                            for confirmation.
+                        </p>
+
+                    </>) : (
+                        <>
+                            <Link href={`/login?redirect=lawyers/lawyerDetails/${id}`}>
+                                <Button
+                                    className="mt-6 h-12 w-full rounded-xl bg-sky-600 text-sm font-bold text-white shadow-sm hover:bg-sky-700"
+                                >
+                                    Login to Hire Now
+                                </Button>
+                            </Link>
+
+                            <p className="mt-4 text-center text-xs leading-5 text-slate-400">
+                                You must be logged in to send a hiring request
+                            </p>
+                        </>
+                    )
+                }
             </div>
 
 

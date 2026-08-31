@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@heroui/react";
 import { FiUser, FiBriefcase, FiArrowRight, FiCheck, FiAlertCircle } from "react-icons/fi";
 import { authClient } from "@/lib/auth-client";
@@ -12,6 +12,9 @@ const SelectRoleComponent = () => {
     const [selectedRole, setSelectedRole] = useState(null);
     const [errorMessage, setError] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get('redirect') || "/"
 
     const handleRoleContinue = async () => {
         if (!selectedRole) {
@@ -40,7 +43,7 @@ const SelectRoleComponent = () => {
 
             toast.success("Your role has been selected successfully!");
 
-            router.push("/");
+            router.push(redirectTo);
             router.refresh();
 
         } catch (error) {

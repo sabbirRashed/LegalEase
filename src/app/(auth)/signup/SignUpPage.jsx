@@ -17,7 +17,8 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function SignUpForm() {
     const [step, setStep] = useState("signup");
@@ -27,6 +28,9 @@ export default function SignUpForm() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const router = useRouter();
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get('redirect') || "/"
+
 
     const [formData, setFormData] = useState({
         name: "",
@@ -96,10 +100,9 @@ export default function SignUpForm() {
             role: selectedRole
         })
 
-        console.log("Selected role:", data, error);
         if (data?.status) {
             toast.success('Thank you for completting Sign Up step')
-            router.push('/')
+            router.push(redirectTo)
         }
         else {
             toast.error('Something went wrong!')
@@ -110,7 +113,7 @@ export default function SignUpForm() {
         try {
             const { data: loginData, error } = await authClient.signIn.social({
                 provider: "google",
-                callbackURL: "/select-role",
+                callbackURL: `/select-role?redirect=${redirectTo}`,
             })
             if (error) {
                 toast.error(
@@ -333,12 +336,12 @@ export default function SignUpForm() {
 
                                 <p className="mt-7 text-center text-sm text-slate-500">
                                     Already have an account?{" "}
-                                    <a
-                                        href="/login"
+                                    <Link
+                                        href={`/login?redirect=${redirectTo}`}
                                         className="font-semibold text-blue-600 hover:text-blue-700"
                                     >
                                         Sign in
-                                    </a>
+                                    </Link>
                                 </p>
                             </motion.div>
                         ) : (
