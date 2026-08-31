@@ -1,6 +1,8 @@
 "use client";
 
 import { FiPlus, FiBriefcase, FiEdit3, FiTrash2 } from "react-icons/fi";
+import AddServiceForm from "./AddServiceForm";
+import { Button } from "@heroui/react";
 
 export default function LegalServicesSection({ services, onAddService }) {
     const hasServices = services && services.length > 0;
@@ -11,15 +13,7 @@ export default function LegalServicesSection({ services, onAddService }) {
                 <h2 className="text-xl font-bold text-slate-900">
                     Legal Services
                 </h2>
-
-                <button
-                    type="button"
-                    onClick={onAddService}
-                    className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition-colors hover:bg-blue-700"
-                >
-                    <FiPlus className="h-4 w-4" />
-                    Add Service
-                </button>
+                <AddServiceForm onAddService={onAddService}/>
             </div>
 
             <div className="mt-5">
@@ -98,7 +92,7 @@ export default function LegalServicesSection({ services, onAddService }) {
                         <button
                             type="button"
                             onClick={onAddService}
-                            className="mt-5 flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition-colors hover:bg-blue-700"
+                            className="cursor-pointer mt-5 flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition-colors hover:bg-blue-700"
                         >
                             <FiPlus className="h-4 w-4" />
                             Add Your First Service

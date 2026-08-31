@@ -13,7 +13,7 @@ export default function ProfileDisplay({ profile, onEdit }) {
                 <button
                     type="button"
                     onClick={onEdit}
-                    className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-[10px] sm:text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                    className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-[10px] sm:text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 cursor-pointer"
                 >
                     <FiEdit3 className="h-4 w-4" />
                     Edit Profile
@@ -41,11 +41,11 @@ export default function ProfileDisplay({ profile, onEdit }) {
                         {profile.name}
                     </h3>
 
-                    <span className="mt-1.5 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
+                    <span className="mt-1.5 inline-block leading-relaxed rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
                         {profile.specialization}
                     </span>
 
-                    <p className="mt-4 text-sm leading-relaxed text-slate-500">
+                    <p className="mt-4 text-sm  text-slate-500 max-w-xl">
                         {profile.bio}
                     </p>
                 </div>
