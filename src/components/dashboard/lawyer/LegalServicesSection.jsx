@@ -4,6 +4,7 @@ import { FiPlus, FiBriefcase, FiEdit3, FiTrash2 } from "react-icons/fi";
 import AddServiceForm from "./AddServiceForm";
 import { Button } from "@heroui/react";
 import EditServiceModal from "./EditServiceModal";
+import DeleteServiceModal from "./DeleteServiceModal";
 
 export default function LegalServicesSection({ profile, services, }) {
     const hasServices = services && services.length > 0;
@@ -56,13 +57,8 @@ export default function LegalServicesSection({ profile, services, }) {
                                         <td className="px-4 py-3">
                                             <div className="flex items-center justify-end gap-2 md:gap-4">
                                                 <EditServiceModal service={service}/>
-                                                <button
-                                                    type="button"
-                                                    aria-label="Delete service"
-                                                    className="cursor-pointer  hover:text-red-600 p-1 rounded-full hover:bg-red-100 text-red-500 transition-all duration-300 active:scale-95"
-                                                >
-                                                    <FiTrash2 className="h-4 w-4" />
-                                                </button>
+                                                
+                                                <DeleteServiceModal service={service}/>
                                             </div>
                                         </td>
                                     </tr>
