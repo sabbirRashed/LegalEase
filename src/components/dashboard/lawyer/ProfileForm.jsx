@@ -13,11 +13,12 @@ const ProfileForms = ({ profile }) => {
     const [imagePreview, setImagePreview] = useState(profile?.imageUrl || null);
     const [imageUrl, setImageUrl] = useState(profile?.imageUrl || null);
     const [isUploadingImage, setIsUploadingImage] = useState(false);
-    const [status, setStatus] = useState(profile?.status || '')
+    const [availability, setAvailability] = useState(profile?.status || '')
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const router = useRouter()
+
 
     const { data, isPending } = authClient.useSession()
     const user = data?.user;
@@ -96,7 +97,7 @@ const ProfileForms = ({ profile }) => {
                 consultationRate: consultationRate,
                 hourlyRate: hourlyRate,
                 bio: bio,
-                status: status,
+                status: availability,
                 imageUrl: imageUrl,
             })
 
@@ -142,7 +143,7 @@ const ProfileForms = ({ profile }) => {
                 consultationRate: consultationRate,
                 hourlyRate: hourlyRate,
                 bio: bio,
-                status: status,
+                status: availability,
                 imageUrl: imageUrl,
             })
 
@@ -290,8 +291,8 @@ const ProfileForms = ({ profile }) => {
 
                                     {/* availability status */}
                                     <Select
-                                        value={status}
-                                        onChange={(value) => setStatus(value)} className="w-full" placeholder="Select one" variant='secondary' isRequired>
+                                        value={availability}
+                                        onChange={(value) => setAvailability(value)} className="w-full" placeholder="Select one" variant='secondary' isRequired>
                                         <Label>Status</Label>
                                         <Select.Trigger>
                                             <Select.Value />
@@ -299,11 +300,11 @@ const ProfileForms = ({ profile }) => {
                                         </Select.Trigger>
                                         <Select.Popover className={'rounded-md'}>
                                             <ListBox >
-                                                <ListBox.Item id="available" textValue="available" >
+                                                <ListBox.Item id="Available" textValue="Available" >
                                                     Available
                                                     <ListBox.ItemIndicator />
                                                 </ListBox.Item>
-                                                <ListBox.Item id="busy" textValue="busy">
+                                                <ListBox.Item id="Busy" textValue="Busy">
                                                     Busy
                                                     <ListBox.ItemIndicator />
                                                 </ListBox.Item>
@@ -331,8 +332,8 @@ const ProfileForms = ({ profile }) => {
                                         </Button>
 
                                         {
-                                            profile?._id ? <Button type='submit'>Update Profile</Button>
-                                                : <Button type='submit'>Save Profile</Button>
+                                            profile?._id ? <Button type='submit'>{isSubmitting?"Updating...": "Update Profile"}</Button>
+                                                : <Button type='submit'>{isSubmitting? "Saving...":"Save Profile"}</Button>
 
                                         }
 

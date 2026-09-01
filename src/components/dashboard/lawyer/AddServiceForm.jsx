@@ -1,10 +1,16 @@
 
+import { createService } from "@/lib/actions/lawyer";
 import { Button, FieldError, Input, Label, Modal, Surface, TextArea, TextField } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FiPlus } from "react-icons/fi";
 
-const AddServiceForm = ({ service }) => {
+const AddServiceForm = ({ profile }) => {
     const [error, setError] = useState("")
+    const [isloading, setIsloading] = useState(false)
+
+    const router = useRouter();
 
     const handleCreateService = async (e) => {
         e.preventDefault();
@@ -14,16 +20,34 @@ const AddServiceForm = ({ service }) => {
         const submitPayload = Object.fromEntries(formData.entries());
         const { description } = submitPayload;
 
-        console.log('formData:', submitPayload);
-
         if (description.length < 20) {
             setError('Description must be atleast 20 caracter.')
             return
         }
         setError('')
 
+        try {
+            setIsloading(true)
 
-        // const res = await createService({submitPayload});
+            const res = await createService({
+                profileId: profile?._id,
+                ...submitPayload
+            });
+
+            if (res.insertedId) {
+                toast.success('Successfully added your service.')
+                form.reset()
+                router.refresh();
+            } else {
+                toast.error('Something went wrong! Plese try again.')
+            }
+        } catch {
+            toast.error('Submition faild! Please try again.')
+        }
+        finally {
+            setIsloading(false)
+        }
+
 
     }
     return (
@@ -75,7 +99,7 @@ const AddServiceForm = ({ service }) => {
                                     <TextField
                                         isRequired
                                         name="description"
-                                        defaultValue={service?.description}
+                                        // defaultValue={service?.description}
                                         variant='secondary'
                                     >
                                         <Label>Bio</Label>
@@ -89,7 +113,7 @@ const AddServiceForm = ({ service }) => {
                                         <Button slot="close" variant="secondary">
                                             Cancel
                                         </Button>
-                                        <Button type="submit">Send Message</Button>
+                                        <Button type="submit">{isloading ? "submitting..." : "Create Service"}</Button>
                                     </Modal.Footer>
                                 </form>
                             </Surface>
