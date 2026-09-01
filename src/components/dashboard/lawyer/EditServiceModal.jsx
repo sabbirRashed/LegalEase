@@ -1,24 +1,25 @@
 
-import { createService } from "@/lib/actions/lawyer";
-import { Button, FieldError, Input, Label, Modal, Surface, TextArea, TextField } from "@heroui/react";
+import { updateService } from "@/lib/actions/lawyer";
+import { Button,  Input, Label, Modal, Surface, TextArea, TextField } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FiPlus } from "react-icons/fi";
+import { FiEdit3, } from "react-icons/fi";
 
-const AddServiceForm = ({ profile }) => {
+
+const EditServiceModal = ({ service }) => {
     const [error, setError] = useState("")
     const [isloading, setIsloading] = useState(false)
 
     const router = useRouter();
 
-    const handleCreateService = async (e) => {
+    const handleUpdateService = async (e) => {
         e.preventDefault();
 
         const form = e.currentTarget;
         const formData = new FormData(form);
-        const submitPayload = Object.fromEntries(formData.entries());
-        const { description } = submitPayload;
+        const updatePayload = Object.fromEntries(formData.entries());
+        const { description } = updatePayload;
 
         if (description.length < 20) {
             setError('Description must be atleast 20 caracter.')
@@ -28,21 +29,19 @@ const AddServiceForm = ({ profile }) => {
 
         try {
             setIsloading(true)
+           
+            const res = await updateService(service?._id, updatePayload ) 
 
-            const res = await createService({
-                profileId: profile?._id,
-                ...submitPayload
-            });
-
-            if (res.insertedId) {
-                toast.success('Successfully added your service.')
+            if (res.modifiedCount > 0) {
+                toast.success('Successfully updated your service.')
                 form.reset()
                 router.refresh();
             } else {
                 toast.error('Something went wrong! Plese try again.')
             }
-        } catch {
-            toast.error('Submition faild! Please try again.')
+        } catch(error) {
+            console.log('update err:', error);
+            toast.error('Update faild! Please try again.')
         }
         finally {
             setIsloading(false)
@@ -53,12 +52,12 @@ const AddServiceForm = ({ profile }) => {
     return (
         <Modal>
             <Button
-                size="sm"
-                type="button"
-                className="cursor-pointer flex items-center gap-1 md:gap-2 rounded-lg bg-blue-600 px-2 p md:px-4 md:py-2 text-[10px] md:text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition-colors hover:bg-blue-700 "
+                isIconOnly
+                size="small"
+                variant="white"
+                className=" text-slate-400 hover:bg-blue-200 hover:text-blue-600"
             >
-                <FiPlus className="md:h-4 md:w-4 h-3 w-3" />
-                Add Service
+                <FiEdit3 className="h-4 w-4" />
             </Button>
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
@@ -74,46 +73,74 @@ const AddServiceForm = ({ profile }) => {
                             <Surface variant="default">
 
                                 <form
-                                    onSubmit={handleCreateService}
+                                    onSubmit={handleUpdateService}
                                     className="flex flex-col gap-4 space-y-4">
 
                                     {/* service name */}
-                                    <TextField className="w-full" name="name" type="text" variant="secondary" isRequired>
+                                    <TextField
+                                        className="w-full"
+                                        name="name"
+                                        type="text"
+                                        variant="secondary"
+                                        defaultValue={service?.name}
+                                        isRequired>
                                         <Label>Service Name</Label>
                                         <Input placeholder="e.g. Criminal Case Consultation" className={'py-3'} />
                                     </TextField>
 
                                     {/* title */}
-                                    <TextField className="w-full" name="category" type="text" variant="secondary" isRequired>
+                                    <TextField
+                                        className="w-full"
+                                        name="category"
+                                        type="text"
+                                        variant="secondary"
+                                        defaultValue={service?.category}
+                                        isRequired>
                                         <Label>Category</Label>
-                                        <Input placeholder="e.g. Criminal Law" className={'py-3'} />
+                                        <Input
+                                            placeholder="e.g. Criminal Law"
+                                            className={'py-3'} />
                                     </TextField>
 
                                     {/* price */}
-                                    <TextField className="w-full" name="consultationFee" type="number" variant="secondary" isRequired>
+                                    <TextField
+                                        className="w-full"
+                                        name="consultationFee"
+                                        type="number"
+                                        variant="secondary"
+                                        defaultValue={service?.consultationFee}
+                                        isRequired>
                                         <Label>Consultation Fee</Label>
-                                        <Input placeholder="Enter your phone number" className={'py-3'} />
+                                        <Input
+                                            placeholder="Enter your phone number"
+                                            className={'py-3'} />
                                     </TextField>
 
                                     {/* description */}
                                     <TextField
                                         isRequired
                                         name="description"
-                                        // defaultValue={service?.description}
+                                        defaultValue={service?.description}
                                         variant='secondary'
                                     >
                                         <Label>Description</Label>
-                                        <TextArea rows={3} placeholder="Tell about your service..." />
+                                        <TextArea rows={3}
+                                            placeholder="Tell us about your service..." />
                                         {
                                             error.length > 0 && <p className="text-xs text-red-500 bg-red-100 px-4 py-3 rounded-2xl">{error}</p>
                                         }
                                     </TextField>
 
                                     <Modal.Footer>
-                                        <Button slot="close" variant="secondary">
+                                        <Button
+                                            slot="close"
+                                            variant="secondary">
                                             Cancel
                                         </Button>
-                                        <Button type="submit">{isloading ? "submitting..." : "Create Service"}</Button>
+                                        <Button
+                                            type="submit">
+                                            {isloading ? "Updating..." : "Update Service"}
+                                        </Button>
                                     </Modal.Footer>
                                 </form>
                             </Surface>
@@ -126,4 +153,4 @@ const AddServiceForm = ({ profile }) => {
     );
 };
 
-export default AddServiceForm;
+export default EditServiceModal;

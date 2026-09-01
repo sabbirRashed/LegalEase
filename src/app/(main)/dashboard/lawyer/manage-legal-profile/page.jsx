@@ -72,7 +72,6 @@ export default async function ManageLegalProfilePage() {
 
     const profile = await getLogedInLawyerProfile();
     const services = await getLawyerServiceByProfileId(profile?._id)
-    console.log('service home:', services);
     const user = await getUserSession()
 
 

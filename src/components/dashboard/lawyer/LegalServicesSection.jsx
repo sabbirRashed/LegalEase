@@ -3,6 +3,7 @@
 import { FiPlus, FiBriefcase, FiEdit3, FiTrash2 } from "react-icons/fi";
 import AddServiceForm from "./AddServiceForm";
 import { Button } from "@heroui/react";
+import EditServiceModal from "./EditServiceModal";
 
 export default function LegalServicesSection({ profile, services, }) {
     const hasServices = services && services.length > 0;
@@ -22,7 +23,9 @@ export default function LegalServicesSection({ profile, services, }) {
             <div className="mt-5">
                 {hasServices ? (
                     <div className="overflow-x-auto rounded-2xl border border-slate-200 w-full">
+
                         <table className="w-full text-left text-sm">
+
                             <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
                                 <tr>
                                     <th className="px-4 py-3">Service Name</th>
@@ -31,28 +34,28 @@ export default function LegalServicesSection({ profile, services, }) {
                                     <th className="px-4 py-3 text-right">Actions</th>
                                 </tr>
                             </thead>
+
+
                             <tbody className="divide-y divide-slate-100">
                                 {services.map((service) => (
                                     <tr key={service?._id} className="hover:bg-slate-50">
+
                                         <td className="px-4 py-3 font-medium text-slate-900">
                                             {service?.name}
                                         </td>
+
                                         <td className="px-4 py-3 text-slate-500">
                                             {service?.category}
                                         </td>
+
                                         <td className="px-4 py-3 text-slate-500">
                                             ${service?.consultationFee
                                             }
                                         </td>
+
                                         <td className="px-4 py-3">
                                             <div className="flex items-center justify-end gap-2 md:gap-4">
-                                                <button
-                                                    type="button"
-                                                    aria-label="Edit service"
-                                                    className="cursor-pointer text-slate-400 hover:bg-blue-200 hover:text-blue-600 p-1 rounded-full active:scale-95"
-                                                >
-                                                    <FiEdit3 className="h-4 w-4" />
-                                                </button>
+                                                <EditServiceModal service={service}/>
                                                 <button
                                                     type="button"
                                                     aria-label="Delete service"
