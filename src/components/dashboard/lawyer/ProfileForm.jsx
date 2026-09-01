@@ -137,7 +137,7 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
         }
     };
 
-    
+
     const handleUpdate = async (e) => {
         e.preventDefault();
 
@@ -152,19 +152,19 @@ export default function ProfileForm({ existingProfile, user, handleSubmitProfile
             const res = await handleUpdateProfile(profileId, updateData)
 
             if (res.modifiedCount > 0) {
-                toast.success('Successfully update your profile') 
-                                     
+                toast.success('Successfully update your profile')
+
             }
         } catch {
             setErrors({ submit: "Failed to update profile. Please try again." })
-        }finally{
-           setIsSubmitting(false);
+        } finally {
+            setIsSubmitting(false);
         }
 
     }
 
     return (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm max-w-5xl mx-auto">
             <div className="border-b border-slate-100 px-6 py-5 sm:px-8">
                 <h2 className="text-lg font-bold text-slate-900">Professional Profile</h2>
                 <p className="mt-1 text-sm text-slate-500">
