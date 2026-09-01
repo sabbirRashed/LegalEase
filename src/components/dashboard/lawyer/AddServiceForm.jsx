@@ -1,8 +1,10 @@
 
 import { Button, FieldError, Input, Label, Modal, Surface, TextArea, TextField } from "@heroui/react";
+import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
 const AddServiceForm = ({ service }) => {
+    const [error, setError] = useState("")
 
     const handleCreateService = async (e) => {
         e.preventDefault();
@@ -10,8 +12,16 @@ const AddServiceForm = ({ service }) => {
         const form = e.currentTarget;
         const formData = new FormData(form);
         const submitPayload = Object.fromEntries(formData.entries());
+        const { description } = submitPayload;
 
         console.log('formData:', submitPayload);
+
+        if (description.length < 20) {
+            setError('Description must be atleast 20 caracter.')
+            return
+        }
+        setError('')
+
 
         // const res = await createService({submitPayload});
 
@@ -21,7 +31,6 @@ const AddServiceForm = ({ service }) => {
             <Button
                 size="sm"
                 type="button"
-                // onClick={onAddService}
                 className="cursor-pointer flex items-center gap-1 md:gap-2 rounded-lg bg-blue-600 px-2 p md:px-4 md:py-2 text-[10px] md:text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition-colors hover:bg-blue-700 "
             >
                 <FiPlus className="md:h-4 md:w-4 h-3 w-3" />
@@ -71,14 +80,16 @@ const AddServiceForm = ({ service }) => {
                                     >
                                         <Label>Bio</Label>
                                         <TextArea rows={3} placeholder="Tell us about yourself..." />
-                                        <FieldError />
+                                        {
+                                            error.length > 0 && <p className="text-xs text-red-500 bg-red-100 px-4 py-3 rounded-2xl">{error}</p>
+                                        }
                                     </TextField>
 
                                     <Modal.Footer>
                                         <Button slot="close" variant="secondary">
                                             Cancel
                                         </Button>
-                                        <Button slot="close" type="submit">Send Message</Button>
+                                        <Button type="submit">Send Message</Button>
                                     </Modal.Footer>
                                 </form>
                             </Surface>
