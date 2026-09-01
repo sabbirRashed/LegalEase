@@ -12,7 +12,6 @@ import Link from "next/link";
 import HireCard from "@/components/HireCard";
 import { getLawyerProfileById} from "@/lib/api/lawyer";
 import { getUserSession } from "@/lib/core/session";
-import { div } from "framer-motion/client";
 
 
 const comments = [
@@ -37,6 +36,7 @@ const LawyerDetails = async ({ params }) => {
 
     const lawyer = await getLawyerProfileById(id)
     const user = await getUserSession()
+    
  
     return (
         <div className="min-h-screen bg-sky-50/60">
@@ -69,10 +69,9 @@ const LawyerDetails = async ({ params }) => {
                 {/* ----------------HERO PROFILE--------------*/}
                 <section className="grid gap-7 lg:grid-cols-[1fr_340px]">
 
-                    {/* LEFT PROFILE */}
+                    {/* PROFILE CARD*/}
                     <div className="bg-white p-6 shadow-sm md:p-10">
 
-                        {/* Profile top */}
                         <div className="flex flex-col gap-8 md:flex-row">
 
                             {/* IMAGE */}
@@ -116,10 +115,9 @@ const LawyerDetails = async ({ params }) => {
                                     {lawyer.specialization}
                                 </p>
 
-                                {/* Divider */}
                                 <div className="my-7 h-px w-full bg-slate-200" />
 
-                                {/* Quote / Bio */}
+                                {/* Bio */}
                                 <div className="border-l-4 border-sky-500 pl-5">
                                     <p className="text-base italic leading-8 text-slate-600">
                                         {lawyer.bio}
@@ -181,7 +179,7 @@ const LawyerDetails = async ({ params }) => {
                     </div>
 
                     {/* ---------HIRE CARD---------- */}
-                    <HireCard lawyer={lawyer} user={user} id={id} />
+                    <HireCard lawyer={lawyer} user={user} />
                 </section>
 
                 {/* ---------------------ABOUT SECTION------------ */}

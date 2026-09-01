@@ -1,5 +1,6 @@
 
-import { updateService } from "@/lib/actions/lawyer";
+
+import { updateService } from "@/lib/actions/service";
 import { Button,  Input, Label, Modal, Surface, TextArea, TextField } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

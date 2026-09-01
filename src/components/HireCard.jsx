@@ -1,18 +1,64 @@
 "use client"
 
+
+import { sendRequest } from '@/lib/actions/request';
 import { Check, Clock, CreditCard } from '@gravity-ui/icons';
-import { Button } from '@heroui/react';
+import { Button, TextArea, } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import { FiX } from 'react-icons/fi';
 
-const HireCard = ({ lawyer, user, id }) => {
+const HireCard = ({ lawyer, user }) => {
 
+    const [message, setMessage] = useState("")
+    const [isloading, setIsloading] = useState(false);
     const [showHireModal, setShowHireModal] = useState(false);
 
-    const handleHire = () => {
-        console.log("Hiring request sent");
-        setShowHireModal(false);
+    const router = useRouter()
+
+    const handleHire = async () => {
+
+
+        setIsloading(true);
+
+        const requestData = {
+            clientUserId: user?.id,
+            clientName: user?.name,
+            clientEmail: user?.email,
+            lawyerProfileId: lawyer?._id,
+            lawyerName: lawyer?.name,
+            lawyerEmail: lawyer?.email,
+            status: "Pending",
+            message: message,
+
+        }
+
+        console.log(lawyer?._id);
+
+        try {
+            console.log('before', requestData);
+            const res = await sendRequest(lawyer?._id, requestData);
+            console.log('after: ', requestData);
+
+
+            if (res?.insertedId) {
+                toast.success(`Successfully send your request.`);
+                
+                router.refresh()
+                setShowHireModal(false)
+
+            }
+        }
+        catch(error) {
+            // console.log('err', error);
+            toast.error('Request failed! Please try again later.')
+        }
+        finally {
+            setIsloading(false)
+        }
     };
 
 
@@ -154,9 +200,9 @@ const HireCard = ({ lawyer, user, id }) => {
 
                             <button
                                 onClick={() => setShowHireModal(false)}
-                                className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                                className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700 cursor-pointer"
                             >
-                                ×
+                                <FiX />
                             </button>
                         </div>
 
@@ -218,10 +264,19 @@ const HireCard = ({ lawyer, user, id }) => {
                             </p>
                         </div>
 
+                        <div className=" mt-6 border border-sky-100 bg-sky-50 p-4 rounded-xl">
+                            <TextArea fullWidth
+                                placeholder="Write your message..."
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                className="shadow-none border border-sky-100 text-xs" />
+
+                        </div>
+
                         <div className="mt-7 flex gap-3">
                             <Button
                                 onPress={() => setShowHireModal(false)}
-                                variant="bordered"
+                                variant="outline"
                                 className="h-11 flex-1 rounded-xl border-slate-300 font-semibold text-slate-700"
                             >
                                 Cancel
@@ -229,6 +284,7 @@ const HireCard = ({ lawyer, user, id }) => {
 
                             <Button
                                 onPress={handleHire}
+                                isDisabled={message.length < 5 || isloading}
                                 className="h-11 flex-1 rounded-xl bg-sky-600 font-semibold text-white hover:bg-sky-700"
                             >
                                 Confirm Hire

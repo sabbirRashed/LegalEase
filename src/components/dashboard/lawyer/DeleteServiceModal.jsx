@@ -1,6 +1,6 @@
 "use client"
 
-import { deleteService } from '@/lib/actions/lawyer';
+import { deleteService } from '@/lib/actions/service';
 import { Button, Modal } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';

@@ -1,5 +1,6 @@
 
-import { createService } from "@/lib/actions/lawyer";
+
+import { createService } from "@/lib/actions/service";
 import { Button, FieldError, Input, Label, Modal, Surface, TextArea, TextField } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -34,7 +35,7 @@ const AddServiceForm = ({ profile }) => {
                 ...submitPayload
             });
 
-            if (res.insertedId) {
+            if (res?.insertedId) {
                 toast.success('Successfully added your service.')
                 form.reset()
                 router.refresh();
