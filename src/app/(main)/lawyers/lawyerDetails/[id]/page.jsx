@@ -10,21 +10,10 @@ import {
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import HireCard from "@/components/HireCard";
-import { getLawyerServiceById } from "@/lib/api/lawyer";
+import { getLawyerProfileById, getLawyerServiceById } from "@/lib/api/lawyer";
 import { getUserSession } from "@/lib/core/session";
 import { div } from "framer-motion/client";
 
-// const lawyer = {
-//     name: "Nusrat Jahan",
-//     email: "nusrat.jahan@example.com",
-//     imageUrl: "/images/image1.jpg",
-//     specialization: "Family Law",
-//     bio: "Dedicated family lawyer handling divorce, child custody, maintenance, and other family-related legal matters. She is committed to providing clear, practical, and compassionate legal guidance to individuals and families.",
-//     hourlyRate: 2200,
-//     consultationRate: 1200,
-//     status: "Available",
-//     joinedDate: "January 22, 2026",
-// };
 
 const comments = [
     {
@@ -46,10 +35,9 @@ const comments = [
 const LawyerDetails = async ({ params }) => {
     const { id } = await params;
 
-    const lawyer = await getLawyerServiceById(id)
+    const lawyer = await getLawyerProfileById(id)
     const user = await getUserSession()
-    console.log('user in profile:', user);
-
+ 
     return (
         <div className="min-h-screen bg-sky-50/60">
             {/* ------------HEADER------------ */}

@@ -9,23 +9,25 @@ export default function LegalServicesSection({ services, onAddService }) {
 
     return (
         <div>
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-slate-900">
-                    Legal Services
-                </h2>
-                <AddServiceForm onAddService={onAddService}/>
+            <div className="flex items-center justify-between gap-4">
+                <div>
+                    <h2 className="text-xl font-bold text-slate-900">
+                        Legal Services
+                    </h2>
+                    <p className="text-slate-500 text-sm ms:text-base mt-1">Manage the services you currently offer to clients.</p>
+                </div>
+                <AddServiceForm onAddService={onAddService} />
             </div>
 
             <div className="mt-5">
                 {hasServices ? (
-                    <div className="overflow-hidden rounded-2xl border border-slate-200">
+                    <div className="overflow-x-auto rounded-2xl border border-slate-200 w-full">
                         <table className="w-full text-left text-sm">
                             <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
                                 <tr>
                                     <th className="px-4 py-3">Service Name</th>
                                     <th className="px-4 py-3">Category</th>
                                     <th className="px-4 py-3">Price</th>
-                                    <th className="px-4 py-3">Status</th>
                                     <th className="px-4 py-3 text-right">Actions</th>
                                 </tr>
                             </thead>
@@ -42,28 +44,18 @@ export default function LegalServicesSection({ services, onAddService }) {
                                             ${service.price}
                                         </td>
                                         <td className="px-4 py-3">
-                                            <span
-                                                className={`inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${service.status === "active"
-                                                        ? "bg-emerald-50 text-emerald-600"
-                                                        : "bg-slate-100 text-slate-500"
-                                                    }`}
-                                            >
-                                                {service.status === "active" ? "Active" : "Inactive"}
-                                            </span>
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            <div className="flex items-center justify-end gap-3">
+                                            <div className="flex items-center justify-end gap-2 md:gap-4">
                                                 <button
                                                     type="button"
                                                     aria-label="Edit service"
-                                                    className="text-slate-400 hover:text-blue-600"
+                                                    className="cursor-pointer text-slate-400 hover:bg-blue-200 hover:text-blue-600 p-1 rounded-full active:scale-95"
                                                 >
                                                     <FiEdit3 className="h-4 w-4" />
                                                 </button>
                                                 <button
                                                     type="button"
                                                     aria-label="Delete service"
-                                                    className="text-slate-400 hover:text-red-600"
+                                                    className="cursor-pointer  hover:text-red-600 p-1 rounded-full hover:bg-red-100 text-red-500 transition-all duration-300 active:scale-95"
                                                 >
                                                     <FiTrash2 className="h-4 w-4" />
                                                 </button>

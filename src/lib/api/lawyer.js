@@ -10,6 +10,14 @@ export const getLawyerServiceById = async(id)=>{
     return serverFetch(`/api/service/${id}`)
 }
 
+export const getLawyerProfile = async(query)=>{
+    return serverFetch(`/api/lawyer?${query}`)
+}
+
+export const getLawyerProfileById = async(id)=>{
+    return serverFetch (`/api/lawyer/${id}`)
+}
+
 export const getLawyerProfileByUserId = async (userId) => {
 
     return serverFetch(`/api/lawyer/myprofile?userId=${userId}`)

@@ -1,6 +1,6 @@
 import LawyerCard from "@/components/lawyerCard";
 import LawyerListingContainer from "@/components/LawyerListingContainer";
-import { getLawyerServices } from "@/lib/api/lawyer";
+import { getLawyerProfile, getLawyerServices } from "@/lib/api/lawyer";
 import { q } from "framer-motion/m";
 
 
@@ -11,7 +11,7 @@ const BrowseLawyersPage = async ({ searchParams }) => {
     const query = new URLSearchParams(search_params).toString()
     console.log(query);
 
-    const services = await getLawyerServices(query);
+    const services = await getLawyerProfile(query);
 
 
 

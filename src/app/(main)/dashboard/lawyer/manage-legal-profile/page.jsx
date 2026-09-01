@@ -7,10 +7,68 @@ export const metadata = {
     description: "Create and manage your professional lawyer profile and legal services.",
 };
 
+const services = [
+    {
+        id: 1,
+        name: "Criminal Case Consultation",
+        category: "Criminal Law",
+        price: 1800,
+        status: "active",
+    },
+    {
+        id: 2,
+        name: "Bail Application",
+        category: "Criminal Law",
+        price: 3500,
+        status: "active",
+    },
+    {
+        id: 3,
+        name: "Divorce Legal Consultation",
+        category: "Family Law",
+        price: 2000,
+        status: "active",
+    },
+    {
+        id: 4,
+        name: "Property Dispute Consultation",
+        category: "Property Law",
+        price: 2500,
+        status: "active",
+    },
+    {
+        id: 5,
+        name: "Legal Document Review",
+        category: "Corporate Law",
+        price: 1500,
+        status: "inactive",
+    },
+    {
+        id: 6,
+        name: "Business Contract Drafting",
+        category: "Corporate Law",
+        price: 3000,
+        status: "active",
+    },
+    {
+        id: 7,
+        name: "Land Ownership Consultation",
+        category: "Property Law",
+        price: 2200,
+        status: "active",
+    },
+    {
+        id: 8,
+        name: "Legal Notice Preparation",
+        category: "Civil Law",
+        price: 1800,
+        status: "inactive",
+    },
+];
 
 
 export default async function ManageLegalProfilePage() {
-    
+
     const profile = await getLogedInLawyerProfile();
     const user = await getUserSession()
 
@@ -29,9 +87,9 @@ export default async function ManageLegalProfilePage() {
                 </div>
 
                 <ProfileManager
-                    initialProfile={profile}
+                    profile={profile}
                     user={user}
-                    // initialServices={services}
+                services={services}
                 />
             </div>
         </div>

@@ -1,10 +1,6 @@
 "use client";
 
-
-import { FiEdit3, FiUser } from "react-icons/fi";
-import ProfileForm from "./ProfileForm";
-import ProfileForms from "./ProfileForms";
-import HireCard from "@/components/HireCard";
+import ProfileForms from "./ProfileForm";
 import { Briefcase, Calendar, ShieldCheck } from "@gravity-ui/icons";
 import Image from "next/image";
 
@@ -12,53 +8,13 @@ export default function ProfileDisplay({ profile }) {
 
 
     return (
-        // <div className="border border-slate-200 bg-white shadow-sm p-6 sm:p-8">
-        //     <div className="flex items-start justify-between ">
-        //         <h2 className="text-xl font-bold text-slate-900">
-        //             Professional Profile
-        //         </h2>
-        //         <ProfileForms profile={profile} />
-
-        //     </div>
-
-        //     <div className="mt-6 flex flex-col gap-6 sm:flex-row">
-        //         {/* Avatar */}
-        //         <div className="flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-        //             {profile.imageUrl ? (
-        //                 // eslint-disable-next-line @next/next/no-img-element
-        //                 <img
-        //                     src={profile.imageUrl}
-        //                     alt={profile.name}
-        //                     className="h-full w-full object-cover"
-        //                 />
-        //             ) : (
-        //                 <FiUser className="h-10 w-10 text-slate-300" />
-        //             )}
-        //         </div>
-
-        //         {/* Info */}
-        //         <div className="flex-1">
-        //             <h3 className="text-lg font-bold text-slate-900">
-        //                 {profile.name}
-        //             </h3>
-
-        //             <span className="mt-1.5 inline-block leading-relaxed rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
-        //                 {profile.specialization}
-        //             </span>
-
-        //             <p className="mt-4 text-sm  text-slate-500 max-w-xl">
-        //                 {profile.bio}
-        //             </p>
-        //         </div>
-        //     </div>
-        // </div>
 
         <section className="relative border border-slate-200 bg-white shadow-sm p-6 sm:p-8">
             <div className="absolute top-6 right-6 z-20"><ProfileForms profile={profile} /></div>
 
             <div>
 
-            
+
                 <div className="flex flex-col gap-8 md:gap-15 md:flex-row ">
 
 

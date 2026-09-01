@@ -1,102 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import ProfileForm from "./ProfileForm";
 import ProfileDisplay from "./ProfileDisplay";
-import { createLawyerProfile, updateLawyerProfile } from "@/lib/actions/lawyer";
-import { useRouter } from "next/navigation";
 import LegalServicesSection from "./LegalServicesSection";
-import ProfileForms from "./ProfileForms";
-import { Button } from "@heroui/react";
+import ProfileForms from "./ProfileForm";
 import { FiUser } from "react-icons/fi";
 
 
-const fakeServices = [
-    // {
-    //     id: "srv-101",
-    //     name: "Full-Stack Web Development",
-    //     category: "Development",
-    //     price: "1,200",
-    //     status: "active",
-    // },
-    // {
-    //     id: "srv-102",
-    //     name: "UI/UX Dashboard Redesign",
-    //     category: "Design",
-    //     price: "850",
-    //     status: "active",
-    // },
-    // {
-    //     id: "srv-103",
-    //     name: "SEO Optimization & Audit",
-    //     category: "Marketing",
-    //     price: "450",
-    //     status: "inactive",
-    // },
-    // {
-    //     id: "srv-104",
-    //     name: "REST API Integration",
-    //     category: "Backend",
-    //     price: "600",
-    //     status: "active",
-    // },
-    // {
-    //     id: "srv-105",
-    //     name: "Custom Graphic Design",
-    //     category: "Branding",
-    //     price: "300",
-    //     status: "inactive",
-    // },
-];
 
+export default function ProfileManager({ profile, services}) {
 
+    const isShowForm = !profile?.userId 
 
-export default function ProfileManager({ initialProfile, user }) {
-
-    const [profile, setProfile] = useState(initialProfile);
-    const [services, setServices] = useState(fakeServices);
-    const [isEdit, setIsEdit] = useState(false);
-
-
-
-
-    const isShowForm = !profile?.userId || isEdit
-
-    const router = useRouter()
 
     const handleAddService = () => {
         // to do
     };
 
-    const handleCancelEdit = () => {
-        console.log('before cancel edit');
-        setIsEdit(false)
-    }
-
-    const handleSubmitProfile = async (profileData) => {
-
-        // console.log('after create:', profile);
-        const res = await createLawyerProfile(profileData)
-
-        setProfile(profileData)
-        setIsEdit(false)
-        router.refresh()
-        return res
-    }
-
-    const handleUpdateProfile = async (profileId, updatedData,) => {
-        console.log('from manage:', profileId, updatedData);
-        const res = await updateLawyerProfile(profileId, updatedData);
-
-        setIsEdit(false);
-        router.refresh()
-        return res
-    }
-
+ 
     return (
-        <div className="overflow-hidden ">
+        <div>
             {/* Professional Profile section */}
-            <div className="">
+            <div >
                 {isShowForm ? (
                     <div className="border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
                         <div className="flex flex-col items-center justify-center py-8 text-center">
@@ -113,21 +38,21 @@ export default function ProfileManager({ initialProfile, user }) {
                                 what you specialize in, and what legal services you offer.
                             </p>
 
-                            <ProfileForms profile={profile}/>
+                            <ProfileForms profile={profile} />
                         </div>
                     </div>
                 ) : (
                     <>
                         <ProfileDisplay
                             profile={profile}
-                            onEdit={() => setIsEdit(true)}
+                            
                         />
                     </>
                 )}
             </div>
 
             {/* Legal Services section */}
-            <div className="border-t  p-6 sm:p-8 mt-20 border border-slate-200 bg-white shadow-sm">
+            <div className="min-w-0  p-6 sm:p-8 mt-20 border border-slate-200 bg-white shadow-sm">
                 <LegalServicesSection
                     services={services}
                     onAddService={handleAddService}

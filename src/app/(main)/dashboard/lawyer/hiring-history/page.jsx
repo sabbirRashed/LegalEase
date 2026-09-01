@@ -1,4 +1,4 @@
-import ProfileForms from '@/components/dashboard/lawyer/ProfileForms';
+import ProfileForms from '@/components/dashboard/lawyer/ProfileForm';
 import { div } from 'framer-motion/client';
 import React from 'react';
 
