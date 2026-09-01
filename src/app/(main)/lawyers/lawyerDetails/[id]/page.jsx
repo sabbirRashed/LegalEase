@@ -10,8 +10,9 @@ import {
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import HireCard from "@/components/HireCard";
-import { getLawyerProfileById} from "@/lib/api/lawyer";
+import { getLawyerProfileById } from "@/lib/api/lawyer";
 import { getUserSession } from "@/lib/core/session";
+import CommentsSection from "@/components/CommentsSection";
 
 
 const comments = [
@@ -36,8 +37,8 @@ const LawyerDetails = async ({ params }) => {
 
     const lawyer = await getLawyerProfileById(id)
     const user = await getUserSession()
-    
- 
+
+
     return (
         <div className="min-h-screen bg-sky-50/60">
             {/* ------------HEADER------------ */}
@@ -227,71 +228,7 @@ const LawyerDetails = async ({ params }) => {
                 </section>
 
                 {/* -------------------COMMENT SECTION--------------------- */}
-                <section className="mt-8 bg-white p-7 shadow-sm md:p-10">
-
-                    <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                        <div>
-                            <div className="flex items-center gap-3">
-                                <div className="h-8 w-1 bg-sky-500" />
-
-                                <h2 className="font-serif text-2xl uppercase text-slate-900">
-                                    Client Comments
-                                </h2>
-                            </div>
-
-                            <p className="mt-2 text-sm text-slate-500">
-                                See what previous clients say about this lawyer.
-                            </p>
-                        </div>
-
-                        {/* For authenticated users later */}
-                        <Button
-                            variant="bordered"
-                            className="rounded-xl border-slate-300 font-semibold text-slate-700"
-                        >
-                            Write a Comment
-                        </Button>
-                    </div>
-
-                    {/* Comments */}
-                    <div className="mt-8 space-y-4">
-
-                        {comments.map((item) => (
-                            <div
-                                key={item.id}
-                                className="rounded-2xl border border-slate-200 p-5"
-                            >
-                                <div className="flex items-start justify-between gap-4">
-
-                                    <div className="flex gap-3">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100">
-                                            <Person className="h-5 w-5 text-sky-600" />
-                                        </div>
-
-                                        <div>
-                                            <p className="font-semibold text-slate-800">
-                                                {item.name}
-                                            </p>
-
-                                            <p className="text-xs text-slate-400">
-                                                {item.date}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex gap-1 text-amber-400">
-                                        ★★★★★
-                                    </div>
-                                </div>
-
-                                <p className="mt-4 pl-0 text-sm leading-7 text-slate-600 md:pl-[52px]">
-                                    {item.comment}
-                                </p>
-                            </div>
-                        ))}
-
-                    </div>
-                </section>
+                <CommentsSection lawyer={lawyer} comments={comments} user={user}/>
             </div>
         </div>
     );
