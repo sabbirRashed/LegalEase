@@ -4,7 +4,7 @@ import { FiPlus, FiBriefcase, FiEdit3, FiTrash2 } from "react-icons/fi";
 import AddServiceForm from "./AddServiceForm";
 import { Button } from "@heroui/react";
 
-export default function LegalServicesSection({profile, services,  }) {
+export default function LegalServicesSection({ profile, services, }) {
     const hasServices = services && services.length > 0;
 
     return (
@@ -33,15 +33,16 @@ export default function LegalServicesSection({profile, services,  }) {
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 {services.map((service) => (
-                                    <tr key={service.id} className="hover:bg-slate-50">
+                                    <tr key={service?._id} className="hover:bg-slate-50">
                                         <td className="px-4 py-3 font-medium text-slate-900">
-                                            {service.name}
+                                            {service?.name}
                                         </td>
                                         <td className="px-4 py-3 text-slate-500">
-                                            {service.category}
+                                            {service?.category}
                                         </td>
                                         <td className="px-4 py-3 text-slate-500">
-                                            ${service.price}
+                                            ${service?.consultationFee
+                                            }
                                         </td>
                                         <td className="px-4 py-3">
                                             <div className="flex items-center justify-end gap-2 md:gap-4">

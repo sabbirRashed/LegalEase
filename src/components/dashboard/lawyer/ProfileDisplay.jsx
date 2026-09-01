@@ -10,7 +10,9 @@ export default function ProfileDisplay({ profile }) {
     return (
 
         <section className="relative border border-slate-200 bg-white shadow-sm p-6 sm:p-8">
-            <div className="absolute top-6 right-6 z-20"><ProfileForms profile={profile} /></div>
+            <div className="absolute top-6 right-6 z-20">
+                <ProfileForms profile={profile} />
+            </div>
 
             <div>
 

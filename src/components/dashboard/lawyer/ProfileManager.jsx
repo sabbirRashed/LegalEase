@@ -22,7 +22,7 @@ export default function ProfileManager({ profile, services }) {
                         </div>
 
                         <h2 className="mt-4 text-xl font-bold text-slate-900">
-                            Your professional profile isn’t set up yet
+                            Your professional profile isn't set up yet
                         </h2>
 
                         <p className="mt-2 max-w-lg text-sm leading-6 text-slate-500">

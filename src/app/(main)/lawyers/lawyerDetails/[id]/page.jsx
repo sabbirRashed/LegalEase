@@ -10,7 +10,7 @@ import {
 import { Button } from "@heroui/react";
 import Link from "next/link";
 import HireCard from "@/components/HireCard";
-import { getLawyerProfileById, getLawyerServiceById } from "@/lib/api/lawyer";
+import { getLawyerProfileById} from "@/lib/api/lawyer";
 import { getUserSession } from "@/lib/core/session";
 import { div } from "framer-motion/client";
 

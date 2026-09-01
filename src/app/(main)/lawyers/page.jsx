@@ -1,6 +1,6 @@
 import LawyerCard from "@/components/lawyerCard";
 import LawyerListingContainer from "@/components/LawyerListingContainer";
-import { getLawyerProfile, getLawyerServices } from "@/lib/api/lawyer";
+import { getLawyerProfile } from "@/lib/api/lawyer";
 import { q } from "framer-motion/m";
 
 
