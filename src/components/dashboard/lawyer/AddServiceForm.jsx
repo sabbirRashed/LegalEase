@@ -3,6 +3,19 @@ import { Button, FieldError, Input, Label, Modal, Surface, TextArea, TextField }
 import { FiPlus } from "react-icons/fi";
 
 const AddServiceForm = ({ service }) => {
+
+    const handleCreateService = async (e) => {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+        const submitPayload = Object.fromEntries(formData.entries());
+
+        console.log('formData:', submitPayload);
+
+        // const res = await createService({submitPayload});
+
+    }
     return (
         <Modal>
             <Button
@@ -26,9 +39,13 @@ const AddServiceForm = ({ service }) => {
                         </Modal.Header>
                         <Modal.Body className="p-6">
                             <Surface variant="default">
-                                <form className="flex flex-col gap-4 space-y-4">
+
+                                <form
+                                    onSubmit={handleCreateService}
+                                    className="flex flex-col gap-4 space-y-4">
+
                                     {/* service name */}
-                                    <TextField className="w-full" name="name" type="text" variant="secondary"  isRequired>
+                                    <TextField className="w-full" name="name" type="text" variant="secondary" isRequired>
                                         <Label>Service Name</Label>
                                         <Input placeholder="e.g. Criminal Case Consultation" className={'py-3'} />
                                     </TextField>
@@ -42,7 +59,7 @@ const AddServiceForm = ({ service }) => {
                                     {/* price */}
                                     <TextField className="w-full" name="consultationFee" type="number" variant="secondary" isRequired>
                                         <Label>Consultation Fee</Label>
-                                        <Input placeholder="Enter your phone number"  className={'py-3'}/>
+                                        <Input placeholder="Enter your phone number" className={'py-3'} />
                                     </TextField>
 
                                     {/* description */}
@@ -56,15 +73,17 @@ const AddServiceForm = ({ service }) => {
                                         <TextArea rows={3} placeholder="Tell us about yourself..." />
                                         <FieldError />
                                     </TextField>
+
+                                    <Modal.Footer>
+                                        <Button slot="close" variant="secondary">
+                                            Cancel
+                                        </Button>
+                                        <Button slot="close" type="submit">Send Message</Button>
+                                    </Modal.Footer>
                                 </form>
                             </Surface>
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button slot="close" variant="secondary">
-                                Cancel
-                            </Button>
-                            <Button slot="close">Send Message</Button>
-                        </Modal.Footer>
+
                     </Modal.Dialog>
                 </Modal.Container>
             </Modal.Backdrop>
