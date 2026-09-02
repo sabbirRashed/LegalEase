@@ -128,7 +128,11 @@ const UserUpdateForm = ({ user }) => {
 
                         {/* Buttons */}
                         <div className="flex justify-end gap-3">
-                            <Button type="button" variant="secondary" className="rounded-lg px-5">
+                            <Button
+                            onClick={()=> router.back()}
+                             type="button" 
+                             variant="secondary" 
+                             className="rounded-lg px-5">
                                 Cancel
                             </Button>
                             <Button

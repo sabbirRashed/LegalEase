@@ -1,3 +1,4 @@
+import NoRequestsCard from "@/components/dashboard/user/NoRequestCard";
 import { getRequestByClientId } from "@/lib/api/hiringRequest";
 import { getUserSession } from "@/lib/core/session";
 import { Avatar, Button, Chip, Table } from "@heroui/react";
@@ -20,7 +21,7 @@ const UserDashboardPage = async () => {
     }
 
     return (
-        <main className="min-h-screen bg-slate-50">
+        <main className="min-h-screen">
             <div className="mx-auto max-w-7xl px-6 py-8">
 
                 {/* Header */}
@@ -68,7 +69,7 @@ const UserDashboardPage = async () => {
                         <Link href="/dashboard/user/update-profile">
                             <Button
                                 variant="primary"
-                                className="rounded-md bg-slate-900 px-5 font-medium text-white hover:bg-slate-800"
+                                className="rounded-md bg-blue-600 px-5 font-medium text-white hover:bg-slate-800"
                             >
                                 Update Profile
                             </Button>
@@ -79,7 +80,7 @@ const UserDashboardPage = async () => {
                 </section>
 
                 {/* Statistics */}
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-6 mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
                     <div className="rounded-lg border border-slate-200 bg-white p-6">
                         <p className="text-sm text-slate-500">
@@ -116,7 +117,7 @@ const UserDashboardPage = async () => {
                 </div>
 
                 {/* Recent Requests */}
-                <section className="mt-6 rounded-lg border border-slate-200 bg-white p-6">
+                {userRequest.length > 20 ? <section className=" rounded-lg border border-slate-200 bg-white p-6">
                     <div className="flex items-center justify-between">
                         <h2 className="text-lg font-semibold text-slate-900">
                             Recent Hiring Requests
@@ -189,6 +190,7 @@ const UserDashboardPage = async () => {
                         </Table>
                     </div>
                 </section>
+                : <NoRequestsCard />}
 
             </div>
         </main>
