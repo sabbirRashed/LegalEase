@@ -158,7 +158,11 @@ const LawyerDetails = async ({ params }) => {
                                         Member Since
                                     </p>
                                     <p className="mt-1 font-semibold text-slate-800">
-                                        {lawyer.joinedDate}
+                                        {new Date(lawyer.createAt).toLocaleDateString("en-GB", {
+                                            day: "2-digit",
+                                            month: "short",
+                                            year: "numeric",
+                                        })}
                                     </p>
                                 </div>
                             </div>

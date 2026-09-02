@@ -1,4 +1,5 @@
 
+import { getRequestByProfileId } from '@/lib/api/hiringRequest';
 import { Button } from '@heroui/react';
 import React from 'react';
 
@@ -27,7 +28,11 @@ const lawyerRequests = [
     }
 ];
 
-const HiringHistory = () => {
+const HiringHistory = async () => {
+
+    const clientRequests = await getRequestByProfileId();
+    console.log('laweyry:', clientRequests);
+
     return (
         <div className='w-11/12 max-w-7xl mx-auto my-20 '>
 
@@ -44,7 +49,7 @@ const HiringHistory = () => {
                     <p className='text-slate-500 text-sm ms:text-base mt-1'>Review incoming hiring requests and respond to clients.</p>
                 </div>
 
-              
+
                 <div className="rounded-2xl border border-slate-200 overflow-x-auto">
 
                     <table className=" text-left text-sm w-full min-w-[360px]">
@@ -60,7 +65,7 @@ const HiringHistory = () => {
 
 
                         <tbody className="divide-y divide-slate-100">
-                            {lawyerRequests.map((item) => (
+                            {clientRequests.map((item) => (
                                 <tr key={item?._id} className="hover:bg-slate-50">
 
                                     <td className="px-4 py-3 font-medium text-slate-900">
@@ -68,28 +73,36 @@ const HiringHistory = () => {
                                     </td>
 
                                     <td className="px-4 py-3 text-slate-500">
-                                        {item?.requestDate
-                                        }
+                                        {new Date(item?.createAt).toLocaleDateString("en-GB", {
+                                            day: "2-digit",
+                                            month: "short",
+                                            year: "numeric",
+                                        })}
                                     </td>
 
-                                    <td className="px-4 py-3 text-slate-500">
-                                        {item?.status}
+                                    <td className='px-4 py-3'>
+                                        <span className={` 
+                                        inline-block px-3 py-1.5 rounded-full
+                                        ${item?.status.toLowerCase() === "pending"? 
+                                        "text-amber-700 text-xs bg-amber-100" 
+                                        : item?.status.toLowerCase() === "accept"?
+                                        "text-success bg-green-100" : "text-rose-500 bg-rose-100" }`}>{item?.status}</span>
                                     </td>
 
                                     <td className="px-4 py-3">
                                         <div className="flex items-center justify-end gap-2 md:gap-4">
-                                            <Button 
-                                            variant='secondary'
-                                            size='sm'
-                                            className="text-blue-600"
+                                            <Button
+                                                variant='secondary'
+                                                size='sm'
+                                                className="text-green-500 text-xs hover:text-green-600 "
                                             >
                                                 Accept
                                             </Button>
 
                                             <Button
                                                 size='sm'
-                                                variant='outline'
-                                                className=" hover:text-rose-600 hover:bg-red-100 text-rose-500 transition-all duration-300"
+                                                variant='secondary'
+                                                className="text-xs hover:text-rose-600 hover:bg-red-100 text-rose-500 transition-all duration-300"
                                             >
                                                 Reject
                                             </Button>

@@ -101,7 +101,11 @@ export default function ProfileDisplay({ profile }) {
                                 Member Since
                             </p>
                             <p className="mt-1 font-semibold text-slate-800">
-                                {new Date(profile.createAt).toLocaleDateString()}
+                                {new Date(profile.createAt).toLocaleDateString("en-GB", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                })}
                             </p>
                         </div>
                     </div>
