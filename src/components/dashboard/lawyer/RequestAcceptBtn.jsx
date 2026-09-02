@@ -11,7 +11,7 @@ const RequestAcceptBtn = ({ id, }) => {
         setIsloading(true);
 
         try {
-             await updateRequestStatus(id, { status: "Accept" });
+             await updateRequestStatus(id, { status: "Accepted" });
         } catch {
             toast.error('Something went wrong! Please try again.')
         } finally {

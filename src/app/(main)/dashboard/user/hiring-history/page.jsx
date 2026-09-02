@@ -1,7 +1,30 @@
+import { getRequestByClientId } from '@/lib/api/hiringRequest';
 import { Button, Chip, Table } from '@heroui/react';
 import React from 'react';
 
-const UserHiringHistory = () => {
+const UserHiringHistory = async () => {
+
+    const userRequest = await getRequestByClientId();
+
+    const getStatusBtn = (status) => {
+        if (status.toLowerCase() === "accepted") return <Chip color="success" size="sm" variant="soft">{status}</Chip>
+        if (status.toLowerCase() === "rejected") return <Chip color="danger" size="sm" variant="soft">{status}</Chip>
+        if (status.toLowerCase() === "pending") return <Chip color="warning" size="sm" variant="soft">{status}</Chip>
+    }
+
+    const getPayBtn = (status) => {
+        if (status.toLowerCase() === "accepted") {
+            return (<Button
+                size="sm"
+                variant="primary"
+                className="rounded-md bg-emerald-600 px-4 text-xs font-medium text-white transition hover:bg-emerald-700"
+            >
+                Pay Now
+            </Button>)
+        }
+        return 
+    }
+
     return (
         <div className='w-11/12 max-w-7xl mx-auto mt-15 md:mt-20'>
 
@@ -43,49 +66,38 @@ const UserHiringHistory = () => {
                                     Action
                                 </Table.Column>
                             </Table.Header>
+
                             <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell>Kate Moore</Table.Cell>
-                                    <Table.Cell>Family Law</Table.Cell>
-                                    <Table.Cell>$50</Table.Cell>
-                                    <Table.Cell>10, janu, 26</Table.Cell>
-                                    <Table.Cell>
-                                        <Chip color="success" size="sm" variant="soft">
-                                            Accepted
-                                        </Chip>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Button>Pay</Button>
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>Kate Moore</Table.Cell>
-                                    <Table.Cell>Family Law</Table.Cell>
-                                    <Table.Cell>$50</Table.Cell>
-                                    <Table.Cell>10, janu, 26</Table.Cell>
-                                    <Table.Cell>
-                                        <Chip color="success" size="sm" variant="soft">
-                                            Accepted
-                                        </Chip>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Button>Pay</Button>
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>Kate Moore</Table.Cell>
-                                    <Table.Cell>Family Law</Table.Cell>
-                                    <Table.Cell>$50</Table.Cell>
-                                    <Table.Cell>10, janu, 26</Table.Cell>
-                                    <Table.Cell>
-                                        <Chip color="success" size="sm" variant="soft">
-                                            Accepted
-                                        </Chip>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Button>Pay</Button>
-                                    </Table.Cell>
-                                </Table.Row>
+
+                                {
+                                    userRequest.map(item => {
+                                        return (
+                                            <Table.Row key={item?._id}>
+                                                <Table.Cell>{item?.lawyerName}</Table.Cell>
+                                                <Table.Cell>Family Law</Table.Cell>
+                                                <Table.Cell>৳{"2500"}</Table.Cell>
+                                                <Table.Cell>
+                                                    {new Date(item.createAt).toLocaleDateString("en-GB", {
+                                                        day: "2-digit",
+                                                        month: "short",
+                                                        year: "numeric",
+                                                    })}
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    {
+                                                        getStatusBtn(item?.status)
+                                                    }
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    {
+                                                        getPayBtn(item?.status) || "---"
+                                                    }
+                                                </Table.Cell>
+                                            </Table.Row>
+                                        )
+                                    })
+                                }
+
                             </Table.Body>
                         </Table.Content>
                     </Table.ResizableContainer>

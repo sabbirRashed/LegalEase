@@ -59,7 +59,7 @@ const LawyerCard = ({ service }) => {
                 <div className="text-left w-full">
                     <p className="text-[10px] sm:text-xs text-slate-400">Hourly Rate</p>
                     <p className="text-xs sm:text-sm font-bold text-slate-900">
-                        $
+                        ৳
                         {hourlyRate}
                         <span className=" text-slate-400">/hr</span>
                     </p>

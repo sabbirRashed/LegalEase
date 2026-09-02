@@ -12,7 +12,7 @@ const RequestRejectBtn = ({ id }) => {
         setIsloading(true);
 
         try {
-            const res = await updateRequestStatus(id, { status: "Reject" });
+            const res = await updateRequestStatus(id, { status: "Rejected" });
         } catch {
             toast.error('Something went wrong!')
         } finally {

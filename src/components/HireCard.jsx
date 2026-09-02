@@ -23,7 +23,6 @@ const HireCard = ({ lawyer, user }) => {
 
     const handleHire = async () => {
 
-
         setIsloading(true);
 
         const requestData = {
@@ -33,6 +32,7 @@ const HireCard = ({ lawyer, user }) => {
             lawyerProfileId: lawyer?._id,
             lawyerName: lawyer?.name,
             lawyerEmail: lawyer?.email,
+            specialization: lawyer?.specialization,
             status: "Pending",
             message: message,
 
@@ -196,7 +196,7 @@ const HireCard = ({ lawyer, user }) => {
             </div>
 
 
-            {/* ================= HIRE MODAL ================= */}
+            {/* ---------------HIRE MODAL------------- */}
             {showHireModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm">
 
