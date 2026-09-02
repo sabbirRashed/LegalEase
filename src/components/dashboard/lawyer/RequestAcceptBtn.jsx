@@ -11,8 +11,7 @@ const RequestAcceptBtn = ({ id, }) => {
         setIsloading(true);
 
         try {
-            console.log("before:up", id);
-            const res = await updateRequestStatus(id, { status: "Accept" });
+             await updateRequestStatus(id, { status: "Accept" });
         } catch {
             toast.error('Something went wrong! Please try again.')
         } finally {
@@ -23,13 +22,15 @@ const RequestAcceptBtn = ({ id, }) => {
     return (
         <div>
             <Button
-                isPending={isloading}
+                isDisabled={isloading}
                 onClick={handleAcceptBtn}
                 variant='secondary'
                 size='sm'
                 className="text-green-500 text-xs hover:text-green-600 "
             >
-                Accept
+                {
+                    isloading? "Changing..": "Accept"
+                }
             </Button>
         </div>
     );

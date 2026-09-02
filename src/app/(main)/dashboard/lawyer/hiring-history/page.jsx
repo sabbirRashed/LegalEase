@@ -1,5 +1,6 @@
 
 import RequestAcceptBtn from '@/components/dashboard/lawyer/RequestAcceptBtn';
+import RequestRejectBtn from '@/components/dashboard/lawyer/RequestRejectBtn';
 import { getRequestByProfileId } from '@/lib/api/hiringRequest';
 import { getUserSession } from '@/lib/core/session';
 import { Button } from '@heroui/react';
@@ -97,13 +98,7 @@ const HiringHistory = async () => {
                                         <div className="flex items-center justify-end gap-2 md:gap-4">
                                             <RequestAcceptBtn id={item?._id} />
 
-                                            <Button
-                                                size='sm'
-                                                variant='secondary'
-                                                className="text-xs hover:text-rose-600 hover:bg-red-100 text-rose-500 transition-all duration-300"
-                                            >
-                                                Reject
-                                            </Button>
+                                            <RequestRejectBtn id={item?._id} />
                                         </div>
                                     </td>
                                 </tr>
