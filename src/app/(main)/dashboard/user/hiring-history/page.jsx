@@ -74,8 +74,8 @@ const UserHiringHistory = async () => {
                                         return (
                                             <Table.Row key={item?._id}>
                                                 <Table.Cell>{item?.lawyerName}</Table.Cell>
-                                                <Table.Cell>Family Law</Table.Cell>
-                                                <Table.Cell>৳{"2500"}</Table.Cell>
+                                                <Table.Cell>{item?.specialization || "Criminal Law"}</Table.Cell>
+                                                <Table.Cell>৳{item?.consultationRate}</Table.Cell>
                                                 <Table.Cell>
                                                     {new Date(item.createAt).toLocaleDateString("en-GB", {
                                                         day: "2-digit",
