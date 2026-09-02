@@ -33,6 +33,7 @@ const HireCard = ({ lawyer, user }) => {
             lawyerName: lawyer?.name,
             lawyerEmail: lawyer?.email,
             specialization: lawyer?.specialization,
+            consultationRate: lawyer?.consultationRate, 
             status: "Pending",
             message: message,
 

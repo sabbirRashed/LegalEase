@@ -23,7 +23,7 @@ export async function DashboardSidebar() {
     const userDashboardLinks = [
         { label: "Dashboard", href: "/dashboard/user", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
         { label: "Hiring History", href: "/dashboard/user/hiring-history", icon: FiClock, color: "text-violet-600 bg-violet-50" },
-        { label: "Update Profile", href: "/dashboard/user/profile", icon: FiEdit3, color: "text-amber-600 bg-amber-50" },
+        { label: "Update Profile", href: "/dashboard/user/update-profile", icon: FiEdit3, color: "text-amber-600 bg-amber-50" },
         { label: "Comments", href: "/dashboard/user/comments", icon: FiMessageSquare, color: "text-emerald-600 bg-emerald-50" },
     ];
 

@@ -4,64 +4,80 @@ import React, { useState } from "react";
 import { Avatar, Button, Form, Input, Label, TextField } from "@heroui/react";
 import { BiCamera } from "react-icons/bi";
 import { motion } from "framer-motion";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-const UpdateProfilePage = () => {
-    const [imagePreview, setImagePreview] = useState("https://img.heroui.chat/image/avatar?w=400&h=400&u=3");
-    const [imageUrl, setImageUrl] = useState(null);
-    const [isUploadingImage, setIsUploadingImage] = useState(false);
-    const [errors, setErrors] = useState({});
+const UserUpdateForm = ({ user }) => {
 
-    // Direct image upload on file select
-    const handleImageChange = async (e) => {
+    const [imageFile, setImageFile] = useState(null);
+    const [imagePreview, setImagePreview] = useState(user?.image || null);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+
+    // Handle local photo
+    const handleImageChange = (e) => {
         const file = e.target.files?.[0];
-        if (!file) return;
-
-        setImagePreview(URL.createObjectURL(file));
-        setIsUploadingImage(true);
-
-        try {
-            const formData = new FormData();
-            formData.append("image", file);
-
-            const uploadImageApiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
-            const res = await fetch(`https://api.imgbb.com/1/upload?key=${uploadImageApiKey}`, {
-                method: "POST",
-                body: formData,
-            });
-            const data = await res.json();
-
-            if (!data.success) throw new Error("Upload failed");
-
-            setImageUrl(data.data.url);
-            setErrors((prev) => ({ ...prev, image: "" }));
-        } catch {
-            setErrors((prev) => ({ ...prev, image: "Image upload failed. Please try again." }));
-            setImageUrl(null);
-        } finally {
-            setIsUploadingImage(false);
+        if (file) {
+            setImageFile(file);
+            setImagePreview(URL.createObjectURL(file));
         }
     };
 
-    // Form submission
+    // Upload to ImgBB
+    const uploadToImgBB = async (file) => {
+        const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+        const body = new FormData();
+        body.append("image", file);
+
+        const res = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+            method: "POST",
+            body,
+        });
+        const data = await res.json();
+        return data?.data?.display_url;
+    };
+
+    // Submit Handler
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         const formData = new FormData(e.currentTarget);
         const fullName = formData.get("name");
 
-        const updatePayload = {
-            name: fullName,
-            image: imageUrl || imagePreview,
-        };
+        try {
+            let photoURL = imagePreview;
+            if (imageFile) {
+                photoURL = await uploadToImgBB(imageFile);
+            }
 
-        console.log("Updated Profile Data:", updatePayload);
+            const { data, error } = await authClient.updateUser({
+                name: fullName,
+                image: photoURL || imagePreview || ""
+            })
+
+            if (data?.status) {
+                router.push('/dashboard/user')
+            }
+
+            // Add your backend API call here
+        } catch (err) {
+            toast.success('Update successfull!')
+            toast.error('Update failed!')
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
-        <div className="w-11/12 max-w-7xl mx-auto mt-15 md:mt-20">
+        <div>
             <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{
+                    opacity: { duration: 1, ease: "easeInOut" },
+                }}
                 className="mx-auto w-full max-w-xl"
             >
                 <div className="border border-slate-200 bg-white p-6 sm:p-8 rounded-xl shadow-sm">
@@ -73,11 +89,11 @@ const UpdateProfilePage = () => {
                     </div>
 
                     <Form onSubmit={handleSubmit} className="space-y-6">
-                        {/* profile image*/}
-                        <div className="flex flex-col items-center">
+                        {/* Avatar Upload */}
+                        <div className="flex justify-center">
                             <div className="relative">
                                 <Avatar className="w-24 h-24 border border-slate-100">
-                                    <Avatar.Image alt="User profile" src={imagePreview} />
+                                    <Avatar.Image alt="User Avatar" src={imagePreview} />
                                     <Avatar.Fallback>U</Avatar.Fallback>
                                 </Avatar>
                                 <label
@@ -94,22 +110,18 @@ const UpdateProfilePage = () => {
                                     />
                                 </label>
                             </div>
-
-                            {errors.image && (
-                                <p className="text-xs text-rose-500 mt-2">{errors.image}</p>
-                            )}
                         </div>
 
                         {/* Name Field */}
-                        <TextField className="w-full" name="name" type="text" defaultValue="John Doe" isRequired>
+                        <TextField className="w-full" name="name" type="text" defaultValue={user?.name} isRequired>
                             <Label className="text-sm font-medium text-slate-700">Full Name</Label>
-                            <Input placeholder="Enter your full name" className="py-2.5 shadow-none mt-1" />
+                            <Input variant="secondary" placeholder="Enter your full name" className="py-2.5 shadow-none mt-1" />
                         </TextField>
 
                         {/* Email Field (Read-only) */}
-                        <TextField className="w-full" name="email" type="email" value="john.doe@example.com" isReadOnly>
+                        <TextField className="w-full" name="email" type="email" value={user?.email} isReadOnly>
                             <Label className="text-sm font-medium text-slate-700">Email Address</Label>
-                            <Input className="py-2.5 shadow-none mt-1 bg-slate-50 text-slate-500 cursor-not-allowed" />
+                            <Input className="py-2.5 shadow-none mt-1 bg-slate-100 text-slate-500 cursor-not-allowed" />
                         </TextField>
 
                         <div className="h-px bg-slate-200 my-6" />
@@ -122,8 +134,7 @@ const UpdateProfilePage = () => {
                             <Button
                                 type="submit"
                                 variant="primary"
-                                isLoading={isUploadingImage}
-                                isDisabled={isUploadingImage}
+                                isLoading={loading}
                                 className="rounded-lg px-6 bg-slate-900 text-white"
                             >
                                 Update
@@ -136,4 +147,4 @@ const UpdateProfilePage = () => {
     );
 };
 
-export default UpdateProfilePage;
+export default UserUpdateForm;

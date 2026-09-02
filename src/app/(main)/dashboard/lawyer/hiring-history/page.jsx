@@ -104,7 +104,7 @@ const HiringHistory = async () => {
                                                                 <RequestAcceptBtn id={item?._id} />
                                                                 <RequestRejectBtn id={item?._id} />
                                                             </>
-                                                            : item?.status.toLowerCase() === "accept" ?
+                                                            : item?.status.toLowerCase() === "accepted" ?
                                                                 <Chip
                                                                     variant='secondary'
                                                                     size='sm'
@@ -112,7 +112,7 @@ const HiringHistory = async () => {
                                                                 >
                                                                     Accepted
                                                                 </Chip>
-                                                                : item?.status.toLowerCase() === "reject" ?
+                                                                : item?.status.toLowerCase() === "rejected" ?
                                                                     <Chip
                                                                         size='sm'
                                                                         variant='secondary'
