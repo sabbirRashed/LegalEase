@@ -1,11 +1,24 @@
+import { getRequestByClientId } from "@/lib/api/hiringRequest";
 import { getUserSession } from "@/lib/core/session";
-import { Avatar, Button } from "@heroui/react";
+import { Avatar, Button, Chip, Table } from "@heroui/react";
 import Link from "next/link";
 
 
 const UserDashboardPage = async () => {
 
     const user = await getUserSession()
+    const userRequest = await getRequestByClientId();
+
+    const acceptedReq = userRequest.filter(item => item.status.toLowerCase() === "accepted")
+    const pendingReq = userRequest.filter(item => item.status.toLowerCase() === "pending")
+
+
+    const getStatusBtn = (status) => {
+        if (status.toLowerCase() === "accepted") return <Chip color="success" size="sm" variant="soft">{status}</Chip>
+        if (status.toLowerCase() === "rejected") return <Chip color="danger" size="sm" variant="soft">{status}</Chip>
+        if (status.toLowerCase() === "pending") return <Chip color="warning" size="sm" variant="soft">{status}</Chip>
+    }
+
     return (
         <main className="min-h-screen bg-slate-50">
             <div className="mx-auto max-w-7xl px-6 py-8">
@@ -32,11 +45,11 @@ const UserDashboardPage = async () => {
                                     alt={user?.name}
                                 />
 
-                                {/* <Avatar.Fallback>
+                                <Avatar.Fallback>
                                     {user?.name
                                         ?.slice(0, 2)
                                         .toUpperCase()}
-                                </Avatar.Fallback> */}
+                                </Avatar.Fallback>
                             </Avatar>
 
                             <div>
@@ -74,7 +87,7 @@ const UserDashboardPage = async () => {
                         </p>
 
                         <p className="mt-2 text-3xl font-bold text-slate-900">
-                            5
+                            {userRequest.length}
                         </p>
                     </div>
 
@@ -84,7 +97,9 @@ const UserDashboardPage = async () => {
                         </p>
 
                         <p className="mt-2 text-3xl font-bold text-emerald-600">
-                            2
+                            {
+                                acceptedReq.length
+                            }
                         </p>
                     </div>
 
@@ -94,7 +109,7 @@ const UserDashboardPage = async () => {
                         </p>
 
                         <p className="mt-2 text-3xl font-bold text-amber-600">
-                            3
+                            {pendingReq.length}
                         </p>
                     </div>
 
@@ -117,7 +132,62 @@ const UserDashboardPage = async () => {
                         </Button>
                     </div>
 
-                    {/* Your request table/list goes here */}
+                    <div className="mt-10">
+                        <Table>
+                            <Table.ResizableContainer>
+                                <Table.Content aria-label="Table with resizable columns" className="min-w-[700px]">
+                                    <Table.Header>
+                                        <Table.Column isRowHeader defaultWidth="1fr" id="name" minWidth={160}>
+                                            Lawyer Name
+                                            <Table.ColumnResizer />
+                                        </Table.Column>
+                                        <Table.Column defaultWidth="1fr" id="specialization" minWidth={220}>
+                                            Specialization
+                                            <Table.ColumnResizer />
+                                        </Table.Column>
+                                        <Table.Column defaultWidth="1fr" id="fee" minWidth={200}>
+                                            Fee
+                                        </Table.Column>
+                                        <Table.Column defaultWidth="1fr" id="date" minWidth={200}>
+                                            Hiring Date
+                                        </Table.Column>
+                                        <Table.Column defaultWidth="1fr" id="status" minWidth={100}>
+                                            Status
+                                            <Table.ColumnResizer />
+                                        </Table.Column>
+                                    </Table.Header>
+
+                                    <Table.Body>
+
+                                        {
+                                            userRequest.map(item => {
+                                                return (
+                                                    <Table.Row key={item?._id}>
+                                                        <Table.Cell>{item?.lawyerName}</Table.Cell>
+                                                        <Table.Cell>{item?.specialization || "Criminal Law"}</Table.Cell>
+                                                        <Table.Cell>৳{item?.consultationRate}</Table.Cell>
+                                                        <Table.Cell>
+                                                            {new Date(item.createAt).toLocaleDateString("en-GB", {
+                                                                day: "2-digit",
+                                                                month: "short",
+                                                                year: "numeric",
+                                                            })}
+                                                        </Table.Cell>
+                                                        <Table.Cell>
+                                                            {
+                                                                getStatusBtn(item?.status)
+                                                            }
+                                                        </Table.Cell>
+                                                    </Table.Row>
+                                                )
+                                            })
+                                        }
+
+                                    </Table.Body>
+                                </Table.Content>
+                            </Table.ResizableContainer>
+                        </Table>
+                    </div>
                 </section>
 
             </div>
