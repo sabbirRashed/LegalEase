@@ -1,5 +1,7 @@
 
+import RequestAcceptBtn from '@/components/dashboard/lawyer/RequestAcceptBtn';
 import { getRequestByProfileId } from '@/lib/api/hiringRequest';
+import { getUserSession } from '@/lib/core/session';
 import { Button } from '@heroui/react';
 import React from 'react';
 
@@ -29,9 +31,11 @@ const lawyerRequests = [
 ];
 
 const HiringHistory = async () => {
+   
 
     const clientRequests = await getRequestByProfileId();
-    console.log('laweyry:', clientRequests);
+    
+    
 
     return (
         <div className='w-11/12 max-w-7xl mx-auto my-20 '>
@@ -91,13 +95,7 @@ const HiringHistory = async () => {
 
                                     <td className="px-4 py-3">
                                         <div className="flex items-center justify-end gap-2 md:gap-4">
-                                            <Button
-                                                variant='secondary'
-                                                size='sm'
-                                                className="text-green-500 text-xs hover:text-green-600 "
-                                            >
-                                                Accept
-                                            </Button>
+                                            <RequestAcceptBtn id={item?._id} />
 
                                             <Button
                                                 size='sm'

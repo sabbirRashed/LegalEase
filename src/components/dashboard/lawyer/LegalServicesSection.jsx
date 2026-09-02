@@ -76,18 +76,11 @@ export default function LegalServicesSection({ profile, services, }) {
                             No services added yet
                         </h3>
 
-                        <p className="mt-1.5 max-w-sm text-sm text-slate-500">
+                        <p className="mt-1.5 max-w-sm text-sm text-slate-500 mb-10">
                             You haven't added any legal services yet. Add your first
                             service so clients can discover and hire you.
                         </p>
-
-                        <button
-                            type="button"
-                            className="cursor-pointer mt-5 flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue-600/30 transition-colors hover:bg-blue-700"
-                        >
-                            <FiPlus className="h-4 w-4" />
-                            Add Your First Service
-                        </button>
+                        <AddServiceForm/>
                     </div>
                 )}
             </div>
