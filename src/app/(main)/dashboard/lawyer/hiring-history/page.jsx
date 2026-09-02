@@ -1,13 +1,106 @@
-import ProfileForms from '@/components/dashboard/lawyer/ProfileForm';
-import { div } from 'framer-motion/client';
+
+import { Button } from '@heroui/react';
 import React from 'react';
+
+
+const lawyerRequests = [
+    {
+        _id: 1,
+        clientName: "Eleanor Vance",
+        requestDate: "2026-09-01",
+        status: "pending",
+        action: ["accept", "reject"]
+    },
+    {
+        _id: 2,
+        clientName: "Marcus Thorne",
+        requestDate: "2026-08-28",
+        status: "accept",
+        action: ["reject"]
+    },
+    {
+        _id: 3,
+        clientName: "Julian Davis",
+        requestDate: "2026-08-15",
+        status: "reject",
+        action: ["accept"]
+    }
+];
 
 const HiringHistory = () => {
     return (
-        <div className='min-h-screen w-full px-4 py-10 sm:px-6 lg:px-8 '>
-            <div className='max-w-7xl mx-auto'>
-                
+        <div className='w-11/12 max-w-7xl mx-auto my-20 '>
+
+            {/* page header */}
+            <div className='mb-8'>
+                <h2 className="text-3xl font-bold text-slate-900">Hiring History</h2>
+                <p className="mt-1.5 text-slate-500">Review and manage all hiring requests from your clients.</p>
             </div>
+
+            {/* Request History Table */}
+            <section className=' border bg-white p-6 sm:p-8 w-full min-w-0'>
+                <div className='mb-4'>
+                    <h2 className='text-xl font-bold text-slate-900'>Client Requests</h2>
+                    <p className='text-slate-500 text-sm ms:text-base mt-1'>Review incoming hiring requests and respond to clients.</p>
+                </div>
+
+              
+                <div className="rounded-2xl border border-slate-200 overflow-x-auto">
+
+                    <table className=" text-left text-sm w-full min-w-[360px]">
+
+                        <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            <tr>
+                                <th className="px-4 py-3">Client Name</th>
+                                <th className="px-4 py-3">Request Date</th>
+                                <th className="px-4 py-3">Status</th>
+                                <th className="px-4 py-3 text-right">Actions</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody className="divide-y divide-slate-100">
+                            {lawyerRequests.map((item) => (
+                                <tr key={item?._id} className="hover:bg-slate-50">
+
+                                    <td className="px-4 py-3 font-medium text-slate-900">
+                                        {item?.clientName}
+                                    </td>
+
+                                    <td className="px-4 py-3 text-slate-500">
+                                        {item?.requestDate
+                                        }
+                                    </td>
+
+                                    <td className="px-4 py-3 text-slate-500">
+                                        {item?.status}
+                                    </td>
+
+                                    <td className="px-4 py-3">
+                                        <div className="flex items-center justify-end gap-2 md:gap-4">
+                                            <Button 
+                                            variant='secondary'
+                                            size='sm'
+                                            className="text-blue-600"
+                                            >
+                                                Accept
+                                            </Button>
+
+                                            <Button
+                                                size='sm'
+                                                variant='outline'
+                                                className=" hover:text-rose-600 hover:bg-red-100 text-rose-500 transition-all duration-300"
+                                            >
+                                                Reject
+                                            </Button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
     );
 };
