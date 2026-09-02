@@ -13,29 +13,31 @@ import HireCard from "@/components/HireCard";
 import { getLawyerProfileById } from "@/lib/api/lawyer";
 import { getUserSession } from "@/lib/core/session";
 import CommentsSection from "@/components/CommentsSection";
+import { getCommentsByProfileId } from "@/lib/api/comments";
 
 
-const comments = [
-    {
-        id: 1,
-        name: "Rahim Ahmed",
-        comment:
-            "Nusrat Jahan was very professional and explained everything clearly. She handled my case with great care.",
-        date: "August 24, 2026",
-    },
-    {
-        id: 2,
-        name: "Sadia Karim",
-        comment:
-            "Very helpful and responsive. I really appreciated her professional approach and clear communication.",
-        date: "August 18, 2026",
-    },
-];
+// const comments = [
+//     {
+//         id: 1,
+//         name: "Rahim Ahmed",
+//         comment:
+//             "Nusrat Jahan was very professional and explained everything clearly. She handled my case with great care.",
+//         date: "August 24, 2026",
+//     },
+//     {
+//         id: 2,
+//         name: "Sadia Karim",
+//         comment:
+//             "Very helpful and responsive. I really appreciated her professional approach and clear communication.",
+//         date: "August 18, 2026",
+//     },
+// ];
 
 const LawyerDetails = async ({ params }) => {
     const { id } = await params;
 
-    const lawyer = await getLawyerProfileById(id)
+    const lawyer = await getLawyerProfileById(id);
+    const comments = await getCommentsByProfileId(id)
     const user = await getUserSession()
 
 
@@ -228,7 +230,9 @@ const LawyerDetails = async ({ params }) => {
                 </section>
 
                 {/* -------------------COMMENT SECTION--------------------- */}
-                <CommentsSection lawyer={lawyer} comments={comments} user={user}/>
+                {
+                    user?.role === "user" && <CommentsSection lawyer={lawyer} comments={comments} user={user} />
+                }
             </div>
         </div>
     );

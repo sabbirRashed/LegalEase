@@ -16,6 +16,8 @@ const CommentsSection = ({ lawyer, comments, user }) => {
     const [isloading, setIsloading] = useState(false)
     const router = useRouter()
 
+console.log('comments', comments);
+
 
     const handleCommentClick = () => {
         commentRef.current?.focus();
@@ -116,7 +118,7 @@ const CommentsSection = ({ lawyer, comments, user }) => {
 
                 {comments.map((item) => (
                     <div
-                        key={item.id}
+                        key={item?._id}
                         className="rounded-2xl border border-slate-200 p-5"
                     >
                         <div className="flex items-start justify-between gap-4">
@@ -128,11 +130,15 @@ const CommentsSection = ({ lawyer, comments, user }) => {
 
                                 <div>
                                     <p className="font-semibold text-slate-800">
-                                        {item.name}
+                                        {item.clientName}
                                     </p>
 
                                     <p className="text-xs text-slate-400">
-                                        {item.date}
+                                        {new Date(item?.createAt).toLocaleDateString("en-US", {
+                                            month: "long",
+                                            day: "numeric",
+                                            year: "numeric",
+                                        })}
                                     </p>
                                 </div>
                             </div>

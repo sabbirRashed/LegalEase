@@ -4,12 +4,14 @@
 import { sendRequest } from '@/lib/actions/request';
 import { Check, Clock, CreditCard } from '@gravity-ui/icons';
 import { Button, TextArea, } from '@heroui/react';
+import { div } from 'framer-motion/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { FiX } from 'react-icons/fi';
+import { FiShield, FiX } from 'react-icons/fi';
+import { GoShieldLock } from 'react-icons/go';
 
 const HireCard = ({ lawyer, user }) => {
 
@@ -46,13 +48,13 @@ const HireCard = ({ lawyer, user }) => {
 
             if (res?.insertedId) {
                 toast.success(`Successfully send your request.`);
-                
+
                 router.refresh()
                 setShowHireModal(false)
 
             }
         }
-        catch(error) {
+        catch (error) {
             // console.log('err', error);
             toast.error('Request failed! Please try again later.')
         }
@@ -148,23 +150,36 @@ const HireCard = ({ lawyer, user }) => {
 
                 {/* CTA */}
                 {
-                    user ? (<>
+                    user ?
+                        <div>
 
-                        <Button
-                            onPress={() => setShowHireModal(true)}
-                            className="mt-6 h-12 w-full rounded-xl bg-sky-600 text-sm font-bold text-white shadow-sm hover:bg-sky-700"
-                        >
-                            Hire Lawyer
-                        </Button>
+                            {
+                                user?.role === "user" ?
+                                    <>
+                                        <Button
+                                            onPress={() => setShowHireModal(true)}
+                                            className="mt-6 h-12 w-full rounded-xl bg-sky-600 text-sm font-bold text-white shadow-sm hover:bg-sky-700"
+                                        >
+                                            Hire Lawyer
+                                        </Button>
 
-                        <p className="mt-4 text-center text-xs leading-5 text-slate-400">
-                            A hiring request will be sent to the lawyer
-                            for confirmation.
-                        </p>
+                                        <p className="mt-4 text-center text-xs leading-5 text-slate-400">
+                                            A hiring request will be sent to the lawyer
+                                            for confirmation.
+                                        </p>
+                                    </> :
+                                    <div className='px-4 py-6 bg-rose-200  space-y-1 mt-2 rounded-xl text-center'>
+                                        <div className='text-rose-500 mx-auto flex justify-center items-center'>
+                                            <GoShieldLock size={18} className='' />
+                                        </div>
+                                        <h2 className='text-rose-500 text-md md:text-lg font-semibold'>Unauthorized to hire!</h2>
+                                        <p className='text-sm text-rose-500'>Only client can hire lawyer.</p>
+                                    </div>
+                            }
 
-                    </>) : (
+                        </div> :
                         <>
-                            <Link href={`/login?redirect=lawyers/lawyerDetails/${id}`}>
+                            <Link href={`/login?redirect=lawyers/lawyerDetails/${lawyer?._id}`}>
                                 <Button
                                     className="mt-6 h-12 w-full rounded-xl bg-sky-600 text-sm font-bold text-white shadow-sm hover:bg-sky-700"
                                 >
@@ -173,10 +188,10 @@ const HireCard = ({ lawyer, user }) => {
                             </Link>
 
                             <p className="mt-4 text-center text-xs leading-5 text-slate-400">
-                                You must be logged in to send a hiring request
+                                You must be logged in as a client to send a hiring request
                             </p>
                         </>
-                    )
+
                 }
             </div>
 
