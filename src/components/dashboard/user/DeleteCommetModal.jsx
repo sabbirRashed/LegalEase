@@ -1,5 +1,6 @@
 "use client"
 
+import { deleteCommentApi } from '@/lib/actions/comments';
 import { Button, Modal } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -15,16 +16,18 @@ const DeleteCommentModal = ({ comment }) => {
         setIsloading(true);
 
         try {
-            // api call
+            const res = await deleteCommentApi(comment?.lawyerProfileId, comment?._id)
 
-            // if (res.deletedCount > 0) {
-            //     toast.success('Successfully deleted a comment');
-            //     setIsOpen(false)
-            //     router.refresh();
+            console.log('after delete:', res);
+            if (res.deletedCount > 0) {
+                toast.success('Successfully deleted a comment');
+                setIsOpen(false)
+                router.refresh();
 
-            // }
+            }
 
         } catch (error) {
+            console.log(error);
             toast.error('Something went wrong!')
         }
         finally {

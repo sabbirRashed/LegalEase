@@ -21,7 +21,7 @@ const UpdateCommentModal = ({ comment }) => {
         const  newCommment  = Object.fromEntries(formData);
 
         try{
-            const res = await updateComment(comment?._id, newCommment)
+            const res = await updateComment( comment?.lawyerProfileId ,comment?._id, newCommment)
             if(res.modifiedCount > 0){
                 toast.success('Comment updated succesfully!')
                 router.refresh()

@@ -10,11 +10,18 @@ export const postComment = async(id, data)=>{
     return res
 }
 
-export const updateComment = async(commentId, data)=>{
+export const updateComment = async(lawProfileId, commentId, data)=>{
 
-    console.log('commentId from update api: ', commentId);
     const res = await serverMutation(`/api/comment/${commentId}`, data, "PATCH");
     revalidatePath(`/dashboard/user/comments`);
+    revalidatePath(`/lawyer/lawyerDetails/${lawProfileId}`);
     //revalidate detailspage
+    return res
+}
+
+export const deleteCommentApi = async(lawProfileId, commentId)=>{
+    const res = await serverMutation(`/api/comment/${commentId}`, null, 'DELETE');
+    revalidatePath(`/dashboard/user/comments`);
+    revalidatePath(`/lawyer/lawyerDetails/${lawProfileId}`);
     return res
 }
