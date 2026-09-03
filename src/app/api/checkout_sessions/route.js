@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 
 import { stripe } from '../../../lib/stripe'
+import { getUserSession } from '@/lib/core/session'
 
 export async function POST(request) {
     try {
@@ -9,14 +10,18 @@ export async function POST(request) {
         const origin = headersList.get('origin')
 
         const formData = await request.formData()
-        const price = await formData.get("consultationFee");
+        const priceStr = await formData.get("consultationFee");
+        const price = Number(priceStr)
 
         if (!price || price <= 0) {
             return NextResponse.json({ error: 'Invalid amount' }, { status: 400 })
         }
 
+        const user = await getUserSession()
+
         // Create Checkout Sessions from body params.
         const session = await stripe.checkout.sessions.create({
+            customer_email: user?.email,
             line_items: [
                 {
                     price_data:{
