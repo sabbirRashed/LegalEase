@@ -5,10 +5,10 @@ import UpdateCommentModal from "./UpdateCommentModal";
 import DeleteCommentModal from "./DeleteCommetModal";
 
 
-const CommentCard = ({ comment}) => {
+const CommentCard = ({ comment }) => {
 
 
-    const handleCommentUpdate = async()=>{
+    const handleCommentUpdate = async () => {
 
     }
 
@@ -36,9 +36,7 @@ const CommentCard = ({ comment}) => {
                         </h3>
 
                         <p className="text-xs text-slate-500">
-                            {new Date(
-                                comment?.createdAt
-                            ).toLocaleDateString("en-US", {
+                            {new Date(comment?.createAt).toLocaleDateString("en-US", {
                                 month: "long",
                                 day: "numeric",
                                 year: "numeric",
