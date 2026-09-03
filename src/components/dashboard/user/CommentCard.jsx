@@ -2,6 +2,7 @@ import { Pencil } from "@gravity-ui/icons";
 import { Avatar, Button } from "@heroui/react";
 import { BsTrash2 } from "react-icons/bs";
 import UpdateCommentModal from "./UpdateCommentModal";
+import DeleteCommentModal from "./DeleteCommetModal";
 
 
 const CommentCard = ({ comment}) => {
@@ -62,15 +63,7 @@ const CommentCard = ({ comment}) => {
             {/* Actions */}
             <div className="mt-6 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
                 <UpdateCommentModal comment={comment} />
-                <Button
-                    size="sm"
-                    variant="secondary"
-                    // onPress={() => onDelete(comment)}
-                    className="border border-red-200 bg-red-50 font-medium text-red-600 hover:bg-red-100"
-                >
-                    <BsTrash2 size={15} />
-                    Delete
-                </Button>
+                <DeleteCommentModal comment={comment} />
             </div>
         </div>
     );
