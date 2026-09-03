@@ -7,11 +7,14 @@ import { serverMutation } from "../core/server";
 export const sendRequest = async (id, data) => {
     const res = await serverMutation(`/api/request`, data);
     revalidatePath(`/lawyers/lawyerDetails/${id}`);
+    revalidatePath(`/dashboard/lawyer/hiring-history`);
+    revalidatePath(`/dashboard/user/hiring-history`);
     return res
 }
 
 export const updateRequestStatus = async (id, data) => {
     const res = await serverMutation(`/api/request/${id}`, data, "PATCH");
     revalidatePath(`/dashboard/lawyer/hiring-history`);
+    revalidatePath(`/dashboard/user/hiring-history`);
     return res
 }

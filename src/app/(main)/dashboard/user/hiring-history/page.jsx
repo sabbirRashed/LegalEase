@@ -42,7 +42,7 @@ const UserHiringHistory = async () => {
                 </div>
 
                 {
-                    userRequest.length > 20 ? <Table>
+                    userRequest.length > 0 ? <Table>
                         <Table.ResizableContainer>
                             <Table.Content aria-label="Table with resizable columns" className="min-w-[700px]">
                                 <Table.Header>

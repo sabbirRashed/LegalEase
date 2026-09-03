@@ -117,7 +117,7 @@ const UserDashboardPage = async () => {
                 </div>
 
                 {/* Recent Requests */}
-                {userRequest.length > 20 ? <section className=" rounded-lg border border-slate-200 bg-white p-6">
+                {userRequest.length > 0 ? <section className=" rounded-lg border border-slate-200 bg-white p-6">
                     <div className="flex items-center justify-between">
                         <h2 className="text-lg font-semibold text-slate-900">
                             Recent Hiring Requests
