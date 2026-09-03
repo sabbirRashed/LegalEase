@@ -1,24 +1,40 @@
 "use client"
 
+import { updateComment } from '@/lib/actions/comments';
 import { Pencil } from '@gravity-ui/icons';
 import { Button, Form, Input, Label, Modal, TextArea, TextField } from '@heroui/react';
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { BiEdit, } from 'react-icons/bi';
 
 const UpdateCommentModal = ({ comment }) => {
+
+    const [isOpen, setIsOpen]= useState(false)
 
 
     const handleUpdateComment = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-        const { comment } = Object.fromEntries(formData);
+        const  newCommment  = Object.fromEntries(formData);
 
-        console.log('update coment', comment);
+        try{
+            const res = await updateComment(comment?._id, newCommment)
+            if(res.modifiedCount > 0){
+                toast.success('Comment updated succesfully!')
+                setIsOpen(false)
+            }
+        }
+        catch(error){
+            console.log('err:', error);
+            toast.error('Something went worng!')
+        }
+
     }
 
     return (
-        <Modal>
+        <Modal isOpen={isOpen}
+        onOpenChange={setIsOpen}>
             <Button
                 size="sm"
                 variant="secondary"
@@ -43,13 +59,14 @@ const UpdateCommentModal = ({ comment }) => {
                             <Form onSubmit={handleUpdateComment}>
                                 <div className=" space-y-3">
                                     <TextArea
+                                    defaultValue={comment?.comment}
                                         name='comment'
                                         variant='secondary'
                                         fullWidth
                                         placeholder="Your comment..." />
                                 </div>
 
-                                <Button className="w-full mt-6" type='submit' slot="close" >
+                                <Button className="w-full mt-6" type='submit' >
                                     Continue
                                 </Button>
                             </Form>

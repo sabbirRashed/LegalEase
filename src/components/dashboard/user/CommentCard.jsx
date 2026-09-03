@@ -61,7 +61,7 @@ const CommentCard = ({ comment}) => {
 
             {/* Actions */}
             <div className="mt-6 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
-                <UpdateCommentModal/>
+                <UpdateCommentModal comment={comment} />
                 <Button
                     size="sm"
                     variant="secondary"
