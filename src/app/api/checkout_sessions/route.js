@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 
 import { stripe } from '../../../lib/stripe'
 import { getUserSession } from '@/lib/core/session'
+import { getHiringRequestById } from '@/lib/api/hiringRequest'
 
 export async function POST(request) {
     try {
@@ -10,8 +11,18 @@ export async function POST(request) {
         const origin = headersList.get('origin')
 
         const formData = await request.formData()
-        const priceStr = await formData.get("consultationFee");
-        const price = Number(priceStr)
+        const hiringRequestId = await formData.get("requestId");
+
+        const hiringRequest = await getHiringRequestById(hiringRequestId);
+        const {
+            _id,
+            clientUserId,
+            clientEmail,
+            lawyerProfileId,
+            lawyerEmail,
+            consultationRate,
+        } = hiringRequest;
+
 
         if (!price || price <= 0) {
             return NextResponse.json({ error: 'Invalid amount' }, { status: 400 })
@@ -22,12 +33,21 @@ export async function POST(request) {
         // Create Checkout Sessions from body params.
         const session = await stripe.checkout.sessions.create({
             customer_email: user?.email,
+            metadata: {
+                hiringRequestId,
+                clientUserId,
+                clientEmail,
+                lawyerProfileId,
+                lawyerEmail,
+                consultationFee: consultationRate,
+
+            },
             line_items: [
                 {
-                    price_data:{
+                    price_data: {
                         currency: "usd",
                         unit_amount: price * 100,
-                        product_data:{
+                        product_data: {
                             name: "Consultation Fee"
                         }
                     },

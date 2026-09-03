@@ -96,8 +96,8 @@ const UserHiringHistory = async () => {
                                                                 <form action="/api/checkout_sessions" method="POST">
                                                                     <input
                                                                         type="hidden"
-                                                                        name='consultationFee'
-                                                                        value={item?.consultationRate}
+                                                                        name='requestId'
+                                                                        value={item?._id}
                                                                     />
                                                                     <section>
                                                                         <button

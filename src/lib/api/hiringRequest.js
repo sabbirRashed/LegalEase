@@ -14,3 +14,7 @@ export const getRequestByClientId = async()=>{
     const id = user?.id;
     return serverFetch(`/api/request/user/${id}`)
 }
+
+export const getHiringRequestById = async(id)=>{
+    return serverFetch(`/api/request/requestid/${id}`)
+}
