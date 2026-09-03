@@ -9,11 +9,8 @@ const BrowseLawyersPage = async ({ searchParams }) => {
 
     const search_params = await searchParams;
     const query = new URLSearchParams(search_params).toString()
-    console.log(query);
 
-    const services = await getLawyerProfile(query);
-
-
+    const {total, profiles }= await getLawyerProfile(query);
 
     return (
         <div className="w-11/12 max-w-7xl mx-auto py-15 md:py-20">
@@ -28,8 +25,9 @@ const BrowseLawyersPage = async ({ searchParams }) => {
             </div>
 
             <LawyerListingContainer
-                services={services}
+                profiles={profiles}
                 search_params={search_params}
+                total={total}
             />
         </div>
     );

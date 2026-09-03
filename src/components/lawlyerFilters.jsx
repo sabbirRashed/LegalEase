@@ -18,10 +18,11 @@ export default function LawyerFilters({
     setMaxFeeRange,
     availability,
     setAvailability,
+    page,
+    setPage
 }) {
 
 
-    const hasActiveFilters = searchQuery || minFeeRange || maxFeeRange || availability !== "all";
 
     const handleReset = () => {
         setSearchQuery("");

@@ -92,7 +92,19 @@ const UserHiringHistory = async () => {
                                                     </Table.Cell>
                                                     <Table.Cell>
                                                         {
-                                                            getPayBtn(item?.status) || "---"
+                                                            item?.status.toLowerCase() === "accepted" ?
+                                                                <form action="/api/checkout_sessions" method="POST">
+                                                                    <section>
+                                                                        <button
+                                                                            className='rounded-md bg-emerald-600 px-4 text-xs font-medium text-white transition hover:bg-emerald-700 py-1.5 cursor-pointer'
+                                                                            type="submit"
+                                                                            role="link">
+                                                                            Pay Now
+                                                                        </button>
+                                                                    </section>
+                                                                </form>
+                                                                :
+                                                                "---"
                                                         }
                                                     </Table.Cell>
                                                 </Table.Row>
@@ -104,8 +116,8 @@ const UserHiringHistory = async () => {
                             </Table.Content>
                         </Table.ResizableContainer>
                     </Table>
-                    :
-                    <NoRequestsCard />
+                        :
+                        <NoRequestsCard />
                 }
 
             </section>
