@@ -12,6 +12,5 @@ export const getRequestByProfileId = async()=>{
 export const getRequestByClientId = async()=>{
     const user = await getUserSession();
     const id = user?.id;
-    console.log('request on call api');
     return serverFetch(`/api/request/user/${id}`)
 }

@@ -1,9 +1,22 @@
+"use client"
+
 import { Pencil } from '@gravity-ui/icons';
-import { Button, Form, Input, Label, Modal, TextField } from '@heroui/react';
+import { Button, Form, Input, Label, Modal, TextArea, TextField } from '@heroui/react';
 import React from 'react';
 import { BiEdit, } from 'react-icons/bi';
 
-const UpdateCommentModal = () => {
+const UpdateCommentModal = ({ comment }) => {
+
+
+    const handleUpdateComment = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const { comment } = Object.fromEntries(formData);
+
+        console.log('update coment', comment);
+    }
+
     return (
         <Modal>
             <Button
@@ -17,7 +30,7 @@ const UpdateCommentModal = () => {
             </Button>
             <Modal.Backdrop>
                 <Modal.Container>
-                    <Modal.Dialog className="sm:max-w-[360px]">
+                    <Modal.Dialog className="sm:max-w-sm">
                         <Modal.CloseTrigger />
                         <Modal.Header>
                             <Modal.Icon className="bg-default text-foreground">
@@ -27,23 +40,21 @@ const UpdateCommentModal = () => {
                         </Modal.Header>
                         <Modal.Body>
 
-                            <Form>
-                                <TextField 
-                                className="w-full" 
-                                name="comment" 
-                                type="text" 
-                                defaultValue="abcd..." isRequired>
-                                    <Label className="text-sm font-medium text-slate-700">Your Comment</Label>
-                                    <Input placeholder="Enter your full name" className="py-2.5 shadow-none mt-1" />
-                                </TextField>
+                            <Form onSubmit={handleUpdateComment}>
+                                <div className=" space-y-3">
+                                    <TextArea
+                                        name='comment'
+                                        variant='secondary'
+                                        fullWidth
+                                        placeholder="Your comment..." />
+                                </div>
+
+                                <Button className="w-full mt-6" type='submit' slot="close" >
+                                    Continue
+                                </Button>
                             </Form>
 
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button className="w-full" slot="close">
-                                Continue
-                            </Button>
-                        </Modal.Footer>
                     </Modal.Dialog>
                 </Modal.Container>
             </Modal.Backdrop>

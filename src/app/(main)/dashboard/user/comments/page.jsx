@@ -8,7 +8,7 @@ const CommentsPage = async () => {
 
     const user = await getUserSession()
     const comments = await getCommentsByClientId(user?.id);
-    console.log(comments);
+   
     return (
         <div className='w-11/12 max-w-7xl mx-auto px-6 py-8'>
             <div className='mb-10'>
