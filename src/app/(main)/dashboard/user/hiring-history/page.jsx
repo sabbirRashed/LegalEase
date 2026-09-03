@@ -94,6 +94,11 @@ const UserHiringHistory = async () => {
                                                         {
                                                             item?.status.toLowerCase() === "accepted" ?
                                                                 <form action="/api/checkout_sessions" method="POST">
+                                                                    <input
+                                                                        type="hidden"
+                                                                        name='consultationFee'
+                                                                        value={item?.consultationRate}
+                                                                    />
                                                                     <section>
                                                                         <button
                                                                             className='rounded-md bg-emerald-600 px-4 text-xs font-medium text-white transition hover:bg-emerald-700 py-1.5 cursor-pointer'
