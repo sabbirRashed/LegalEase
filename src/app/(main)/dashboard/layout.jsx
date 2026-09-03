@@ -10,7 +10,7 @@ const DashboardLayout = async ({ children }) => {
         redirect('/signUp')
     }
     return (
-        <div className="flex h-screen">
+        <div className="flex">
 
             <DashboardSidebar />
             <main className=" flex-1">
