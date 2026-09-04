@@ -35,6 +35,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  
+
   const isActive = (href) => pathname === href;
   const router = useRouter()
 

@@ -1,8 +1,10 @@
+"use client"
 
-import { getUserSession } from "@/lib/core/session";
+import { authClient } from "@/lib/auth-client";
 import { LayoutSideContentLeft } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaUsersCog } from "react-icons/fa";
 
 import {
@@ -20,8 +22,13 @@ import { IoWalletOutline } from "react-icons/io5";
 import { LuChartNoAxesCombined } from "react-icons/lu";
 
 
-export async function DashboardSidebar() {
-    const user = await getUserSession();
+export  function DashboardSidebar() {
+    
+    const pathname = usePathname();
+    const isActive = (href) => pathname === href;
+
+    const {data}= authClient.useSession();
+    const user = data?.user;
 
     const userDashboardLinks = [
         { label: "Dashboard", href: "/dashboard/user", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
@@ -38,7 +45,7 @@ export async function DashboardSidebar() {
 
     const adminDashboardLinks = [
         { label: "Dashboard", href: "/dashboard/admin", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
-        { label: "Manage Users", href: "/dashboard/admin/manage-users ", icon: FaUsersCog, color: "text-violet-600 bg-violet-50" },
+        { label: "Manage Users", href: "/dashboard/admin/manage-users", icon: FaUsersCog, color: "text-violet-600 bg-violet-50" },
         { label: "View All Transactions", href: "/dashboard/admin/all-transactions", icon: IoWalletOutline, color: "text-amber-600 bg-amber-50" },
         { label: "Analytics", href: "/dashboard/admin/analytics", icon: LuChartNoAxesCombined, color: "text-emerald-600 bg-emerald-50" },
     ];
@@ -57,10 +64,10 @@ export async function DashboardSidebar() {
             <Link
                 href={item.href}
                 key={item.label}
-                className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
-                type="button"
+                className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default ${isActive(item.href)? "bg-blue-600/10": ""}`}
+                
             >
-                <item.icon className={`w-4 h-4 ${item.color}`} />
+                <item.icon className={`w-4 h-4 ${item?.color}`} />
                 {item.label}
             </Link>
         ))}
