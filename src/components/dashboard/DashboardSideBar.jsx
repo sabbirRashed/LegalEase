@@ -3,6 +3,7 @@ import { getUserSession } from "@/lib/core/session";
 import { LayoutSideContentLeft } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import Link from "next/link";
+import { FaUsersCog } from "react-icons/fa";
 
 import {
     FiSearch,
@@ -15,6 +16,8 @@ import {
     FiEdit3,
     FiMessageSquare,
 } from "react-icons/fi";
+import { IoWalletOutline } from "react-icons/io5";
+import { LuChartNoAxesCombined } from "react-icons/lu";
 
 
 export async function DashboardSidebar() {
@@ -35,9 +38,9 @@ export async function DashboardSidebar() {
 
     const adminDashboardLinks = [
         { label: "Dashboard", href: "/dashboard/admin", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
-        { label: "Hiring History", href: "/dashboard/admin/manage-users ", icon: FiClock, color: "text-violet-600 bg-violet-50" },
-        { label: "Update Profile", href: "/dashboard/admin/all-transactions", icon: FiEdit3, color: "text-amber-600 bg-amber-50" },
-        { label: "Comments", href: "/dashboard/admin/analytics", icon: FiMessageSquare, color: "text-emerald-600 bg-emerald-50" },
+        { label: "Manage Users", href: "/dashboard/admin/manage-users ", icon: FaUsersCog, color: "text-violet-600 bg-violet-50" },
+        { label: "View All Transactions", href: "/dashboard/admin/all-transactions", icon: IoWalletOutline, color: "text-amber-600 bg-amber-50" },
+        { label: "Analytics", href: "/dashboard/admin/analytics", icon: LuChartNoAxesCombined, color: "text-emerald-600 bg-emerald-50" },
     ];
 
     const navLinksMap = {
@@ -57,7 +60,7 @@ export async function DashboardSidebar() {
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
                 type="button"
             >
-                <item.icon className={`w-4 h-4 ${item.color}`}/>
+                <item.icon className={`w-4 h-4 ${item.color}`} />
                 {item.label}
             </Link>
         ))}

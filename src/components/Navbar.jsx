@@ -12,10 +12,17 @@ import {
   FiLogOut,
   FiGrid,
   FiClock,
+  
   FiEdit3,
   FiMessageSquare,
 } from "react-icons/fi";
+
+
+
 import { authClient } from "@/lib/auth-client";
+import { FaUsersCog } from "react-icons/fa";
+import { IoWalletOutline } from "react-icons/io5";
+import { LuChartNoAxesCombined } from "react-icons/lu";
 
 
 const navLinks = [
@@ -51,9 +58,9 @@ export default function Navbar() {
 
   const adminDashboardLinks = [
     { label: "Dashboard", href: "/dashboard/admin", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
-    { label: "Hiring History", href: "/dashboard/admin/manage-users ", icon: FiClock, color: "text-violet-600 bg-violet-50" },
-    { label: "Update Profile", href: "/dashboard/admin/all-transactions", icon: FiEdit3, color: "text-amber-600 bg-amber-50" },
-    { label: "Comments", href: "/dashboard/admin/analytics", icon: FiMessageSquare, color: "text-emerald-600 bg-emerald-50" },
+    { label: "Manage Users", href: "/dashboard/admin/manage-users ", icon: FaUsersCog, color: "text-violet-600 bg-violet-50" },
+    { label: "View All Transactions", href: "/dashboard/admin/all-transactions", icon: IoWalletOutline, color: "text-amber-600 bg-amber-50" },
+    { label: "Analytics", href: "/dashboard/admin/analytics", icon: LuChartNoAxesCombined, color: "text-emerald-600 bg-emerald-50" },
   ];
 
   const navLinksMap = {

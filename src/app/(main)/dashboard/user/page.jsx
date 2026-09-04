@@ -123,14 +123,16 @@ const UserDashboardPage = async () => {
                             Recent Hiring Requests
                         </h2>
 
-                        <Button
-                            href="/dashboard/user/hiring-history"
-                            variant="secondary"
-                            size="sm"
-                            className="rounded-md"
-                        >
-                            View All
-                        </Button>
+                        <Link href={'/dashboard/user/hiring-history'}>
+                            <Button
+                                href="/dashboard/user/hiring-history"
+                                variant="secondary"
+                                size="sm"
+                                className="rounded-md"
+                            >
+                                View All
+                            </Button>
+                        </Link>
                     </div>
 
                     <div className="mt-10">
@@ -190,7 +192,7 @@ const UserDashboardPage = async () => {
                         </Table>
                     </div>
                 </section>
-                : <NoRequestsCard />}
+                    : <NoRequestsCard />}
 
             </div>
         </main>
