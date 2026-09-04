@@ -1,10 +1,12 @@
 import ManagePageStatCard from '@/components/dashboard/admin/ManagePageStatCard';
 import UserManagementTable from '@/components/dashboard/admin/UserManagementTable';
+import { getAllUsers } from '@/lib/api/users';
 import { Button, Table } from '@heroui/react';
 import React from 'react';
 
-const ManageUsersPage = () => {
-    const users = 6
+const ManageUsersPage = async () => {
+    const { totalUsers, totalLawyers, totalAdmins, users } = await getAllUsers();
+
 
     return (
         <div className='w-11/12 max-w-7xl mx-auto md:px-6 py-8'>
@@ -18,7 +20,11 @@ const ManageUsersPage = () => {
                 </p>
             </div>
 
-            <ManagePageStatCard/>
+            <ManagePageStatCard
+                totalUsers={totalUsers}
+                totalLawyers={totalLawyers}
+                totalAdmins={totalAdmins}
+            />
 
             {/* Manage user table */}
             <section className='mt-10 border bg-white p-6 sm:p-8 w-full rounded-lg'>
@@ -27,7 +33,7 @@ const ManageUsersPage = () => {
                     <p className='text-slate-500 text-sm ms:text-base mt-1 max-w-lg'>View your hiring requests, lawyer details, fees, and current status—all in one place.</p>
                 </div>
 
-                <UserManagementTable/>
+                <UserManagementTable users={users} />
 
             </section>
         </div>
