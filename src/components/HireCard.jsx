@@ -35,17 +35,13 @@ const HireCard = ({ lawyer, user }) => {
             specialization: lawyer?.specialization,
             consultationRate: lawyer?.consultationRate, 
             status: "Pending",
+            paymentStatus: "Unpaid",
             message: message,
 
         }
 
-        console.log(lawyer?._id);
-
         try {
-            console.log('before', requestData);
             const res = await sendRequest(lawyer?._id, requestData);
-            console.log('after: ', requestData);
-
 
             if (res?.insertedId) {
                 toast.success(`Successfully send your request.`);

@@ -8,6 +8,7 @@ import {
     FiArrowRight,
     FiHome,
 } from 'react-icons/fi'
+import { postTransectionData } from '@/lib/actions/transaction'
 
 
 export default async function Success({ searchParams }) {
@@ -24,6 +25,17 @@ export default async function Success({ searchParams }) {
 
     const customerEmail = session.customer_details?.email;
     const stripeSessionId = session.id;
+    const requestInfo = session?.metadata;
+    const {
+        hiringRequestId,
+        clientUserId,
+        clientName,
+        lawyerProfileId,
+        lawyerEmail,
+        lawyerName,
+        consultationFee
+    } = requestInfo;
+
 
     const stripePaymentIntentId =
         typeof session.payment_intent === "string"
@@ -38,21 +50,23 @@ export default async function Success({ searchParams }) {
 
     if (session.status === 'complete') {
 
-        console.log('success:',
+     
+        const transactionInfo = {
             stripeSessionId,
             stripePaymentIntentId,
-            customerEmail);
-
-        const transactionInfo = {
-            requestId: "",
-            clientUserId: "",
-            clientName: "",
-            lawyerProfileId: "",
-            lawyerName: "",
-            amount: "",
+            hiringRequestId,
+            clientUserId,
+            clientName,
+            clientEmail: customerEmail,
+            lawyerProfileId,
+            lawyerName,
+            lawyerEmail,
+            amount: consultationFee,
             paymentStatus: "Paid"
 
         }
+
+        await postTransectionData(transactionInfo)
 
 
         return (

@@ -8,29 +8,6 @@ import React from 'react';
 import { FiInbox } from 'react-icons/fi';
 
 
-const lawyerRequests = [
-    {
-        _id: 1,
-        clientName: "Eleanor Vance",
-        requestDate: "2026-09-01",
-        status: "pending",
-        action: ["accept", "reject"]
-    },
-    {
-        _id: 2,
-        clientName: "Marcus Thorne",
-        requestDate: "2026-08-28",
-        status: "accept",
-        action: ["reject"]
-    },
-    {
-        _id: 3,
-        clientName: "Julian Davis",
-        requestDate: "2026-08-15",
-        status: "reject",
-        action: ["accept"]
-    }
-];
 
 const HiringHistory = async () => {
 
@@ -90,7 +67,7 @@ const HiringHistory = async () => {
                                         inline-block px-3 py-1.5 rounded-full
                                         ${item?.status.toLowerCase() === "pending" ?
                                                         "text-amber-700 text-xs bg-amber-100"
-                                                        : item?.status.toLowerCase() === "accept" ?
+                                                        : item?.status.toLowerCase() === "accepted" ?
                                                             "text-success bg-green-100" : "text-rose-500 bg-rose-100"}`}>{item?.status}
                                                 </Chip>
                                             </td>

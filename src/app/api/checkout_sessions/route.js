@@ -17,11 +17,14 @@ export async function POST(request) {
         const {
             _id,
             clientUserId,
-            clientEmail,
+            clientName,
             lawyerProfileId,
+            lawyerName,
             lawyerEmail,
             consultationRate,
         } = hiringRequest;
+
+        const price = Number(consultationRate)
 
 
         if (!price || price <= 0) {
@@ -36,8 +39,9 @@ export async function POST(request) {
             metadata: {
                 hiringRequestId,
                 clientUserId,
-                clientEmail,
+                clientName,
                 lawyerProfileId,
+                lawyerName,
                 lawyerEmail,
                 consultationFee: consultationRate,
 

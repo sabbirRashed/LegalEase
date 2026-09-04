@@ -1,5 +1,6 @@
 import NoRequestsCard from '@/components/dashboard/user/NoRequestCard';
 import { getRequestByClientId } from '@/lib/api/hiringRequest';
+import { Check } from '@gravity-ui/icons';
 import { Button, Chip, Table } from '@heroui/react';
 import React from 'react';
 
@@ -93,21 +94,29 @@ const UserHiringHistory = async () => {
                                                     <Table.Cell>
                                                         {
                                                             item?.status.toLowerCase() === "accepted" ?
-                                                                <form action="/api/checkout_sessions" method="POST">
-                                                                    <input
-                                                                        type="hidden"
-                                                                        name='requestId'
-                                                                        value={item?._id}
-                                                                    />
-                                                                    <section>
-                                                                        <button
-                                                                            className='rounded-md bg-emerald-600 px-4 text-xs font-medium text-white transition hover:bg-emerald-700 py-1.5 cursor-pointer'
-                                                                            type="submit"
-                                                                            role="link">
-                                                                            Pay Now
-                                                                        </button>
-                                                                    </section>
-                                                                </form>
+                                                                item?.paymentStatus.toLowerCase() === "unpaid" ?
+                                                                    <form action="/api/checkout_sessions" method="POST">
+                                                                        <input
+                                                                            type="hidden"
+                                                                            name='requestId'
+                                                                            value={item?._id}
+                                                                        />
+                                                                        <section>
+                                                                            <button
+                                                                                className='rounded-md bg-emerald-600 px-4 text-xs font-medium text-white transition hover:bg-emerald-700 py-1.5 cursor-pointer'
+                                                                                type="submit"
+                                                                                role="link">
+                                                                                Pay Now
+                                                                            </button>
+                                                                        </section>
+                                                                    </form>
+                                                                    :
+                                                                    <span
+                                                                        className='inline-flex  items-center gap-1  rounded-md bg-emerald-600/20 px-4 text-xs font-medium text-emerald-600 transition py-1.5'
+                                                                    >
+                                                                        <Check />
+                                                                        Paid
+                                                                    </span>
                                                                 :
                                                                 "---"
                                                         }
