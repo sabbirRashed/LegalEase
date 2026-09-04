@@ -1,12 +1,13 @@
 import ManagePageStatCard from '@/components/dashboard/admin/ManagePageStatCard';
 import UserManagementTable from '@/components/dashboard/admin/UserManagementTable';
 import { getAllUsers } from '@/lib/api/users';
-import { Button, Table } from '@heroui/react';
 import React from 'react';
 
 const ManageUsersPage = async () => {
-    const { totalUsers, totalClients, totalLawyers, totalAdmins, users } = await getAllUsers();
 
+    const { totalUsers, totalClients, totalLawyers, totalAdmins, users} = await getAllUsers();
+
+   
 
     return (
         <div className='w-11/12 max-w-7xl mx-auto md:px-6 py-8'>

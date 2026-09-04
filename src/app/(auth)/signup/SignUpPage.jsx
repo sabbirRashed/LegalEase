@@ -96,16 +96,22 @@ export default function SignUpForm() {
             return;
         }
 
-        const { data, error } = await authClient.updateUser({
-            role: selectedRole
-        })
+        try {
+            const { data, error } = await authClient.updateUser({
+                role: selectedRole
+            })
 
-        if (data?.status) {
-            toast.success('Thank you for completting Sign Up step')
-            router.push(redirectTo)
+            if (data?.status) {
+                toast.success('Thank you for completting Sign Up step')
+                router.push(redirectTo)
+            }
+            else {
+                console.log(error);
+                toast.error('Something went wrong!')
+            }
         }
-        else {
-            toast.error('Something went wrong!')
+        catch(error){
+            console.log("role-err:", error);
         }
     };
 
