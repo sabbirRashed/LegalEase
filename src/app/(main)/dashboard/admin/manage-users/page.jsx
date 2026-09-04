@@ -5,7 +5,7 @@ import { Button, Table } from '@heroui/react';
 import React from 'react';
 
 const ManageUsersPage = async () => {
-    const { totalUsers, totalLawyers, totalAdmins, users } = await getAllUsers();
+    const { totalUsers, totalClients, totalLawyers, totalAdmins, users } = await getAllUsers();
 
 
     return (
@@ -22,6 +22,7 @@ const ManageUsersPage = async () => {
 
             <ManagePageStatCard
                 totalUsers={totalUsers}
+                totalClients={totalClients}
                 totalLawyers={totalLawyers}
                 totalAdmins={totalAdmins}
             />

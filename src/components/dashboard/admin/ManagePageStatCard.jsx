@@ -5,7 +5,7 @@ import {
     FaUserShield,
 } from "react-icons/fa";
 
-const ManagePageStatCard = () => {
+const ManagePageStatCard = ({totalUsers, totalClients, totalLawyers, totalAdmins}) => {
     return (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {/* Total Users */}
@@ -16,7 +16,7 @@ const ManagePageStatCard = () => {
                             Total Users
                         </p>
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            128
+                            {totalUsers}
                         </h3>
                     </div>
 
@@ -34,7 +34,7 @@ const ManagePageStatCard = () => {
                             Clients
                         </p>
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            86
+                           {totalClients}
                         </h3>
                     </div>
 
@@ -52,7 +52,7 @@ const ManagePageStatCard = () => {
                             Lawyers
                         </p>
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            40
+                           {totalLawyers}
                         </h3>
                     </div>
 
@@ -70,7 +70,7 @@ const ManagePageStatCard = () => {
                             Admins
                         </p>
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            2
+                            {totalAdmins}
                         </h3>
                     </div>
 
