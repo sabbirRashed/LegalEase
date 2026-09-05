@@ -100,7 +100,7 @@ const LawyerListingContainer = ({ profiles, search_params , total}) => {
                             {
                                 profiles.map(profile => <LawyerCard
                                     key={profile._id}
-                                    service={profile} />)
+                                    lawyer={profile} />)
                             }
                         </div>
 
