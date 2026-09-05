@@ -1,5 +1,5 @@
 
-import { serverFetch } from "../core/server"
+import { protectedFetch, serverFetch } from "../core/server"
 import { getUserSession } from "../core/session"
 
 
@@ -17,7 +17,7 @@ export const getLawyerProfileById = async (id) => {
 // (for lawyer's own user id)
 export const getLawyerProfileByUserId = async (userId) => {
 
-    return serverFetch(`/api/lawyer/myprofile?userId=${userId}`)
+    return protectedFetch(`/api/lawyer/myprofile?userId=${userId}`)
 }
 
 export const getLogedInLawyerProfile = async () => {
@@ -34,5 +34,5 @@ export const getTopHiredLawyer = async()=>{
 
 // SERVICE RELATED API
 export const getLawyerServiceByProfileId = async (id) => {
-    return serverFetch(`/api/service/${id}`)
+    return protectedFetch(`/api/service/${id}`)
 }

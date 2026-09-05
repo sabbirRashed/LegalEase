@@ -1,4 +1,4 @@
-import { serverFetch } from "../core/server"
+import { protectedFetch, serverFetch } from "../core/server"
 
 export const transactionFetchingApi = async (userId, profileID) => {
     let url = '/api/transactions';
@@ -11,5 +11,5 @@ export const transactionFetchingApi = async (userId, profileID) => {
         url += `/api/transactions?lawyerProfileId=${profileID}`;
     }
 
-    return serverFetch(url);
+    return protectedFetch(url);
 };

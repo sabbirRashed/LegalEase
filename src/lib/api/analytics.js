@@ -1,5 +1,5 @@
-import { serverFetch } from "../core/server"
+import { protectedFetch, serverFetch } from "../core/server"
 
 export const getAnalyticsData = async()=>{
-    return serverFetch('/api/admin/analytics')
+    return protectedFetch('/api/admin/analytics')
 }

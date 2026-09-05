@@ -22,13 +22,19 @@ export const serverFetch = async (path) => {
     return res.json()
 }
 
+export const protectedFetch = async (path) => {
+    const res = await fetch(`${serverUrl}${path}`, {
+        headers: await authHeader()
+    });
+    return res.json()
+}
 
 export const serverMutation = async (path, data = null, method = 'POST') => {
     const res = await fetch(`${serverUrl}${path}`, {
         method: method,
         headers: {
             "content-type": "application/json",
-            ...authHeader()
+            ...(await authHeader())
         },
         ...(data !== null && { body: JSON.stringify(data) })
     });
