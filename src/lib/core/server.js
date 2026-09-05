@@ -19,14 +19,14 @@ export const serverFetch = async (path) => {
     const res = await fetch(`${serverUrl}${path}`);
 
     // handle 401, 403, 404
-    return res.json()
+    return handleStatus(res)
 }
 
 export const protectedFetch = async (path) => {
     const res = await fetch(`${serverUrl}${path}`, {
         headers: await authHeader()
     });
-    return res.json()
+    return handleStatus(res);
 }
 
 export const serverMutation = async (path, data = null, method = 'POST') => {
@@ -40,5 +40,20 @@ export const serverMutation = async (path, data = null, method = 'POST') => {
     });
 
 
-    return res.json();
+    return handleStatus(res);
+}
+
+
+
+//handle 401, 403, 404
+const handleStatus = async (res) => {
+
+    if (res.status === 401) {
+        redirect('/unauthorized')
+    }
+    else if (res.status === 403) {
+        redirect('/forbidden')
+    }
+
+    return res.json()
 }
