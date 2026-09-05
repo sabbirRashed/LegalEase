@@ -5,6 +5,7 @@ import { LayoutSideContentLeft } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BiPencil } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaUsersCog } from "react-icons/fa";
 
@@ -34,14 +35,14 @@ export  function DashboardSidebar() {
     const userDashboardLinks = [
         { label: "Dashboard", href: "/dashboard/user", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
         { label: "Hiring History", href: "/dashboard/user/hiring-history", icon: FiClock, color: "text-violet-600 bg-violet-50" },
-        { label: "Manage Profile", href: "/dashboard/user/update-profile", icon: CgProfile, color: "text-amber-600 bg-amber-50" },
+        { label: "Update Profile", href: "/dashboard/user/update-profile", icon: BiPencil, color: "text-amber-600 bg-amber-50" },
         { label: "Comments", href: "/dashboard/user/comments", icon: FiMessageSquare, color: "text-emerald-600 bg-emerald-50" },
     ];
 
     const LawyerDashboardLinks = [
         { label: "Dashboard", href: "/dashboard/lawyer", icon: FiGrid, color: "text-blue-600 bg-blue-50" },
         { label: "Hiring History", href: "/dashboard/lawyer/hiring-history", icon: FiClock, color: "text-violet-600 bg-violet-50" },
-        { label: "Update Profile", href: "/dashboard/lawyer/manage-legal-profile", icon: FiEdit3, color: "text-amber-600 bg-amber-50" },
+        { label: "Manage Profile", href: "/dashboard/lawyer/manage-legal-profile", icon: CgProfile, color: "text-amber-600 bg-amber-50" },
     ];
 
     const adminDashboardLinks = [
