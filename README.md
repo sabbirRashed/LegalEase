@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ⚖️ LegalEase — Legal Service Marketplace
 
-## Getting Started
+LegalEase is a full-stack legal service platform that connects clients with qualified lawyers. Users can explore legal professionals, view their profiles and services, hire lawyers, manage requests, make payments, and leave comments.
 
-First, run the development server:
+Lawyers can manage their legal profiles, services, and hiring requests, while administrators can manage users, transactions, and platform analytics.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Live Project
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🔗 **Live Website:** https://legalease-chi-one.vercel.app
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🔗 **Client Repository:** https://github.com/sabbirRashed/LegalEase.git
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📌 Overview
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+LegalEase is designed to make finding and hiring legal professionals easier and more accessible.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The platform provides separate experiences for:
 
-## Deploy on Vercel
+- 👤 Clients
+- ⚖️ Lawyers
+- 🛡️ Administrators
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Users can browse lawyers without logging in, while authenticated users can access features based on their assigned role.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ✨ Key Features
+
+### 👤 Client Features
+
+- Create an account with email/password
+- Google authentication
+- Select user role during registration
+- Secure login/logout
+- Browse available lawyers
+- Search and filter lawyers
+- View detailed lawyer profiles
+- View lawyer specialization and consultation fees
+- Send hiring requests
+- View hiring history
+- Make payments through Stripe
+- View transaction/payment status
+- Leave comments/reviews
+- Update personal profile
+- Protected client dashboard
+
+---
+
+### ⚖️ Lawyer Features
+
+- Lawyer account registration
+- Create and manage legal profile
+- Add legal specialization
+- Add professional biography
+- Set hourly and consultation rates
+- Set availability status
+- Manage hiring requests
+- View hiring history
+- Access lawyer dashboard
+- Protected lawyer routes
+
+---
+
+### 🛡️ Admin Features
+
+- Admin dashboard
+- View platform analytics
+- Manage users
+- Update user roles
+- View all transactions
+- Monitor platform activity
+- Protected admin routes
+
+---
+
+## 🔐 Authentication & Authorization
+
+LegalEase uses **Better Auth** for authentication and session management.
+
+Supported authentication methods:
+
+- Email & Password
+- Google OAuth
+
+The application implements role-based access control for:
+
+```text
+User
+  ↓
+Lawyer
+  ↓
+Admin
