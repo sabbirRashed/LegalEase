@@ -14,8 +14,18 @@ const LawyerCard = ({ lawyer }) => {
 
     return (
         <motion.div
-            whileHover={{ y: -4 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            whileHover={{
+                scale: 1.03,
+                y: -4,
+            }}
+            transition={{
+                duration: 0.5,
+                ease: "easeOut",
+            }}
+            
             className="relative flex flex-col flex-1 items-center rounded-2xl border border-slate-200 bg-white p-3 sm:p-6 text-center shadow-sm transition-shadow hover:shadow-lg hover:shadow-slate-200/60"
         >
             {/* Busy badge */}
