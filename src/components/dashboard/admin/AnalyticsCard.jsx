@@ -7,7 +7,10 @@ import {
 } from "react-icons/fa";
 
 
-const AnalyticsCard = () => {
+const AnalyticsCard = ({analyticsData}) => {
+
+    const {totalUsers, totalLawyers, totalHire, totalRevenue}= analyticsData
+
     return (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
@@ -20,7 +23,7 @@ const AnalyticsCard = () => {
                         </p>
 
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            22
+                            {totalUsers}
                         </h3>
                     </div>
 
@@ -40,7 +43,7 @@ const AnalyticsCard = () => {
                         </p>
 
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            17
+                            {totalLawyers}
                         </h3>
                     </div>
 
@@ -60,7 +63,7 @@ const AnalyticsCard = () => {
                         </p>
 
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            5
+                           {totalHire}
                         </h3>
                     </div>
 
@@ -80,7 +83,7 @@ const AnalyticsCard = () => {
                         </p>
 
                         <h3 className="mt-2 text-2xl font-bold text-foreground">
-                            ৳20000
+                            ৳{totalRevenue}
                         </h3>
                     </div>
 
