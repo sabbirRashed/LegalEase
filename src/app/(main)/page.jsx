@@ -1,6 +1,7 @@
 import HeroSection from '@/components/HeroSectin';
 import TopLawyerCard from '@/components/TopLawyerCard';
 import { getTopHiredLawyer } from '@/lib/api/lawyer';
+import { getUserToken } from '@/lib/core/session';
 import { h2 } from 'framer-motion/m';
 import Link from 'next/link';
 import React from 'react';
@@ -9,6 +10,9 @@ import { FiArrowRight } from 'react-icons/fi';
 
 const HomePage = async () => {
     const topHiredLawyers = await getTopHiredLawyer()
+
+    const token = await getUserToken()
+    console.log('token:', token);
 
     return (
         <div>

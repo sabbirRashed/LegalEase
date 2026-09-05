@@ -9,6 +9,13 @@ export const getUserSession = async () => {
     return session?.user || null;
 }
 
+export const getUserToken = async()=>{
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    return token || null;
+}
+
 export const requireRole = async (role) => {
     const user = await getUserSession();
     if(!user) redirect('/login')
