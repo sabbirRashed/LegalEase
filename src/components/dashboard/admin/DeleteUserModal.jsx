@@ -77,7 +77,7 @@ const DeleteUserModal = ({ user }) => {
                                     <Button
                                         onClick={handleDeleteUser}
                                         isDisabled={isloading}
-                                        className="w-full bg-red-600 text-white hover:bg-red-700 sm:w-auto"
+                                        className="w-full bg-rose-500 text-white hover:bg-rose-600 sm:w-auto"
                                     >
                                         {isloading? "Deleting..": "Delete User"}
                                     </Button>

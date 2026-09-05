@@ -14,6 +14,7 @@ export const sendRequest = async (id, data) => {
 
 export const updateRequestStatus = async (id, data) => {
     const res = await serverMutation(`/api/request/${id}`, data, "PATCH");
+    revalidatePath(`/lawyers/lawyerDetails/${id}`);
     revalidatePath(`/dashboard/lawyer/hiring-history`);
     revalidatePath(`/dashboard/user/hiring-history`);
     return res

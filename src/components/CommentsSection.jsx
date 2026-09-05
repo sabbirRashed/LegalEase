@@ -16,8 +16,6 @@ const CommentsSection = ({ lawyer, comments, user }) => {
     const [isloading, setIsloading] = useState(false)
     const router = useRouter()
 
-console.log('comments', comments);
-
 
     const handleCommentClick = () => {
         commentRef.current?.focus();

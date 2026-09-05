@@ -102,7 +102,7 @@ const UserManagementTable = ({ users }) => {
                                                         size="sm"
                                                         variant="secondary"
                                                         isDisabled={isloading}
-                                                        className={'text-xs border bg-blue-600/5 rounded-sm'}
+                                                        className={'text-xs border bg-amber-500/5 text-amber-600 rounded-sm'}
                                                     >
                                                         {isloading? "Changing..": "Make User"}
                                                     </Button>

@@ -14,15 +14,19 @@ import { getLawyerProfileById } from "@/lib/api/lawyer";
 import { getUserSession } from "@/lib/core/session";
 import CommentsSection from "@/components/CommentsSection";
 import { getCommentsByProfileId } from "@/lib/api/comments";
+import { getCommentPermission } from "@/lib/api/hiringRequest";
 
 
 
 const LawyerDetails = async ({ params }) => {
     const { id } = await params;
 
-    const lawyer = await getLawyerProfileById(id);
-    const comments = await getCommentsByProfileId(id)
     const user = await getUserSession()
+    const lawyer = await getLawyerProfileById(id);
+    const comments = await getCommentsByProfileId(id);
+    const commentPermissionData = await getCommentPermission(user?.id, id);
+    console.log('per', user, commentPermissionData);
+
 
 
     return (
@@ -219,7 +223,7 @@ const LawyerDetails = async ({ params }) => {
 
                 {/* -------------------COMMENT SECTION--------------------- */}
                 {
-                    user?.role === "user" && <CommentsSection lawyer={lawyer} comments={comments} user={user} />
+                    commentPermissionData?._id && <CommentsSection lawyer={lawyer} comments={comments} user={user} />
                 }
             </div>
         </div>

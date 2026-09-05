@@ -111,12 +111,14 @@ const UserHiringHistory = async () => {
                                                                         </section>
                                                                     </form>
                                                                     :
-                                                                    <span
-                                                                        className='inline-flex  items-center gap-1  rounded-md bg-emerald-600/20 px-4 text-xs font-medium text-emerald-600 transition py-1.5'
+                                                                    <Button
+                                                                        size='sm'
+                                                                        isDisabled={true}
+                                                                        className=' items-center gap-1  rounded-md bg-emerald-600/20 text-xs font-medium text-emerald-600 transition'
                                                                     >
                                                                         <Check />
                                                                         Paid
-                                                                    </span>
+                                                                    </Button>
                                                                 :
                                                                 "---"
                                                         }

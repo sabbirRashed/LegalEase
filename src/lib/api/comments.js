@@ -8,3 +8,5 @@ export const getCommentsByProfileId = async(id)=>{
 export const getCommentsByClientId = async(id)=>{
     return serverFetch(`/api/comments/user/${id}`);
 }
+
+
