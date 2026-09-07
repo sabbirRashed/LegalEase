@@ -23,9 +23,15 @@ const LawyerDetails = async ({ params }) => {
 
     const user = await getUserSession()
     const lawyer = await getLawyerProfileById(id);
-    const comments = await getCommentsByProfileId(id);
-    const commentPermissionData = await getCommentPermission(user?.id, id);
-    console.log('per', user, commentPermissionData);
+    const comments = await getCommentsByProfileId(id)
+        
+
+    const commentPermissionData = user?.id ?
+        user?.role === "user" ?
+            await getCommentPermission(user?.id, id)
+            : null
+        : null;
+
 
 
 
@@ -222,9 +228,13 @@ const LawyerDetails = async ({ params }) => {
                 </section>
 
                 {/* -------------------COMMENT SECTION--------------------- */}
-                {
-                    commentPermissionData?._id && <CommentsSection lawyer={lawyer} comments={comments} user={user} />
-                }
+
+                <CommentsSection 
+                lawyer={lawyer} 
+                comments={comments} 
+                user={user}
+                commentPermissionData={commentPermissionData} />
+
             </div>
         </div>
     );

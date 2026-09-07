@@ -3,14 +3,16 @@
 import { postComment } from '@/lib/actions/comments';
 import { Person } from '@gravity-ui/icons';
 import { Avatar, Button, TextArea } from '@heroui/react';
+import { div } from 'framer-motion/m';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaRocketchat } from 'react-icons/fa';
+import { FiMessageCircle } from 'react-icons/fi';
 
 
 
-const CommentsSection = ({ lawyer, comments, user }) => {
+const CommentsSection = ({ lawyer, comments, user, commentPermissionData }) => {
     const commentRef = useRef(null);
     const [comment, setComment] = useState('');
     const [isloading, setIsloading] = useState(false)
@@ -76,83 +78,108 @@ const CommentsSection = ({ lawyer, comments, user }) => {
 
                 {/* For authenticated users later */}
                 {
-                    (comment.trim().length) > 0 ?
-                        (<Button
-                            onClick={handleComment}
-                            isDisabled={isloading}
-                            variant="outline"
-                            className="rounded-xl border-slate-300 font-semibold text-slate-700 flex items-center gap-3"
-                        >
-                            {
-                                isloading ? "Submiting..." : <>Send Comment <FaRocketchat /></>
-                            }
-                        </Button>)
-
-                        :
-                        (<Button
-                            onClick={handleCommentClick}
-                            variant="outline"
-                            className="rounded-xl border-slate-300 font-semibold text-slate-700"
-                        >
-                            Write a Comment
-                        </Button>)
+                    commentPermissionData?._id && <div>
+                        {
+                            (comment.trim().length) > 0 ?
+                                <Button
+                                    onClick={handleComment}
+                                    isDisabled={isloading}
+                                    variant="outline"
+                                    className="rounded-xl border-slate-300 font-semibold text-slate-700 flex items-center gap-3"
+                                >
+                                    {
+                                        isloading ? "Submiting..." : <>Send Comment <FaRocketchat /></>
+                                    }
+                                </Button>
+                                : <Button
+                                    onClick={handleCommentClick}
+                                    variant="outline"
+                                    className="rounded-xl border-slate-300 font-semibold text-slate-700"
+                                >
+                                    Write a Comment
+                                </Button>
+                        }
+                    </div>
                 }
             </div>
 
-
             {/* input field */}
-            <div className=" space-y-3">
-                <TextArea
-                    ref={commentRef}
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    fullWidth
-                    placeholder="Comments..."
-                    className={'shadow-none border border-slate-200 mt-4'} />
-            </div>
+            {
+                commentPermissionData?._id && <div className=" space-y-3">
+                    <TextArea
+                        ref={commentRef}
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        fullWidth
+                        placeholder="Comments..."
+                        className={'shadow-none border border-slate-200 mt-4'} />
+                </div>
+            }
 
             {/* Comments */}
-            <div className="mt-8 space-y-4">
+            {
+                comments.length > 0 ?
+                    <div className="mt-8 space-y-4">
 
-                {comments.map((item) => (
-                    <div
-                        key={item?._id}
-                        className="rounded-2xl border border-slate-200 p-5"
-                    >
-                        <div className="flex items-start justify-between gap-4">
+                        {comments.map((item) => (
+                            <div
+                                key={item?._id}
+                                className="rounded-2xl border border-slate-200 p-5"
+                            >
+                                <div className="flex items-start justify-between gap-4">
 
-                            <div className="flex gap-3">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100">
-                                    <Person className="h-5 w-5 text-sky-600" />
+                                    <div className="flex gap-3">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100">
+                                            <Person className="h-5 w-5 text-sky-600" />
+                                        </div>
+
+                                        <div>
+                                            <p className="font-semibold text-slate-800">
+                                                {item.clientName}
+                                            </p>
+
+                                            <p className="text-xs text-slate-400">
+                                                {new Date(item?.createAt).toLocaleDateString("en-US", {
+                                                    month: "long",
+                                                    day: "numeric",
+                                                    year: "numeric",
+                                                })}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex gap-1 text-amber-400">
+                                        ★★★★★
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <p className="font-semibold text-slate-800">
-                                        {item.clientName}
-                                    </p>
-
-                                    <p className="text-xs text-slate-400">
-                                        {new Date(item?.createAt).toLocaleDateString("en-US", {
-                                            month: "long",
-                                            day: "numeric",
-                                            year: "numeric",
-                                        })}
-                                    </p>
-                                </div>
+                                <p className="mt-4 pl-0 text-sm leading-7 text-slate-600 md:pl-[52px]">
+                                    {item.comment}
+                                </p>
                             </div>
+                        ))}
 
-                            <div className="flex gap-1 text-amber-400">
-                                ★★★★★
-                            </div>
-                        </div>
-
-                        <p className="mt-4 pl-0 text-sm leading-7 text-slate-600 md:pl-[52px]">
-                            {item.comment}
-                        </p>
                     </div>
-                ))}
+                    : <div className="mt-10 rounded-2xl border border-slate-200 p-8">
+                        <div className="flex flex-col items-center justify-center text-center">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100">
+                                <FiMessageCircle className="h-6 w-6 text-sky-600" />
+                            </div>
 
-            </div>
+                            <h3 className="mt-4 font-semibold text-slate-800">
+                                No comments yet
+                            </h3>
+
+                            <p className="mt-2 max-w-md text-sm leading-6 text-slate-500">
+                                This lawyer hasn't received any comments yet. Be the first to
+                                share your experience.
+                            </p>
+                        </div>
+                    </div>
+            }
+
+
+
         </section>
     );
 };

@@ -10,12 +10,12 @@ import DeleteUserModal from './DeleteUserModal';
 
 const UserManagementTable = ({ users }) => {
 
-    const [isloading, setIsloading] = useState(false);
+    const [isloading, setIsloading] = useState(null);
     const router = useRouter();
 
     const handleRoleChange = async (userId, newRole) => {
 
-        setIsloading(true)
+        setIsloading(userId)
         try{
             const res = await updateUserRole(userId, {role: newRole})
             if(res.modifiedCount > 0){
@@ -26,7 +26,7 @@ const UserManagementTable = ({ users }) => {
             toast.error('Something went wrong!')
         }
         finally{
-            setIsloading(false)
+            setIsloading(null)
         }
 
     }
@@ -92,19 +92,19 @@ const UserManagementTable = ({ users }) => {
                                                         onClick={() => handleRoleChange(item?._id, "admin")}
                                                         size="sm"
                                                         variant="secondary"
-                                                        isDisabled={isloading}
+                                                        isDisabled={isloading === item?._id}
                                                         className={'text-xs border bg-blue-600/5 rounded-sm'}
                                                     >
-                                                        {isloading? "Changing..": "Make Admin"}
+                                                        {isloading === item?._id? "Changing..": "Make Admin"}
                                                     </Button>
                                                     : <Button
                                                         onClick={() => handleRoleChange(item?._id, "user")}
                                                         size="sm"
                                                         variant="secondary"
-                                                        isDisabled={isloading}
+                                                        isDisabled={isloading === item?._id}
                                                         className={'text-xs border bg-amber-500/5 text-amber-600 rounded-sm'}
                                                     >
-                                                        {isloading? "Changing..": "Make User"}
+                                                        {isloading === item._id? "Changing..": "Make User"}
                                                     </Button>
 
                                             }

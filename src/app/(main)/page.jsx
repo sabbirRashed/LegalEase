@@ -11,8 +11,6 @@ import { FiArrowRight } from 'react-icons/fi';
 const HomePage = async () => {
     const topHiredLawyers = await getTopHiredLawyer()
 
-    const token = await getUserToken()
-    console.log('token:', token);
 
     return (
         <div>
@@ -57,7 +55,7 @@ const HomePage = async () => {
                                 </h3>
 
                                 <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">
-                                    We’re building our community of trusted legal experts. Check back soon
+                                    We're building our community of trusted legal experts. Check back soon
                                     to discover the most trusted lawyers on LegalEase.
                                 </p>
                             </div>
@@ -84,7 +82,7 @@ const HomePage = async () => {
 
                         {/* Criminal */}
                         <Link
-                            href="/lawyers?specialization=Criminal"
+                            href="/lawyers?search=Criminal"
                             className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                         >
                             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
@@ -107,7 +105,7 @@ const HomePage = async () => {
 
                         {/* Corporate */}
                         <Link
-                            href="/lawyers?specialization=Corporate"
+                            href="/lawyers?search=Corporate"
                             className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                         >
                             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
@@ -130,7 +128,7 @@ const HomePage = async () => {
 
                         {/* Family */}
                         <Link
-                            href="/lawyers?specialization=Family"
+                            href="/lawyers?search=Family"
                             className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                         >
                             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
@@ -153,7 +151,7 @@ const HomePage = async () => {
 
                         {/* Employment */}
                         <Link
-                            href="/lawyers?specialization=Employment"
+                            href="/lawyers?search=Employment"
                             className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                         >
                             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
@@ -176,7 +174,7 @@ const HomePage = async () => {
 
                         {/* Tax */}
                         <Link
-                            href="/lawyers?specialization=Tax"
+                            href="/lawyers?search=Tax"
                             className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                         >
                             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
@@ -199,7 +197,7 @@ const HomePage = async () => {
 
                         {/* Property */}
                         <Link
-                            href="/lawyers?specialization=Property"
+                            href="/lawyers?search=Property"
                             className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                         >
                             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
@@ -222,7 +220,7 @@ const HomePage = async () => {
 
                         {/* Human Rights */}
                         <Link
-                            href="/lawyers?specialization=Human"
+                            href="/lawyers?search=Human"
                             className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                         >
                             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">

@@ -2,7 +2,7 @@ import LawyerCardSkeleton from "@/components/loaderSkeleton";
 import { Skeleton } from "@heroui/react";
 
 
-const Loading = () => {
+const BrowsePageSkeleton = () => {
     return (
         <div className="w-11/12 max-w-7xl mx-auto py-15 md:py-20 min-h-screen bg-slate-50">
             {/* Header Skeleton */}
@@ -27,4 +27,4 @@ const Loading = () => {
     );
 }
 
-export default Loading
+export default BrowsePageSkeleton

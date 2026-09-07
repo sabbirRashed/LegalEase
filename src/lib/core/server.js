@@ -1,6 +1,7 @@
 "use server"
 
 
+import { redirect } from "next/navigation";
 import { getUserToken } from "./session";
 
 const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -19,7 +20,7 @@ export const serverFetch = async (path) => {
     const res = await fetch(`${serverUrl}${path}`);
 
     // handle 401, 403, 404
-    return handleStatus(res)
+    return res.json()
 }
 
 export const protectedFetch = async (path) => {
@@ -48,10 +49,10 @@ export const serverMutation = async (path, data = null, method = 'POST') => {
 //handle 401, 403, 404
 const handleStatus = async (res) => {
 
-    if (res.status === 401) {
+    if (res?.status === 401) {
         redirect('/unauthorized')
     }
-    else if (res.status === 403) {
+    else if (res?.status === 403) {
         redirect('/forbidden')
     }
 

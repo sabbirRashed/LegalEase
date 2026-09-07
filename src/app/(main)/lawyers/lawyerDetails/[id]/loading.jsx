@@ -1,6 +1,6 @@
 import { Skeleton } from "@heroui/react";
 
-const Loading = () => {
+const DetailsPageSkeleton = () => {
     return (
         <div className="min-h-screen bg-sky-50/60">
             <div className="mx-auto w-11/12 max-w-7xl py-10">
@@ -69,4 +69,4 @@ const Loading = () => {
     );
 };
 
-export default Loading;
+export default DetailsPageSkeleton;
