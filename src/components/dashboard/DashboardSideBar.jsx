@@ -78,7 +78,7 @@ export  function DashboardSidebar() {
     return (
         <>
             {/* Desktop device view */}
-            <aside className="hidden w-64 min-h-screen shrink-0 border-r border-default p-4  lg:block bg-white">
+            <aside className="hidden w-64  border-r  p-4  lg:block bg-white">
                 {sidebarContent}
             </aside>
 

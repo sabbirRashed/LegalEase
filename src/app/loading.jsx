@@ -1,6 +1,6 @@
 import { CircularProgress } from "react-loader-spinner";
 
-export default function Loading() {
+export default function RootSpinner() {
     return (
         <div className="flex min-h-screen items-center justify-center">
             <CircularProgress

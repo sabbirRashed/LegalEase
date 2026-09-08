@@ -10,10 +10,10 @@ const DashboardLayout = async ({ children }) => {
         redirect('/signUp')
     }
     return (
-        <div className="flex">
+        <div className="flex  h-screen overflow-hidden">
 
             <DashboardSidebar />
-            <main className=" flex-1">
+            <main className="flex-1 h-screen overflow-y-auto ">
                 {children}
             </main>
 
