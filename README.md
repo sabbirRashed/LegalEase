@@ -1,96 +1,102 @@
 # ⚖️ LegalEase — Legal Service Marketplace
 
-LegalEase is a full-stack legal service platform that connects clients with qualified lawyers. Users can explore legal professionals, view their profiles and services, hire lawyers, manage requests, make payments, and leave comments.
+LegalEase is a full-stack legal service marketplace that connects clients with qualified lawyers. Users can explore lawyers, view their profiles and services, send hiring requests, make payments, manage their hiring history, and leave reviews.
 
-Lawyers can manage their legal profiles, services, and hiring requests, while administrators can manage users, transactions, and platform analytics.
+Lawyers can manage their profiles, services, availability, and hiring requests, while administrators can manage users, transactions, and platform analytics.
 
 ---
 
 ## 🚀 Live Project
 
-🔗 **Live Website:** https://legalease-chi-one.vercel.app
+**Live Website:** https://legalease-chi-one.vercel.app
 
-🔗 **Client Repository:** https://github.com/sabbirRashed/LegalEase.git
-
----
-
-## 📌 Overview
-
-LegalEase is designed to make finding and hiring legal professionals easier and more accessible.
-
-The platform provides separate experiences for:
-
-- 👤 Clients
-- ⚖️ Lawyers
-- 🛡️ Administrators
-
-Users can browse lawyers without logging in, while authenticated users can access features based on their assigned role.
+**GitHub Repository:** https://github.com/sabbirRashed/LegalEase.git
 
 ---
 
-## ✨ Key Features
+## ✨ Features
 
-### 👤 Client Features
+### 👤 Client
 
-- Create an account with email/password
-- Google authentication
-- Select user role during registration
-- Secure login/logout
-- Browse available lawyers
-- Search and filter lawyers
+- Email/password & Google authentication
+- Browse, search, and filter lawyers
 - View detailed lawyer profiles
-- View lawyer specialization and consultation fees
+- View specialization and consultation fees
 - Send hiring requests
-- View hiring history
+- Manage hiring history
 - Make payments through Stripe
-- View transaction/payment status
+- View transaction status
 - Leave comments/reviews
-- Update personal profile
+- Manage personal profile
 - Protected client dashboard
 
----
+### ⚖️ Lawyer
 
-### ⚖️ Lawyer Features
-
-- Lawyer account registration
-- Create and manage legal profile
-- Add legal specialization
-- Add professional biography
-- Set hourly and consultation rates
-- Set availability status
+- Create and manage professional profile
+- Add specialization and biography
+- Set consultation and hourly rates
+- Manage availability status
 - Manage hiring requests
 - View hiring history
-- Access lawyer dashboard
-- Protected lawyer routes
+- Protected lawyer dashboard
 
----
-
-### 🛡️ Admin Features
+### 🛡️ Admin
 
 - Admin dashboard
-- View platform analytics
-- Manage users
+- Platform analytics
+- User management
 - Update user roles
-- View all transactions
-- Monitor platform activity
+- Transaction management
 - Protected admin routes
 
 ---
 
-## 🔐 Authentication & Authorization
+## 🛠️ Technologies
+
+### Frontend
+
+- **Next.js 16.3.3**
+- **React 19.2.8**
+- **Tailwind CSS 4**
+- **HeroUI**
+- **Framer Motion**
+- **Recharts**
+- **React Icons**
+- **Gravity UI Icons**
+- **React Hot Toast**
+- **React Loader Spinner**
+
+### Backend
+
+- **Node.js**
+- **Express.js 5**
+- **MongoDB**
+- **JOSE / JWT**
+- **CORS**
+- **dotenv**
+
+### Authentication & Payment
+
+- **Better Auth**
+- **Google OAuth**
+- **JWT**
+- **Stripe**
+
+---
+
+## 🔐 Authentication & Security
 
 LegalEase uses **Better Auth** for authentication and session management.
 
-Supported authentication methods:
+### Authentication Methods
 
 - Email & Password
 - Google OAuth
 
-The application implements role-based access control for:
+The application implements **role-based access control (RBAC)** for:
 
 ```text
 User
-  ↓
-Lawyer
-  ↓
-Admin
+ ├── Client
+ ├── Lawyer
+ └── Admin
