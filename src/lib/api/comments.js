@@ -1,8 +1,9 @@
-import { protectedFetch } from "../core/server"
+import { protectedFetch, serverFetch } from "../core/server"
 
 
 export const getCommentsByProfileId = async(id)=>{
-    return protectedFetch(`/api/comments/${id}`);
+    return serverFetch(`/api/comments/${id}`);
+    
 }
 
 export const getCommentsByClientId = async(id)=>{

@@ -17,6 +17,16 @@ import { getCommentsByProfileId } from "@/lib/api/comments";
 import { getCommentPermission } from "@/lib/api/hiringRequest";
 
 
+// export const generatemetadata = async({params})=>{
+//     const {id} = await params;
+//     const lawyer = await getLawyerProfileById(id);
+
+//     return {
+//         title: `${lawyer?.name} — Lawyer Profile | LegalEase`
+//     }
+// }
+
+
 
 const LawyerDetails = async ({ params }) => {
     const { id } = await params;
@@ -24,6 +34,7 @@ const LawyerDetails = async ({ params }) => {
     const user = await getUserSession()
     const lawyer = await getLawyerProfileById(id);
     const comments = await getCommentsByProfileId(id)
+    // console.log('comments:', comments);
         
 
     const commentPermissionData = user?.id ?
