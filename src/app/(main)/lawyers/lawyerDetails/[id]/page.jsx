@@ -22,7 +22,7 @@ export const generateMetadata = async({params})=>{
     const lawyer = await getLawyerProfileById(id);
 
     return {
-        title: `${lawyer?.name} - Lawyer Profile | LegalEase`,
+        title: `${lawyer?.name} - Lawyer Profile || LegalEase`,
         description: `View ${lawyer.name}'s lawyer profile, specialization, legal services, consultation fee, availability, and professional details on LegalEase.`,
     }
 }

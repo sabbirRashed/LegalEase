@@ -3,6 +3,11 @@ import UserManagementTable from '@/components/dashboard/admin/UserManagementTabl
 import { getAllUsers } from '@/lib/api/users';
 import React from 'react';
 
+export const metadata = {
+    title: "Manage Users || LegalEase Admin",
+    description: "View and manage registered users, lawyers, roles, and account information across the LegalEase platform."
+}
+
 const ManageUsersPage = async () => {
 
     const { totalUsers, totalClients, totalLawyers, totalAdmins, users} = await getAllUsers();

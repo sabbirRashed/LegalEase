@@ -10,7 +10,7 @@ const inter = Inter({
 
 
 export const metadata = {
-  title: "LegalEase | Find the Right Lawyer for Your Legal Needs",
+  title: "LegalEase || Find the Right Lawyer for Your Legal Needs",
   description: "LegalEase helps you find, explore, and hire lawyers based on their expertise, services, specialization, and consultation fees.",
 };
 
