@@ -1,8 +1,12 @@
 import LawyerCard from "@/components/lawyerCard";
 import LawyerListingContainer from "@/components/LawyerListingContainer";
 import { getLawyerProfile } from "@/lib/api/lawyer";
-import { q } from "framer-motion/m";
 
+
+export const metadata = {
+    title: "Browse Lawyers | LegalEase",
+    description: "Browse and find qualified lawyers by specialization, expertise, services, and consultation fees. Connect with the right lawyer for your legal needs."
+}
 
 
 const BrowseLawyersPage = async ({ searchParams }) => {
