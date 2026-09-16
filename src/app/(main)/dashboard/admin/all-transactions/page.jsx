@@ -3,6 +3,11 @@ import { transactionFetchingApi } from '@/lib/api/transactions';
 import React from 'react';
 import { LuReceiptText } from 'react-icons/lu';
 
+export const metadata ={
+    title: "All Transactions || LegalEase Admin",
+    description: "View and monitor all payment transactions, including transaction details, amounts, users, lawyers, and payment status."
+}
+
 const AllTransactions = async () => {
     const transactions = await transactionFetchingApi()
 

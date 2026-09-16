@@ -3,6 +3,11 @@ import RevenueRechart from '@/components/dashboard/admin/RevenueRechart';
 import { getAnalyticsData } from '@/lib/api/analytics';
 import React from 'react';
 
+export const metadata ={
+    title: "Analytics || LegalEase Admin",
+    description: "Monitor LegalEase platform performance with insights into users, lawyers, hiring requests, transactions, and activity."
+}
+
 const AnalyticsPage = async () => {
 
     const analyticsData = await getAnalyticsData();
