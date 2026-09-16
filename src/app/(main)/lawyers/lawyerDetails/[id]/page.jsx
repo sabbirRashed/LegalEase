@@ -17,14 +17,14 @@ import { getCommentsByProfileId } from "@/lib/api/comments";
 import { getCommentPermission } from "@/lib/api/hiringRequest";
 
 
-// export const generatemetadata = async({params})=>{
-//     const {id} = await params;
-//     const lawyer = await getLawyerProfileById(id);
+export const generateMetadata = async({params})=>{
+    const {id} = await params;
+    const lawyer = await getLawyerProfileById(id);
 
-//     return {
-//         title: `${lawyer?.name} — Lawyer Profile | LegalEase`
-//     }
-// }
+    return {
+        title: `${lawyer?.name} - Lawyer Profile | LegalEase`
+    }
+}
 
 
 
