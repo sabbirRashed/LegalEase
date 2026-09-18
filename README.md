@@ -12,6 +12,8 @@ Lawyers can manage their profiles, services, availability, and hiring requests, 
 
 **GitHub Repository:** https://github.com/sabbirRashed/LegalEase.git
 
+**Server Repository:** https://github.com/sabbirRashed/LegalEase-Server.git
+
 ---
 
 ## ✨ Features
