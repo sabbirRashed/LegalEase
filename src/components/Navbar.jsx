@@ -25,6 +25,7 @@ import { IoWalletOutline } from "react-icons/io5";
 import { LuChartNoAxesCombined } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { BiPencil } from "react-icons/bi";
+import Image from "next/image";
 
 
 const navLinks = [
@@ -90,7 +91,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold text-slate-900 shrink-0">
-          Legal<span className="text-blue-600">Ease</span>
+          {/* Legal<span className="text-blue-600">Ease</span> */}
+
+          <Image 
+          src={'/assets/Logo.png'}
+          alt="LegalEase"
+          width={100}
+          height={100}
+          className="scale-150 translate-x-4"/>
         </Link>
 
         {/* Desktop nav links */}
