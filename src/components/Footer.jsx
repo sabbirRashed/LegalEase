@@ -11,6 +11,7 @@ import {
     FiSend,
     FiCheck,
 } from "react-icons/fi";
+import Image from "next/image";
 
 const quickLinks = [
     { label: "About", href: "/about" },
@@ -43,8 +44,22 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* Brand + social */}
                     <div className="md:col-span-1">
-                        <Link href="/" className="text-xl font-bold text-white">
-                            Legal<span className="text-blue-500">Ease</span>
+                        <Link href="/" className="">
+                            <div className="flex items-center">
+                                <Image
+                                    src={'/assets/logoicon.png'}
+                                    alt="LegalEase"
+                                    width={100}
+                                    height={100}
+                                    className="scale-70 -translate-x-2" />
+                                <div className="translate-y-1 -translate-x-4">
+                                    <p className="tracking-wider text-xl font-bold  ">
+                                        <span>Legal</span>
+                                        <span className="text-sky-600">Ease</span>
+                                    </p>
+                                    <p className="text-[10px]">Connecting you to justice</p>
+                                </div>
+                            </div>
                         </Link>
                         <p className="mt-3 text-sm leading-relaxed">
                             Connecting clients with trusted legal experts — simple, secure,
