@@ -43,7 +43,7 @@ const UpdateCommentModal = ({ comment }) => {
                 className="border border-blue-200 bg-blue-50 font-medium text-blue-600 hover:bg-blue-100"
             >
                 <Pencil size={15} />
-                Update
+                Edit
             </Button>
             <Modal.Backdrop>
                 <Modal.Container>
@@ -53,7 +53,7 @@ const UpdateCommentModal = ({ comment }) => {
                             <Modal.Icon className="bg-default text-foreground">
                                 <BiEdit />
                             </Modal.Icon>
-                            <Modal.Heading>Update your comment</Modal.Heading>
+                            <Modal.Heading>Edit your comment</Modal.Heading>
                         </Modal.Header>
                         <Modal.Body>
 
@@ -68,7 +68,7 @@ const UpdateCommentModal = ({ comment }) => {
                                 </div>
 
                                 <Button className="w-full mt-6" type='submit' >
-                                    Continue
+                                    Send
                                 </Button>
                             </Form>
 

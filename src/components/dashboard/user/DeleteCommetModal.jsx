@@ -18,7 +18,6 @@ const DeleteCommentModal = ({ comment }) => {
         try {
             const res = await deleteCommentApi(comment?.lawyerProfileId, comment?._id)
 
-            console.log('after delete:', res);
             if (res.deletedCount > 0) {
                 toast.success('Successfully deleted a comment');
                 setIsOpen(false)

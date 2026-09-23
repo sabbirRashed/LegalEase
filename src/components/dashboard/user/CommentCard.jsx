@@ -1,16 +1,9 @@
-import { Pencil } from "@gravity-ui/icons";
-import { Avatar, Button } from "@heroui/react";
-import { BsTrash2 } from "react-icons/bs";
+import { Avatar } from "@heroui/react";
 import UpdateCommentModal from "./UpdateCommentModal";
 import DeleteCommentModal from "./DeleteCommetModal";
 
 
 const CommentCard = ({ comment }) => {
-
-
-    const handleCommentUpdate = async () => {
-
-    }
 
     return (
         <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
@@ -59,7 +52,7 @@ const CommentCard = ({ comment }) => {
             </div>
 
             {/* Actions */}
-            <div className="mt-6 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+            <div className="mt-6 flex items-center gap-2 border-t border-slate-100 pt-4">
                 <UpdateCommentModal comment={comment} />
                 <DeleteCommentModal comment={comment} />
             </div>
