@@ -1,3 +1,4 @@
+import ClientExperience from '@/components/HomePageComponents/ClientExperience';
 import HeroSection from '@/components/HomePageComponents/HeroSectin';
 import TopLawyerCard from '@/components/HomePageComponents/TopLawyerCard';
 import { getTopHiredLawyer } from '@/lib/api/lawyer';
@@ -16,7 +17,7 @@ const HomePage = async () => {
         <div>
             <HeroSection />
 
-            {/* top legal expert section */}
+            {/* top legal expert */}
             <section className="mx-auto my-15 w-full max-w-7xl md:my-24">
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/50 px-5 py-10 md:px-10 md:py-14">
 
@@ -64,6 +65,7 @@ const HomePage = async () => {
             </section>
 
 
+            {/* legal categories */}
             <section className="mx-auto my-15 w-full max-w-7xl md:my-24">
 
                 <div className=" rounded-2xl border border-blue-100 bg-blue-50/50 px-5 py-10 md:px-10 md:py-14">
@@ -270,6 +272,8 @@ const HomePage = async () => {
                 </div>
 
             </section>
+
+            <ClientExperience/>
         </div>
     );
 };
