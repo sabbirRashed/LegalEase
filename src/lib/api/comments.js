@@ -10,4 +10,6 @@ export const getCommentsByClientId = async(id)=>{
     return protectedFetch(`/api/comments/user/${id}`);
 }
 
-
+export const getFeaturedComments = async()=>{
+    return serverFetch('/api/comments/featured');
+}

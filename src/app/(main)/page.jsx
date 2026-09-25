@@ -1,6 +1,7 @@
 import ClientExperience from '@/components/HomePageComponents/ClientExperience';
 import HeroSection from '@/components/HomePageComponents/HeroSectin';
 import TopLawyerCard from '@/components/HomePageComponents/TopLawyerCard';
+import { getFeaturedComments } from '@/lib/api/comments';
 import { getTopHiredLawyer } from '@/lib/api/lawyer';
 import { getUserToken } from '@/lib/core/session';
 import { h2 } from 'framer-motion/m';
@@ -10,7 +11,9 @@ import { FaArrowRight, FaBalanceScale, FaBriefcase, FaBuilding, FaFileInvoiceDol
 import { FiArrowRight } from 'react-icons/fi';
 
 const HomePage = async () => {
-    const topHiredLawyers = await getTopHiredLawyer()
+    const topHiredLawyers = await getTopHiredLawyer();
+    const featuredComments = await getFeaturedComments();
+    console.log('featured comnts:', featuredComments);
 
 
     return (
@@ -273,7 +276,7 @@ const HomePage = async () => {
 
             </section>
 
-            <ClientExperience/>
+            <ClientExperience featuredComments={featuredComments} />
         </div>
     );
 };
