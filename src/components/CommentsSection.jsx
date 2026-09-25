@@ -2,13 +2,13 @@
 
 import { postComment } from '@/lib/actions/comments';
 import { Person } from '@gravity-ui/icons';
-import { Avatar, Button, TextArea } from '@heroui/react';
-import { div } from 'framer-motion/m';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, TextArea } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaRocketchat } from 'react-icons/fa';
 import { FiMessageCircle } from 'react-icons/fi';
+import { PiDotsThreeVerticalBold } from 'react-icons/pi';
 
 
 
@@ -34,6 +34,7 @@ const CommentsSection = ({ lawyer, comments, user, commentPermissionData }) => {
             lawyerProfileId: lawyer?._id,
             lawyerName: lawyer?.name,
             lawyerEmail: lawyer?.email,
+            lawyerImage: lawyer?.imageUrl || "",
             comment: comment,
 
         }
@@ -148,8 +149,17 @@ const CommentsSection = ({ lawyer, comments, user, commentPermissionData }) => {
                                         </div>
                                     </div>
 
-                                    <div className="flex gap-1 text-amber-400">
-                                        ★★★★★
+                                    <div className='flex justify-between items-center gap-1.5 sm:gap-2'>
+                                        <div className="flex gap-1 text-amber-400">
+                                            ★★★★★
+                                        </div>
+                                        {
+                                            item?.clientUserId === user?.id && <div>
+                                                <PiDotsThreeVerticalBold />
+                                            </div>
+
+                                        }
+
                                     </div>
                                 </div>
 

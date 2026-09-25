@@ -1,5 +1,5 @@
-import HeroSection from '@/components/HeroSectin';
-import TopLawyerCard from '@/components/TopLawyerCard';
+import HeroSection from '@/components/HomePageComponents/HeroSectin';
+import TopLawyerCard from '@/components/HomePageComponents/TopLawyerCard';
 import { getTopHiredLawyer } from '@/lib/api/lawyer';
 import { getUserToken } from '@/lib/core/session';
 import { h2 } from 'framer-motion/m';

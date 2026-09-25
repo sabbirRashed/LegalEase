@@ -13,11 +13,11 @@ const CommentCard = ({ comment }) => {
                 <div className="flex items-center gap-3">
                     <Avatar className="h-11 w-11">
                         <Avatar.Image
-                            src={comment?.clientImage}
-                            alt={comment?.clientName}
+                            src={comment?.lawyerImage}
+                            alt={comment?.lawyerName}
                         />
                         <Avatar.Fallback>
-                            {comment?.clientName
+                            {comment?.lawyerName
                                 ?.slice(0, 2)
                                 .toUpperCase()}
                         </Avatar.Fallback>
@@ -25,11 +25,11 @@ const CommentCard = ({ comment }) => {
 
                     <div>
                         <h3 className="font-semibold text-slate-900">
-                            {comment?.clientName}
+                            {comment?.lawyerName}
                         </h3>
 
                         <p className="text-xs text-slate-500">
-                            {new Date(comment?.createAt).toLocaleDateString("en-US", {
+                          {new Date(comment?.createAt).toLocaleDateString("en-US", {
                                 month: "long",
                                 day: "numeric",
                                 year: "numeric",
