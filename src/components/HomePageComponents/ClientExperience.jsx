@@ -35,7 +35,7 @@ const ClientExperience = ({ featuredComments = [] }) => {
     };
 
     return (
-        <section className="mx-auto max-w-5xl px-4 py-20">
+        <section className="mx-auto max-w-5xl px-4 my-24">
             <div className="grid items-center gap-12 lg:grid-cols-5 lg:gap-16">
 
                 {/* Left Content */}
@@ -46,15 +46,15 @@ const ClientExperience = ({ featuredComments = [] }) => {
                     transition={{ duration: 0.6 }}
                     className="lg:col-span-2"
                 >
-                    <span className="text-xs font-semibold tracking-[0.12em] text-blue-600">
+                    <span className="text-[10px] text-xs font-semibold tracking-[0.12em] text-blue-600">
                         CLIENT EXPERIENCES
                     </span>
 
-                    <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+                    <h2 className="mt-2 text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
                         What Our Clients Say
                     </h2>
 
-                    <p className="mt-4 text-base leading-7 text-slate-500">
+                    <p className="mt-4 text-sm md:text-base leading-7 text-slate-500">
                         Real experiences from clients who connected with legal
                         professionals through LegalEase.
                     </p>

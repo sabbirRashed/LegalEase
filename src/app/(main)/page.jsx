@@ -21,7 +21,7 @@ const HomePage = async () => {
             <HeroSection />
 
             {/* top legal expert */}
-            <section className="mx-auto my-15 w-full max-w-7xl md:my-24">
+            <section className="mx-auto my-20 w-full max-w-7xl md:my-24">
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/50 px-5 py-10 md:px-10 md:py-14">
 
                     {/* Section Heading */}
@@ -69,7 +69,7 @@ const HomePage = async () => {
 
 
             {/* legal categories */}
-            <section className="mx-auto my-15 w-full max-w-7xl md:my-24">
+            <section className="mx-auto my-20 w-full max-w-7xl md:my-24">
 
                 <div className=" rounded-2xl border border-blue-100 bg-blue-50/50 px-5 py-10 md:px-10 md:py-14">
                     <div className="mx-auto max-w-2xl text-center">
