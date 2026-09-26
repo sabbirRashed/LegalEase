@@ -36,7 +36,20 @@ const navLinks = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  
+
+  const handleLawyerPath = async () => {
+    const savedSearch = sessionStorage.getItem('lawyerSearch');
+
+    if (savedSearch) {
+      const params = new URLSearchParams();
+      params.set("search", savedSearch);
+
+      router.push(`/lawyers?${params.toString()}`);
+    } else {
+      router.push("/lawyers");
+    }
+  }
+
 
   const isActive = (href) => pathname === href;
   const router = useRouter()
@@ -101,18 +114,36 @@ export default function Navbar() {
 
         {/* Desktop nav links */}
         <nav className="hidden lg:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors ${isActive(link.href)
-                ? "text-blue-600"
-                : "text-slate-500 hover:text-slate-900"
-                }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+
+          {navLinks.map((link) => {
+            if (link.href === "/lawyers") {
+              return (
+                <button
+                  key={link.href}
+                  onClick={handleLawyerPath}
+                  className={`text-sm font-medium transition-colors ${isActive(link.href)
+                      ? "text-blue-600"
+                      : "text-slate-500 hover:text-slate-900"
+                    }`}
+                >
+                  {link.label}
+                </button>
+              );
+            }
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium transition-colors ${isActive(link.href)
+                  ? "text-blue-600"
+                  : "text-slate-500 hover:text-slate-900"
+                  }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
 
           {user?.role && (
             <Dropdown>

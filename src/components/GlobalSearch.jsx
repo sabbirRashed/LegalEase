@@ -14,31 +14,37 @@ const GlobalSearch = () => {
         const value = search.trim();
 
         if (!value) {
+            sessionStorage.removeItem('lawyerSearch')
             router.push("/lawyers");
             return;
         }
 
-        // const searchParams = new URLSearchParams();
-        // if(search.trim()){
-        //     searchParams.set("search", search)
-        // }
+        sessionStorage.setItem("lawyerSearch", value)
 
-        // const strParams = searchParams.toString()
-        // router.push(`/lawyers?${strParams}`)
-        router.push(`/lawyers?search=${encodeURIComponent(value)}`);
+        const searchParams = new URLSearchParams();
+        searchParams.set("search", search)
+
+        const strParams = searchParams.toString()
+        router.push(`/lawyers?${strParams}`)
     }
 
     return (
-        <form 
-        onSubmit={handleSearch}
-        className="hidden md:block relative flex-1 max-w-sm">
+        <form
+            onSubmit={handleSearch}
+            className="hidden md:block relative flex-1 max-w-sm">
             <FiSearch className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <Input
                 type="search"
                 aria-label="Search lawyers"
                 placeholder="Search by name or specialization"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                    const value = e.target.value;
+                    setSearch(value);
+                    if (!value.trim()) {
+                        sessionStorage.removeItem("lawyerSearch");
+                    }
+                }}
                 className="w-full pl-9 bg-slate-50 border border-slate-200"
             />
         </form>
