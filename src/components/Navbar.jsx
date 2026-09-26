@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Input, Dropdown, Button, Label } from "@heroui/react";
 import {
   FiSearch,
@@ -12,8 +12,6 @@ import {
   FiLogOut,
   FiGrid,
   FiClock,
-  
-  FiEdit3,
   FiMessageSquare,
 } from "react-icons/fi";
 
@@ -26,6 +24,7 @@ import { LuChartNoAxesCombined } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import { BiPencil } from "react-icons/bi";
 import Image from "next/image";
+import GlobalSearch from "./GlobalSearch";
 
 
 const navLinks = [
@@ -35,9 +34,8 @@ const navLinks = [
 
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-
+  const pathname = usePathname();
   
 
   const isActive = (href) => pathname === href;
@@ -93,12 +91,12 @@ export default function Navbar() {
         <Link href="/" className="text-xl font-bold text-slate-900 shrink-0">
           {/* Legal<span className="text-blue-600">Ease</span> */}
 
-          <Image 
-          src={'/assets/Logo.png'}
-          alt="LegalEase"
-          width={100}
-          height={100}
-          className="scale-150 translate-x-4"/>
+          <Image
+            src={'/assets/Logo.png'}
+            alt="LegalEase"
+            width={100}
+            height={100}
+            className="scale-150 translate-x-4" />
         </Link>
 
         {/* Desktop nav links */}
@@ -150,15 +148,7 @@ export default function Navbar() {
 
         {/* Search bar and auth button (desktop) */}
         <div className="flex items-center gap-4">
-          <div className="hidden md:block relative flex-1 max-w-sm">
-            <FiSearch className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <Input
-              type="search"
-              aria-label="Search lawyers"
-              placeholder="Search by name or specialization"
-              className="w-full pl-9 bg-slate-50 border border-slate-200"
-            />
-          </div>
+          <GlobalSearch />
 
 
           {/* Auth button (desktop) */}

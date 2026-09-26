@@ -4,17 +4,10 @@ import LegalCategories from '@/components/HomePageComponents/LegalCategories';
 import TopLawyerCard from '@/components/HomePageComponents/TopLawyerCard';
 import { getFeaturedComments } from '@/lib/api/comments';
 import { getTopHiredLawyer } from '@/lib/api/lawyer';
-import { getUserToken } from '@/lib/core/session';
-import { h2 } from 'framer-motion/m';
-import Link from 'next/link';
-import React from 'react';
-import { FaArrowRight, FaBalanceScale, FaBriefcase, FaBuilding, FaFileInvoiceDollar, FaGavel, FaHome, FaUsers } from 'react-icons/fa';
-import { FiArrowRight } from 'react-icons/fi';
 
 const HomePage = async () => {
     const topHiredLawyers = await getTopHiredLawyer();
     const featuredComments = await getFeaturedComments();
-    console.log('featured comnts:', featuredComments);
 
 
     return (

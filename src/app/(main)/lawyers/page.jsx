@@ -1,4 +1,3 @@
-import LawyerCard from "@/components/lawyerCard";
 import LawyerListingContainer from "@/components/LawyerListingContainer";
 import { getLawyerProfile } from "@/lib/api/lawyer";
 
