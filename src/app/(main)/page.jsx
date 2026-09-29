@@ -15,6 +15,9 @@ const HomePage = async () => {
         <div>
             <HeroSection />
 
+            {/* legal categories */}
+            <LegalCategories />
+
             {/* top legal expert */}
             <section className="mx-auto my-16 sm:my-20 lg:my-24 w-full max-w-7xl">
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/50 px-5 py-10 md:px-10 md:py-14">
@@ -63,14 +66,11 @@ const HomePage = async () => {
                 </div>
             </section>
 
-            {/* legal categories */}
-            <LegalCategories />
-
             {/* client experience */}
             <ClientExperience featuredComments={featuredComments} />
 
             {/* FAQ */}
-            <FAQSection/>
+            <FAQSection />
         </div>
     );
 };
