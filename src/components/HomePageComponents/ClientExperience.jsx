@@ -35,7 +35,7 @@ const ClientExperience = ({ featuredComments = [] }) => {
     };
 
     return (
-        <section className="mx-auto max-w-5xl px-4 my-24">
+        <section className="mx-auto max-w-5xl px-4 my-16 sm:my-20 lg:my-24">
             <div className="grid items-center gap-12 lg:grid-cols-5 lg:gap-16">
 
                 {/* Left Content */}

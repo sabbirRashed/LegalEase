@@ -77,7 +77,7 @@ const ClientReviewCard = ({
 
                     {/* Review */}
                     <div className="mt-6 min-h-[120px]">
-                        <p className="text-[17px] font-medium leading-7 text-slate-800 sm:text-lg sm:leading-8">
+                        <p className="text-sm md:text-base font-medium italic leading-7 text-slate-800 sm:text-lg sm:leading-8">
                             “{comment?.comment?.trim()}”
                         </p>
                     </div>
