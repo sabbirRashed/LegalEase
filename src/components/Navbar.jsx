@@ -122,8 +122,8 @@ export default function Navbar() {
                   key={link.href}
                   onClick={handleLawyerPath}
                   className={`text-sm font-medium transition-colors ${isActive(link.href)
-                      ? "text-blue-600"
-                      : "text-slate-500 hover:text-slate-900"
+                    ? "text-blue-600"
+                    : "text-slate-500 hover:text-slate-900"
                     }`}
                 >
                   {link.label}
@@ -192,9 +192,11 @@ export default function Navbar() {
                 {user?.email ? (
                   <Button
                     onClick={handleLogOut}
-                    className="flex items-center gap-2 bg-white border border-slate-200 text-red-600 hover:bg-red-50">
-                    <FiLogOut className="w-4 h-4" />
-                    Logout
+                    variant="light"
+                    className="group flex min-w-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+                  >
+                    <FiLogOut className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+                    <span>Logout</span>
                   </Button>
                 ) : (
                   <div className="flex items-center gap-4">

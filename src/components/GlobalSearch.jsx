@@ -45,7 +45,7 @@ const GlobalSearch = () => {
                         sessionStorage.removeItem("lawyerSearch");
                     }
                 }}
-                className="w-full pl-9 bg-slate-50 border border-slate-200"
+                className="w-full rounded-lg pl-9 bg-slate-50 border border-slate-200"
             />
         </form>
     );
