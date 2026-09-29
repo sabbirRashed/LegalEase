@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
-const TopLawyerCard = ({ lawyer }) => {
+const TopLawyerCard = ({ lawyer, index }) => {
 
     const { _id, name, imageUrl, specialization, hourlyRate, status } = lawyer;
 
@@ -19,6 +19,7 @@ const TopLawyerCard = ({ lawyer }) => {
             }}
             transition={{
                 duration: 0.5,
+                delay: index * 0.25,
                 ease: "easeOut",
             }}
             className="relative flex flex-col flex-1 items-center rounded-2xl border border-slate-200 bg-white p-3 sm:p-6 text-center shadow-sm transition-shadow hover:shadow-lg hover:shadow-slate-200/60"

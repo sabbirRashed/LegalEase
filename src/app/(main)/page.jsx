@@ -40,9 +40,10 @@ const HomePage = async () => {
                             <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
 
                                 {
-                                    topHiredLawyers.map(lawyer => <TopLawyerCard
+                                    topHiredLawyers.map((lawyer, index) => <TopLawyerCard
                                         key={lawyer?._id}
                                         lawyer={lawyer}
+                                        index={index}
                                     />)
                                 }
 
