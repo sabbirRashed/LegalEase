@@ -1,4 +1,5 @@
 import ClientExperience from '@/components/HomePageComponents/ClientExperience';
+import FAQSection from '@/components/HomePageComponents/FaqSection';
 import HeroSection from '@/components/HomePageComponents/HeroSectin';
 import LegalCategories from '@/components/HomePageComponents/LegalCategories';
 import TopLawyerCard from '@/components/HomePageComponents/TopLawyerCard';
@@ -62,12 +63,14 @@ const HomePage = async () => {
                 </div>
             </section>
 
-
             {/* legal categories */}
             <LegalCategories />
 
             {/* client experience */}
             <ClientExperience featuredComments={featuredComments} />
+
+            {/* FAQ */}
+            <FAQSection/>
         </div>
     );
 };
