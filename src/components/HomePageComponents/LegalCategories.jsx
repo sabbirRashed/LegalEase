@@ -127,7 +127,7 @@ const LegalCategories = () => {
                             >
                                 <Link
                                     href={`/lawyers?search=${category.search}`}
-                                    className="group block rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
+                                    className="group block h-full rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50"
                                 >
                                     {/* Icon */}
                                     <motion.div
@@ -143,16 +143,16 @@ const LegalCategories = () => {
                                     </motion.div>
 
                                     {/* Content */}
-                                    <h3 className="mt-4 font-semibold text-slate-900">
+                                    <h3 className="mt-4 font-semibold text-slate-900 line-clamp-1">
                                         {category.title}
                                     </h3>
 
-                                    <p className="mt-1 text-xs leading-5 text-slate-500">
+                                    <p className="mt-1 text-xs line-clamp-2 leading-5 text-slate-500">
                                         {category.description}
                                     </p>
 
                                     {/* Explore */}
-                                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-blue-600">
+                                    <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-blue-600 ">
                                         Explore
 
                                         <motion.span

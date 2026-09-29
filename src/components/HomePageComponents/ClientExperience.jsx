@@ -35,8 +35,8 @@ const ClientExperience = ({ featuredComments = [] }) => {
     };
 
     return (
-        <section className="mx-auto max-w-5xl px-4 my-16 sm:my-20 lg:my-24">
-            <div className="grid items-center gap-12 lg:grid-cols-5 lg:gap-16">
+        <section className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 my-16 sm:my-20 lg:my-24">
+            <div className="grid items-center gap-12 md:grid-cols-5 md:gap-16">
 
                 {/* Left Content */}
                 <motion.div
@@ -44,7 +44,7 @@ const ClientExperience = ({ featuredComments = [] }) => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.6 }}
-                    className="lg:col-span-2"
+                    className="md:col-span-2"
                 >
                     <span className="text-[10px] text-xs font-semibold tracking-[0.12em] text-blue-600">
                         CLIENT EXPERIENCES
@@ -79,7 +79,7 @@ const ClientExperience = ({ featuredComments = [] }) => {
                 </motion.div>
 
                 {/* Right Carousel */}
-                <div className="relative lg:col-span-3">
+                <div className="relative md:col-span-3">
                     <AnimatePresence
                         mode="wait"
                         custom={direction}
