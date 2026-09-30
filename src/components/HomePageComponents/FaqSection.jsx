@@ -143,7 +143,7 @@ const FAQSection = () => {
                                             }}
                                         >
                                             <div className="border-t border-slate-100 px-5 pb-5 pt-3 sm:px-6">
-                                                <p className="text-sm leading-6 text-slate-500">
+                                                <p className="text-sm leading-6 text-slate-900">
                                                     {faq.answer}
                                                 </p>
                                             </div>
