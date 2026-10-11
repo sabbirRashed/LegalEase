@@ -8,48 +8,53 @@ const UserHiringHistory = async () => {
     const userRequest = await getRequestByClientId();
 
     const getStatusBtn = (status) => {
-        if (status?.toLowerCase() === "accepted")
+        const currentStatus = status?.toLowerCase();
+
+        if (currentStatus === 'accepted') {
             return (
                 <Chip color="success" size="sm" variant="soft">
                     {status}
                 </Chip>
             );
+        }
 
-        if (status?.toLowerCase() === "rejected")
+        if (currentStatus === 'rejected') {
             return (
                 <Chip color="danger" size="sm" variant="soft">
                     {status}
                 </Chip>
             );
+        }
 
-        if (status?.toLowerCase() === "pending")
+        if (currentStatus === 'pending') {
             return (
                 <Chip color="warning" size="sm" variant="soft">
                     {status}
                 </Chip>
             );
+        }
 
         return null;
     };
 
     const formatDate = (date) => {
-        return new Date(date).toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
+        return new Date(date).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
         });
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
 
             {/* Page Header */}
             <div className="mb-6 sm:mb-8">
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+                <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
                     Hiring History
                 </h2>
 
-                <p className="mt-1.5 max-w-2xl text-sm sm:text-base leading-6 text-slate-500">
+                <p className="mt-1.5 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
                     Keep track of your legal requests, monitor their progress,
                     and stay informed about every step of your lawyer engagement.
                 </p>
@@ -60,11 +65,11 @@ const UserHiringHistory = async () => {
 
                 {/* Section Header */}
                 <div className="mb-5 sm:mb-6">
-                    <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+                    <h2 className="text-base font-semibold text-slate-900 sm:text-lg">
                         Your Legal Engagements
                     </h2>
 
-                    <p className="mt-1 max-w-2xl text-sm sm:text-base text-slate-500">
+                    <p className="mt-1 max-w-2xl text-sm leading-5 text-slate-500 sm:text-base">
                         View your hiring requests, lawyer details, fees, and current
                         status—all in one place.
                     </p>
@@ -73,7 +78,7 @@ const UserHiringHistory = async () => {
                 {userRequest.length > 0 ? (
                     <>
                         {/* ================= TABLET & DESKTOP ================= */}
-                        <div className="hidden md:block w-full overflow-x-auto">
+                        <div className="hidden w-full overflow-x-auto md:block">
                             <Table>
                                 <Table.ResizableContainer>
                                     <Table.Content
@@ -140,37 +145,43 @@ const UserHiringHistory = async () => {
                                             {userRequest.map((item) => (
                                                 <Table.Row key={item?._id}>
 
+                                                    {/* Lawyer Name */}
                                                     <Table.Cell>
                                                         <span className="font-medium text-slate-800">
                                                             {item?.lawyerName}
                                                         </span>
                                                     </Table.Cell>
 
+                                                    {/* Specialization */}
                                                     <Table.Cell>
                                                         <span className="text-sm text-slate-600">
-                                                            {item?.specialization || "Criminal Law"}
+                                                            {item?.specialization || 'Criminal Law'}
                                                         </span>
                                                     </Table.Cell>
 
+                                                    {/* Fee */}
                                                     <Table.Cell>
                                                         <span className="font-medium text-slate-700">
                                                             ৳{item?.consultationRate}
                                                         </span>
                                                     </Table.Cell>
 
+                                                    {/* Hiring Date */}
                                                     <Table.Cell>
                                                         <span className="text-sm text-slate-600">
                                                             {formatDate(item?.createAt)}
                                                         </span>
                                                     </Table.Cell>
 
+                                                    {/* Status */}
                                                     <Table.Cell>
                                                         {getStatusBtn(item?.status)}
                                                     </Table.Cell>
 
+                                                    {/* Action */}
                                                     <Table.Cell>
-                                                        {item?.status?.toLowerCase() === "accepted" ? (
-                                                            item?.paymentStatus?.toLowerCase() === "unpaid" ? (
+                                                        {item?.status?.toLowerCase() === 'accepted' ? (
+                                                            item?.paymentStatus?.toLowerCase() === 'unpaid' ? (
                                                                 <form
                                                                     action="/api/checkout_sessions"
                                                                     method="POST"
@@ -182,8 +193,8 @@ const UserHiringHistory = async () => {
                                                                     />
 
                                                                     <button
-                                                                        className="rounded-md bg-emerald-600 px-4 py-2 text-xs font-medium text-white transition hover:bg-emerald-700 cursor-pointer"
                                                                         type="submit"
+                                                                        className="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-blue-700"
                                                                     >
                                                                         Pay Now
                                                                     </button>
@@ -214,7 +225,7 @@ const UserHiringHistory = async () => {
                         </div>
 
                         {/* ================= MOBILE ================= */}
-                        <div className="md:hidden space-y-4">
+                        <div className="space-y-4 md:hidden">
 
                             {userRequest.map((item) => (
                                 <div
@@ -226,7 +237,7 @@ const UserHiringHistory = async () => {
                                     <div className="flex items-start justify-between gap-3">
 
                                         <div className="min-w-0">
-                                            <p className="text-xs text-slate-400">
+                                            <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                                                 Lawyer
                                             </p>
 
@@ -242,18 +253,20 @@ const UserHiringHistory = async () => {
                                     </div>
 
                                     {/* Details */}
-                                    <div className="mt-4 grid grid-cols-2 gap-4">
+                                    <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4">
 
+                                        {/* Specialization */}
                                         <div>
                                             <p className="text-xs text-slate-400">
                                                 Specialization
                                             </p>
 
                                             <p className="mt-1 text-sm font-medium text-slate-700">
-                                                {item?.specialization || "Criminal Law"}
+                                                {item?.specialization || 'Criminal Law'}
                                             </p>
                                         </div>
 
+                                        {/* Fee */}
                                         <div>
                                             <p className="text-xs text-slate-400">
                                                 Consultation Fee
@@ -264,6 +277,7 @@ const UserHiringHistory = async () => {
                                             </p>
                                         </div>
 
+                                        {/* Hiring Date */}
                                         <div>
                                             <p className="text-xs text-slate-400">
                                                 Hiring Date
@@ -274,23 +288,24 @@ const UserHiringHistory = async () => {
                                             </p>
                                         </div>
 
+                                        {/* Payment */}
                                         <div>
                                             <p className="text-xs text-slate-400">
                                                 Payment
                                             </p>
 
-                                            <p className="mt-1 text-sm font-medium text-slate-700">
-                                                {item?.paymentStatus || "—"}
+                                            <p className="mt-1 text-sm font-medium capitalize text-slate-700">
+                                                {item?.paymentStatus || '—'}
                                             </p>
                                         </div>
 
                                     </div>
 
                                     {/* Payment Action */}
-                                    {item?.status?.toLowerCase() === "accepted" && (
-                                        <div className="mt-4 border-t border-slate-200 pt-4">
+                                    {item?.status?.toLowerCase() === 'accepted' && (
+                                        <div className="mt-5 border-t border-slate-200 pt-4">
 
-                                            {item?.paymentStatus?.toLowerCase() === "unpaid" ? (
+                                            {item?.paymentStatus?.toLowerCase() === 'unpaid' ? (
                                                 <form
                                                     action="/api/checkout_sessions"
                                                     method="POST"
@@ -303,7 +318,7 @@ const UserHiringHistory = async () => {
 
                                                     <button
                                                         type="submit"
-                                                        className="w-full rounded-md bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-700 cursor-pointer"
+                                                        className="w-full cursor-pointer rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
                                                     >
                                                         Pay Now
                                                     </button>

@@ -121,7 +121,7 @@ export default function Navbar() {
                 <button
                   key={link.href}
                   onClick={handleLawyerPath}
-                  className={`text-sm font-medium transition-colors ${isActive(link.href)
+                  className={`text-sm font-medium transition-colors cursor-pointer ${isActive(link.href)
                     ? "text-blue-600"
                     : "text-slate-500 hover:text-slate-900"
                     }`}

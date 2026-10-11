@@ -26,18 +26,34 @@ export const auth = betterAuth({
                 type: "string",
                 defaultValue: ""
             },
+            phone: {
+                type: "string",
+                required: false,
+            },
+            gender: {
+                type: "string",
+                required: false,
+            },
+            location: {
+                type: "string",
+                required: false,
+            },
+            bio: {
+                type: "string",
+                required: false,
+            },
 
         }
     },
-    session:{
+    session: {
         cookieCache: {
             enabled: true,
             strategy: "jwt",
             maxAge: 7 * 24 * 60 * 60
         }
     },
-    plugins:[
+    plugins: [
         jwt()
     ]
- 
+
 });
